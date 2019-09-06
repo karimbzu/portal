@@ -7,6 +7,8 @@ import {MyCartComponent} from './my-cart/my-cart.component';
 import {MyAccountComponent} from './my-account/my-account.component';
 import {LandingComponent} from './landing/landing.component';
 import {LoginComponent} from './login/login.component';
+import {combineAll} from 'rxjs/operators';
+import {ScanRequestComponent} from './scan-request/scan-request.component';
 
 
 const routes: Routes = [
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path: 'page2', component: Page2Component},
   {path: 'page3', component: Page3Component},
   {path: 'my-cart', component: MyCartComponent},
-  {path: 'my-account', component: MyAccountComponent}
+  {path: 'my-account', component: MyAccountComponent},
+  {path: 'scan-request', component: ScanRequestComponent}
 ];
 
 @NgModule({
