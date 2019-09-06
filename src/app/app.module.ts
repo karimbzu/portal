@@ -15,6 +15,7 @@ import { MyAccountComponent } from './my-account/my-account.component';
 import { HeaderComponent } from './header/header.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
+import { ScanRequestComponent } from './scan-request/scan-request.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LoginComponent } from './login/login.component';
     MyAccountComponent,
     HeaderComponent,
     LandingComponent,
-    LoginComponent
+    LoginComponent,
+    ScanRequestComponent
   ],
   imports: [
     BrowserModule,
