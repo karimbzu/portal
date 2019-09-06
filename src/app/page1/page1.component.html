@@ -1,0 +1,25 @@
+<mdb-card class="m-3">
+  <mdb-card-header class="yellow accent-4 h5">Request Scanning</mdb-card-header>
+  <mdb-card-body>
+    <form [formGroup]="myRequestForm">
+      <mat-radio-group formControlName="scanType">
+        <div class="card-deck">
+          <div class="card mb-4 testCard" mdbWavesEffect (click)="updateSelection('source_code')">
+            <div class="card-header"><mat-radio-button value="source_code">Source Code</mat-radio-button></div>
+            <div class="card-body">Please put the source code scanning description here</div>
+          </div>
+
+          <div class="card mb-4 testCard" mdbWavesEffect (click)="updateSelection('mobile_app')">
+            <div class="card-header"><mat-radio-button value="mobile_app">Mobile Application</mat-radio-button></div>
+            <div class="card-body">Please put the mobile application scanning description here</div>
+          </div>
+
+          <div class="card mb-4 testCard" mdbWavesEffect (click)="updateSelection('web_app')">
+            <div class="card-header"><mat-radio-button value="web_app">Web Application</mat-radio-button></div>
+            <div class="card-body">Please put the web application scanning description here</div>
+          </div>
+        </div>
+      </mat-radio-group>
+    </form>
+  </mdb-card-body>
+</mdb-card>

@@ -1,0 +1,7 @@
+<form [formGroup]="myRequestForm">
+  <mat-radio-group formControlName="scanType" (change)="selectScanType()">
+    <mat-radio-button value="source_code">Source Code</mat-radio-button>
+    <mat-radio-button value="mobile_app">Mobile Application</mat-radio-button>
+    <mat-radio-button value="web_app" >Web Application</mat-radio-button>
+  </mat-radio-group>
+</form>
