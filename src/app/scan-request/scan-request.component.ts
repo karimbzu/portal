@@ -7,25 +7,52 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./scan-request.component.scss']
 })
 export class ScanRequestComponent implements OnInit {
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+  myRequestForm = new FormGroup({
+    scanType: new FormControl('mobile_app'),
+    type: new FormControl('repo'),
+    programLanguage: new FormControl('javascript'),
+    buildCommand: new FormControl({value: '', disabled: true})
+  });
+
+  flagScanTypeNext = false;
+  flagShowUpload = true;
+  flagShowRepo = false;
+  flagShowWeb = false;
 
   constructor() { }
 
   ngOnInit() {
-    this.firstFormGroup = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email])
-    });
-    this.secondFormGroup = new FormGroup({
-      password: new FormControl('', Validators.required)
-    });
   }
 
-  get email() { return this.firstFormGroup.get('email'); }
-  get password() { return this.secondFormGroup.get('password'); }
+  updateScanType(val) {
+    this.myRequestForm.patchValue({
+      scanType: val
+    });
 
-  onSubmit() {
-    // do something here
+    this.flagShowRepo = false;
+    this.flagShowUpload = false;
+    this.flagShowWeb = false;
+    switch (val) {
+      case 'source_code':
+        this.flagShowRepo = true;
+        this.flagShowUpload = true;
+        break;
+
+      case 'mobile_app':
+        this.flagShowUpload = true;
+        break;
+
+      case 'web_app':
+        this.flagShowWeb = true;
+        break;
+    }
+  }
+
+  clickScanType() {
+    this.flagScanTypeNext = true;
+    setTimeout(() => {
+      this.flagScanTypeNext = false;
+    }, 3000);
   }
 
 }
