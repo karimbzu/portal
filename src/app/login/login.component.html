@@ -1,2 +1,24 @@
-<p>login works!</p>
-<button type="button" mdbBtn color="primary" routerLink="/scan-request">Login</button>
+<div class="d-flex justify-content-center align-items-center vh-100">
+  <div class="col-md-4">
+    <mdb-card>
+      <mdb-card-header class="light-blue darken-4 h5 white-text text-center py-4">Login to CENTURION</mdb-card-header>
+      <mdb-card-body>
+        <div class="md-form">
+          <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+          <input mdbInput type="text" id="username" class="form-control">
+          <label for="username">Username</label>
+        </div>
+
+        <div class="md-form">
+          <mdb-icon fas icon="key" class="prefix"></mdb-icon>
+          <input mdbInput type="password" id="password" class="form-control">
+          <label for="username">Password</label>
+        </div>
+
+
+        <button type="button" mdbBtn color="primary" block="true" routerLink="/scan-request">Login</button>
+        <a class="forgot-password" href="https://idss.tm.com.my">Forgot password?</a>
+      </mdb-card-body>
+    </mdb-card>
+  </div>
+</div>

@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import {DropdownModule, MDBBootstrapModule} from 'angular-bootstrap-md';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatRadioModule, MatStepperModule, MatBadgeModule, MatFormFieldModule, MatSelectModule, MatInputModule} from '@angular/material';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Page1Component } from './page1/page1.component';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { Page2Component } from './page2/page2.component';
-import {MatRadioModule, MatStepperModule, MatBadgeModule, MatFormFieldModule, MatSelectModule, MatInputModule} from '@angular/material';
-import {ReactiveFormsModule} from '@angular/forms';
 import { Page3Component } from './page3/page3.component';
 import { MyCartComponent } from './my-cart/my-cart.component';
 import { MyAccountComponent } from './my-account/my-account.component';
@@ -33,12 +33,11 @@ import { ScanRequestComponent } from './scan-request/scan-request.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MDBBootstrapModule,
+    MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule,
     MatRadioModule,
     ReactiveFormsModule,
     MatStepperModule,
-    DropdownModule.forRoot(),
     MatBadgeModule,
     MatFormFieldModule,
     MatSelectModule,

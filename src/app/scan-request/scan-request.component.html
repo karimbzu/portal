@@ -3,5 +3,110 @@
   <mdb-card-header class="yellow accent-4 h5">Scan Request</mdb-card-header>
   <mdb-card-body>
     <mdb-card-text>We shall populate the content of Scan Request here</mdb-card-text>
+
+    <button mdbBtn color="primary" type="button" [disabled]="flagScanTypeNext" (click)="clickScanType()">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="flagScanTypeNext"></span>
+      <span>Next</span>
+    </button>
+
+    <br />
+    <hr />
+    <h5>Scan Type</h5>
+    <mdb-card-text>Please select the Type of Scan</mdb-card-text>
+    <form [formGroup]="myRequestForm">
+      <div class="card-deck">
+        <mdb-card class="m-3" (click)="updateScanType('source_code')">
+          <mdb-card-header class="custom-control custom-radio">
+            <span class="ml-3">&nbsp;</span>
+            <input type="radio" class="custom-control-input" id="typeSourceCode" name="scanType" value="source_code" formControlName="scanType">
+            <label for="typeSourceCode" class="custom-control-label">Source Code</label>
+          </mdb-card-header>
+          <mdb-card-body>
+            <mdb-card-text>
+            Analyze the source code for security and quality issues
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+        <mdb-card class="m-3" (click)="updateScanType('mobile_app')">
+          <mdb-card-header class="custom-control custom-radio">
+            <span class="ml-3">&nbsp;</span>
+            <input type="radio" class="custom-control-input" id="typeMobileApp" name="scanType" value="mobile_app" formControlName="scanType">
+            <label for="typeMobileApp" class="custom-control-label">Binary Application</label>
+          </mdb-card-header>
+          <mdb-card-body>
+            <mdb-card-text>
+            Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
+            licensing term of open source components in the application
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+        <mdb-card class="m-3" (click)="updateScanType('web_app')">
+          <mdb-card-header class="custom-control custom-radio">
+            <span class="ml-3">&nbsp;</span>
+            <input type="radio" class="custom-control-input" id="typeWebApp" name="scanType" value="web_app" formControlName="scanType">
+            <label for="typeWebApp" class="custom-control-label">Web Application</label>
+          </mdb-card-header>
+          <mdb-card-body>
+            <mdb-card-text>
+            Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not
+            to perform on a production system
+            </mdb-card-text>
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+
+      <hr />
+      <h5>Delivery Method</h5>
+      <mdb-card-text>Please specify how to provide the scanning item to Centurion platform</mdb-card-text>
+      <div class="card-deck">
+        <mdb-card class="m-3" *ngIf="flagShowRepo">
+          <mdb-card-header class="custom-control custom-radio">
+            <span class="ml-3">&nbsp;</span>
+            <input type="radio" class="custom-control-input" id="typeRepo" name="type" value="repo" formControlName="type">
+            <label for="typeRepo" class="custom-control-label">GIT Repository</label>
+          </mdb-card-header>
+          <mdb-card-body>
+            <div class="md-form md-outline">
+              <mdb-icon fab icon="git"></mdb-icon>
+              <input type="text" id="inputRepoURL" class="form-control" mdbInput>
+              <label for="inputRepoURL">Source Code Repository</label>
+            </div>
+            <div class="md-form md-outline">
+              <mdb-icon fas icon="key"></mdb-icon>
+              <input type="text" id="inputAccessToken" class="form-control" mdbInput>
+              <label for="inputAccessToken">Access Token</label>
+            </div>
+          </mdb-card-body>
+        </mdb-card>
+
+        <mdb-card class="m-3" *ngIf="flagShowUpload">
+          <mdb-card-header class="custom-control custom-radio" *ngIf="flagShowRepo; else elseUploadTitle">
+            <span class="ml-3">&nbsp;</span>
+            <input type="radio" class="custom-control-input" id="typeUpload" name="type" value="upload" formControlName="type">
+            <label for="typeUpload" class="custom-control-label">Upload</label>
+          </mdb-card-header>
+          <ng-template #elseUploadTitle><mdb-card-header>Upload</mdb-card-header></ng-template>
+          <mdb-card-body>
+
+          </mdb-card-body>
+        </mdb-card>
+
+        <mdb-card class="m-3" *ngIf="flagShowWeb">
+          <mdb-card-header>Web Configuration</mdb-card-header>
+          <mdb-card-body>
+
+          </mdb-card-body>
+        </mdb-card>
+      </div>
+
+
+
+    </form>
+
+
+
   </mdb-card-body>
 </mdb-card>
+<br />
+<br />
+<br />
