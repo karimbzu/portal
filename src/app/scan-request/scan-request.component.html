@@ -1,6 +1,6 @@
 <app-header></app-header>
 <mdb-card class="m-3">
-  <mdb-card-header class="yellow accent-4 h5">Scan Request</mdb-card-header>
+  <mdb-card-header class="yellow darken-1 h5">Scan Request</mdb-card-header>
   <mdb-card-body>
     <mdb-card-text>We shall populate the content of Scan Request here</mdb-card-text>
 
@@ -72,9 +72,22 @@
               <label for="inputRepoURL">Source Code Repository</label>
             </div>
             <div class="md-form md-outline">
+
               <mdb-icon fas icon="key"></mdb-icon>
               <input type="text" id="inputAccessToken" class="form-control" mdbInput>
               <label for="inputAccessToken">Access Token</label>
+              <small class="form-text text-muted">Click here to add new Access Token</small>
+
+              <!--
+              <mdb-icon fas icon="key"></mdb-icon>
+              <select class="browser-default custom-select pl-4" id="inputAccessToken" mdbInput>
+                <option disabled selected>Please Select Access Token</option>
+                <option value="1">Token 1</option>
+                <option value="2">Token 2</option>
+              </select>
+              <small class="form-text text-muted">Click here to add new Access Token</small>
+              -->
+
             </div>
           </mdb-card-body>
         </mdb-card>
@@ -100,6 +113,14 @@
       </div>
 
 
+      <hr />
+      <h5>Analyzing</h5>
+      <mdb-card-text>Please wait while we analysing your scan item</mdb-card-text>
+
+
+      <hr />
+      <h5>Programming Language</h5>
+      <mdb-card-text>Please specify the programming language used </mdb-card-text>
 
     </form>
 
