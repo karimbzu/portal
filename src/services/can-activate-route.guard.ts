@@ -1,16 +1,17 @@
 import { Injectable } from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {ActivatedRouteSnapshot, CanActivate, NavigationStart, Router, RouterStateSnapshot} from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DisabledManualURLGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-      console.log (route);
+      // console.log (route);
       if (route.fragment === undefined) {
         return true;
       } else {

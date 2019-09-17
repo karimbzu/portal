@@ -8,9 +8,11 @@ import {Router} from '@angular/router';
 })
 export class BlockedComponent implements OnInit {
   blockedPage;
+  prevPage;
 
   constructor(private router: Router) {
     this.blockedPage = sessionStorage.getItem('blockedPage');
+    this.prevPage = sessionStorage.getItem('prevPage');
     console.log (this.router);
   }
 
