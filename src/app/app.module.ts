@@ -19,6 +19,7 @@ import { ScanRequestComponent } from './scan-request/scan-request.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { BlockedComponent } from './blocked/blocked.component';
     ScanRequestComponent,
     TicketComponent,
     ScanRequestComponent,
-    BlockedComponent
+    BlockedComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
