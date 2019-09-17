@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { ScanRequestComponent } from './scan-request/scan-request.component';
+import { TicketComponent } from './ticket/ticket.component';
 import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
 
@@ -30,6 +31,8 @@ import { BlockedComponent } from './blocked/blocked.component';
     HeaderComponent,
     LandingComponent,
     LoginComponent,
+    ScanRequestComponent,
+    TicketComponent,
     ScanRequestComponent,
     BlockedComponent
   ],

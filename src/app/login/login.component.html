@@ -3,9 +3,9 @@
     <mdb-card>
       <mdb-card-header class="light-blue darken-4 h5 white-text text-center py-4">Login to CENTURION</mdb-card-header>
       <mdb-card-body>
-        <div class="md-form">
+        <!-- <div class="md-form">
           <mdb-icon fas icon="user" class="prefix"></mdb-icon>
-          <input mdbInput type="text" id="username" class="form-control">
+          <input mdbInput mdbValidate type="text" id="username" class="form-control" [(ngModel)]="m">
           <label for="username">Username</label>
         </div>
 
@@ -13,11 +13,37 @@
           <mdb-icon fas icon="key" class="prefix"></mdb-icon>
           <input mdbInput type="password" id="password" class="form-control">
           <label for="username">Password</label>
-        </div>
+        </div> -->
+        <form [formGroup]="validatingForm">
+          <div class="md-form">
+            <mdb-icon fas icon="user" class="prefix"></mdb-icon>
+            <input mdbInput mdbValidate type="text" id="username" class="form-control" formControlName="required">
+            <label for="username">Username</label>
+            <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">Username required</mdb-error>
+            <!-- <mdb-success *ngIf="input.valid && (input.dirty || input.touched)">Input valid</mdb-success> -->
+          </div>
+            <div class="md-form"> 
+            <mdb-icon fas icon="key" class="prefix"></mdb-icon> 
+            <input mdbInput mdbValidate type="text" id="password" class="form-control" formControlName="required">
+            <label for="password">Password</label>
+            <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">Password required</mdb-error>
+            <!-- <mdb-success *ngIf="input.valid && (input.dirty || input.touched)">Input valid</mdb-success> -->
+                 
+          </div>
+        </form>
+
+
+
+
 
 
         <button type="button" mdbBtn color="primary" block="true" routerLink="/scan-request">Login</button>
         <a class="forgot-password" href="https://idss.tm.com.my">Forgot password?</a>
+
+
+
+
+
       </mdb-card-body>
     </mdb-card>
   </div>
