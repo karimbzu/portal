@@ -16,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { ScanRequestComponent } from './scan-request/scan-request.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ScanRequestComponent } from './scan-request/scan-request.component';
     HeaderComponent,
     LandingComponent,
     LoginComponent,
-    ScanRequestComponent
+    ScanRequestComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
