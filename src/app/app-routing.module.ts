@@ -9,6 +9,7 @@ import {LandingComponent} from './landing/landing.component';
 import {LoginComponent} from './login/login.component';
 import {combineAll} from 'rxjs/operators';
 import {ScanRequestComponent} from './scan-request/scan-request.component';
+import {TicketComponent} from './ticket/ticket.component';
 
 
 const routes: Routes = [
@@ -20,7 +21,8 @@ const routes: Routes = [
   {path: 'page3', component: Page3Component},
   {path: 'my-cart', component: MyCartComponent},
   {path: 'my-account', component: MyAccountComponent},
-  {path: 'scan-request', component: ScanRequestComponent}
+  {path: 'scan-request', component: ScanRequestComponent},
+  {path: 'ticket', component: TicketComponent}
 ];
 
 @NgModule({
