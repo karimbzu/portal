@@ -17,6 +17,8 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { ScanRequestComponent } from './scan-request/scan-request.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
+import { BlockedComponent } from './blocked/blocked.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { TicketComponent } from './ticket/ticket.component';
     LandingComponent,
     LoginComponent,
     ScanRequestComponent,
-    TicketComponent
+    TicketComponent,
+    ScanRequestComponent,
+    BlockedComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +49,7 @@ import { TicketComponent } from './ticket/ticket.component';
     MatSelectModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [DisabledManualURLGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

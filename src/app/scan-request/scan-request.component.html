@@ -1,6 +1,6 @@
 <app-header></app-header>
 <mdb-card class="m-3">
-  <mdb-card-header class="yellow accent-4 h5">Scan Request</mdb-card-header>
+  <mdb-card-header class="yellow darken-1 h5">Scan Request</mdb-card-header>
   <mdb-card-body>
     <mdb-card-text>We shall populate the content of Scan Request here</mdb-card-text>
 
@@ -75,6 +75,18 @@
               <mdb-icon fas icon="key"></mdb-icon>
               <input type="text" id="inputAccessToken" class="form-control" mdbInput>
               <label for="inputAccessToken">Access Token</label>
+              <small class="form-text text-muted">Click here to add new Access Token</small>
+
+              <!--
+              <mdb-icon fas icon="key"></mdb-icon>
+              <select class="browser-default custom-select pl-4" id="inputAccessToken" mdbInput>
+                <option disabled selected>Please Select Access Token</option>
+                <option value="1">Token 1</option>
+                <option value="2">Token 2</option>
+              </select>
+              <small class="form-text text-muted">Click here to add new Access Token</small>
+              -->
+
             </div>
           </mdb-card-body>
         </mdb-card>
@@ -100,7 +112,49 @@
       </div>
 
 
+      <hr />
+      <h5>Analyzing</h5>
+      <mdb-card-text>Please wait while we analysing your scan item (Progress: {{progressCount}})</mdb-card-text>
+      <div class="progress">
+        <div class="progress-bar"
+             role="progressbar" [style.width]="progressCount"
+             aria-valuenow="10"
+             aria-valuemin="0"
+             aria-valuemax="100"></div>
+      </div>
+      <br />
 
+
+      <hr />
+      <h5>Programming Language</h5>
+      <mdb-card-text>Please specify the programming language used </mdb-card-text>
+      <div class="md-form md-outline">
+        <!--<mdb-icon fas icon="code"></mdb-icon>
+        <input type="text" id="inputProgramLang" class="form-control" mdbInput formControlName="programLanguage">-->
+        <select formControlName="programLanguage" id="inputProgramLang" class="browser-default custom-select">
+          <option value="javascript">JavaScript</option>
+          <option value="java">Java</option>
+          <option value="php">PHP</option>
+          <option value="python">Python</option>
+        </select>
+        <!--<label for="inputProgramLang">Programming Language</label>-->
+      </div>
+      <div class="md-form md-outline">
+        <mdb-icon fas icon="terminal"></mdb-icon>
+        <input type="text" id="inputBuildCmd" class="form-control" mdbInput formControlName="buildCommand">
+        <label for="inputBuildCmd">Build Command</label>
+      </div>
+
+
+      <hr />
+      <h5>Optional Services</h5>
+      <mdb-card-text>Please select optional services for this scan</mdb-card-text>
+      <div class="custom-control custom-checkbox">
+        <mdb-checkbox [checked]="true">Security Vulnerability</mdb-checkbox>
+        <mdb-checkbox>Android</mdb-checkbox>
+        <mdb-checkbox>Web Application</mdb-checkbox>
+        <mdb-checkbox>Continuous Scan</mdb-checkbox>
+      </div>
     </form>
 
 
