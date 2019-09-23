@@ -3,9 +3,10 @@
     <mdb-card>
       <mdb-card-header class="light-blue darken-4 h5 white-text text-center py-4">Login to CENTURION</mdb-card-header>
       <mdb-card-body>
+
         <!-- <div class="md-form">
           <mdb-icon fas icon="user" class="prefix"></mdb-icon>
-          <input mdbInput mdbValidate type="text" id="username" class="form-control" [(ngModel)]="m">
+          <input mdbInput mdbValidate type="text" id="username" class="form-control">
           <label for="username">Username</label>
         </div>
 
@@ -14,19 +15,24 @@
           <input mdbInput type="password" id="password" class="form-control">
           <label for="username">Password</label>
         </div> -->
+
+
+        
         <form [formGroup]="validatingForm">
           <div class="md-form">
             <mdb-icon fas icon="user" class="prefix"></mdb-icon>
-            <input mdbInput mdbValidate type="text" id="username" class="form-control" formControlName="required">
+            <input mdbInput mdbValidate type="text" id="username" class="form-control" formControlName="username">
             <label for="username">Username</label>
-            <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">Username required</mdb-error>
-            <!-- <mdb-success *ngIf="input.valid && (input.dirty || input.touched)">Input valid</mdb-success> -->
+            <mdb-error *ngIf="username.invalid && (username.dirty || username.touched)">Username required</mdb-error>
+            <!-- <mdb-success *ngIf="input.valid && (input.dirty || input.touched)">Input valid</mdb-success> --> 
           </div>
+        
+          
             <div class="md-form"> 
             <mdb-icon fas icon="key" class="prefix"></mdb-icon> 
-            <input mdbInput mdbValidate type="text" id="password" class="form-control" formControlName="required">
+            <input mdbInput mdbValidate type="text" id="password" class="form-control" formControlName="password">
             <label for="password">Password</label>
-            <mdb-error *ngIf="input.invalid && (input.dirty || input.touched)">Password required</mdb-error>
+            <mdb-error *ngIf="password.invalid && (password.dirty && password.touched)">Password required</mdb-error>
             <!-- <mdb-success *ngIf="input.valid && (input.dirty || input.touched)">Input valid</mdb-success> -->
                  
           </div>
