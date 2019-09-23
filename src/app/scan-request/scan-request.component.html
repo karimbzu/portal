@@ -4,9 +4,9 @@
   <mdb-card-body>
     <mdb-card-text>We shall populate the content of Scan Request here</mdb-card-text>
 
-    <button mdbBtn color="primary" type="button" [disabled]="flagScanTypeNext" (click)="clickScanType()">
-      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="flagScanTypeNext"></span>
-      <span>Next</span>
+    <button mdbBtn color="primary" class="col-sm-1" type="button" [disabled]="flagScanTypeNext" (click)="clickScanType()">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true" *ngIf="flagScanTypeNext; else templateScanTypeNext"></span>
+      <ng-template #templateScanTypeNext>Next</ng-template>
     </button>
 
     <br />
