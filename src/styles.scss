@@ -1,8 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+//@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+@font-face {
+  font-family: 'InterFace';
+  src: url('assets/fonts/Dalton Maag - InterFace.ttf') format('truetype');
+}
+
+
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 body {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'InterFace', sans-serif;
 }
