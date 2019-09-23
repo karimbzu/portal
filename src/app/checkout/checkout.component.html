@@ -1,24 +1,104 @@
 <app-header></app-header>
 <mdb-card class="m-3">
   <mdb-card-header class="yellow accent-4 h5">Checkout</mdb-card-header>
-  <mdb-card-body>
-    <mdb-card-text>We shall populate the content of Checkout here</mdb-card-text>
+   <mdb-card-body>
+    <!-- <mdb-card-text>We shall populate the content of Checkout here</mdb-card-text> -->
+     <mdb-card-title><h5>
+    <div class="row">
+                  
+        <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Checkout Method</b></div>
+                                    
+    </div></h5>   
 
     <!-- Material unchecked -->
-<div class="form-check">
-        <div class="row">
-                <div class ="col-sm-1"></div>
-                <div class ="col-sm-3">
-    <input type="radio" class="form-check-input" id="materialUnchecked" name="materialExampleRadios" mdbInput>
-    <label class="form-check-label" for="materialUnchecked">Material unchecked</label>
+
+  <div class="row">
+    <div class ="col-sm-1"></div>
+    <div class ="col-sm-3">
+      <input type="radio" class="form-check-input" id="individual" name="individual" mdbInput>
+      <label class="form-check-label" for="individual">Individual</label>
     </div>
-  </div>
-  </div>
-  
+    
   <!-- Material checked -->
-  <div class="form-check">
-    <input type="radio" class="form-check-input" id="materialChecked" name="materialExampleRadios" checked mdbInput>
-    <label class="form-check-label" for="materialChecked">Material checked</label>
+  
+     <div class ="col-sm-7">
+       <input type="radio" class="form-check-input" id="company" name="company" checked mdbInput>
+       <label class="form-check-label" for="company">Company</label>
+     </div>
   </div>
-</mdb-card-body>
+   
+  <div class="row">
+      <div class ="col-sm-1"></div>
+      <div class ="col-sm-3" style="font-size:small">Payment using my wallet</div>
+      <div class ="col-sm-7" style="font-size:small">Payment made through COMPANY'S WALLET</div>
+   </div>
+
+   
+  <div class="row">
+      <div class ="col-sm-1"></div>
+      <div class ="col-sm-3"></div>
+      <div class ="col-sm-7" style="font-size:small; font-style: oblique">* Pending approval by Account Manager</div>
+  </div>
+
+
+  </mdb-card-title>
+ </mdb-card-body>
 </mdb-card>
+
+<!-- company -->
+<!-- <div *ngIf="type==='company'"> c-->
+<mdb-card class="m-3">
+  <mdb-card-body>
+    <mdb-card-title><h5>
+        
+        <div class="row">                     
+            <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Company Approval</b></div>                                      
+        </div></h5>   
+    
+        <div class="col-sm-12 mt-2">      
+          <div class="row">
+            <div class ="col-sm-1"></div>
+            <div class ="col-sm-3">Company:</div>
+            <div class ="col-sm-7">TM</div>                                 
+          </div>
+
+          <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Division:</div>
+              <div class ="col-sm-7">{{acctManagerOrgName}}</div>                          
+          </div> 
+          
+          <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Person in Charge (PIC):</div>
+              <div class ="col-sm-7">{{acctManagerName}}</div>                            
+          </div> 
+
+          <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Project Name</div>
+              
+              <div class ="col-sm-7">
+                 <div class="md-form">
+                  <input mdbInput type="text" id="projectname" class="md-textarea form-control">
+                  <label for="projectname" class="">Project Name</label>
+                 </div>                
+              </div>
+          </div>
+
+          <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Project Description</div>
+              
+              <div class ="col-sm-7">
+                 <div class="md-form">
+                  <input mdbInput type="text" id="projectdesc" class="md-textarea form-control">
+                  <label for="projectdesc" class="">Project Description</label>
+                 </div>                
+              </div>
+          </div>
+
+     </div>
+   </mdb-card-title>
+ </mdb-card-body>
+</mdb-card> 
