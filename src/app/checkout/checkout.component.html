@@ -50,12 +50,13 @@
 <mdb-card class="m-3">
   <mdb-card-body>
     <mdb-card-title><h5>
-        
+      
         <div class="row">                     
             <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Company Approval</b></div>                                      
         </div></h5>   
-    
+      
         <div class="col-sm-12 mt-2">      
+          <form [formGroup]="validatingForm"> 
           <div class="row">
             <div class ="col-sm-1"></div>
             <div class ="col-sm-3">Company:</div>
@@ -76,29 +77,83 @@
 
           <div class="row">
               <div class ="col-sm-1"></div>
-              <div class ="col-sm-3">Project Name</div>
+              <div class ="col-sm-3">Project Name:</div>
               
               <div class ="col-sm-7">
-                 <div class="md-form">
-                  <input mdbInput type="text" id="projectname" class="md-textarea form-control">
-                  <label for="projectname" class="">Project Name</label>
+                  <div class="md-form">
+                    <input mdbInput mdbValidate type="text" id="projectname" class="md-textarea form-control" formControlName="projectname">
+                    <!-- <input mdbInput placeholder = "Project Name" type="text" id="projectname" class="md-textarea form-control" minlength="5"> -->
+                    <label for="projectname" class="">Project Name</label>
+                    <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name required</mdb-error>
                  </div>                
               </div>
           </div>
 
           <div class="row">
               <div class ="col-sm-1"></div>
-              <div class ="col-sm-3">Project Description</div>
+              <div class ="col-sm-3">Project Description:</div>
               
               <div class ="col-sm-7">
-                 <div class="md-form">
-                  <input mdbInput type="text" id="projectdesc" class="md-textarea form-control">
+               <div class="md-form">
+                  <input mdbInput mdbValidate type="text" id="projectdesc" class="md-textarea form-control" formControlName="projectdesc" >
                   <label for="projectdesc" class="">Project Description</label>
-                 </div>                
+                  <mdb-error *ngIf="projectdesc.invalid && (projectdesc.dirty || projectdesc.touched)">Project Description required</mdb-error>
+                 </div> 
               </div>
-          </div>
-
+          </div>        
+        </form>
      </div>
    </mdb-card-title>
  </mdb-card-body>
 </mdb-card> 
+
+<mdb-card class="m-3">
+    <mdb-card-body>
+      <mdb-card-title><h5>
+          
+          <div class="row">                     
+              <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Order Review</b></div>                                      
+          </div></h5>   
+      
+          <div class="col-sm-12 mt-2">      
+            <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Items:</div>
+              <div class ="col-sm-7">1</div>                                 
+            </div>
+  
+            <div class="row">
+                <div class ="col-sm-1"></div>
+                <div class ="col-sm-3">Delivered by:</div>
+                <div class ="col-sm-7">7 Working Days After Date of Approval</div>                          
+            </div> 
+            
+            <div class="row">
+                <div class ="col-sm-1"></div>
+                <div class ="col-sm-3">Total Tokens:</div>
+                <div class ="col-sm-7">{{totalPrice}}</div>                            
+            </div>      
+          </div>
+     </mdb-card-title>
+   </mdb-card-body>
+  </mdb-card> 
+
+  <!-- Material checked -->
+  <div class="d-flex flex-row-reverse">
+      <div class="p-2"></div>
+      <div class="p-2">
+        <!-- <mdb-checkbox [checked]="true" (click)="Accept($event)" [disabled]="(!projectname.length) || (!projectdesc.length)"><a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" style="font-size:small; color:black"> I have read and agree to the Terms and Conditions</a></mdb-checkbox> -->
+        <mdb-checkbox id="myCheck" [value]="0" (change)="Accept($event)" [disabled]="cek"><a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" style="font-size:small; color:black"> I have read and agree to the Terms and Conditions</a></mdb-checkbox>
+      </div> 
+  </div> 
+
+  <div class="d-flex flex-row-reverse">
+      <div class="p-2">
+        <button mdbBtn (click)="btnPlaceOrder()" [disabled]="!marked || (!projectname.length) || (!projectdesc.length)" type="button" color="info" rounded="true" mdbWavesEffect>PLACE ORDER</button>
+      </div>
+  </div>    
+  <br/>
+  <br/>
+
+
+ 
