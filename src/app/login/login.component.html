@@ -1,23 +1,9 @@
-<div class="d-flex justify-content-center align-items-center vh-100">
+<div class="d-flex justify-content-center align-items-center vh-100 centurionBlue">
   <div class="col-md-4">
+    <img src="../../assets/images/centurionlogo3.png" class="mb-5 mx-auto d-block" height="48" />
     <mdb-card>
-      <mdb-card-header class="light-blue darken-4 h5 white-text text-center py-4">Login to CENTURION</mdb-card-header>
+      <mdb-card-header class="centurionDarkBlue h3 white-text text-center py-4">Login</mdb-card-header>
       <mdb-card-body>
-
-        <!-- <div class="md-form">
-          <mdb-icon fas icon="user" class="prefix"></mdb-icon>
-          <input mdbInput mdbValidate type="text" id="username" class="form-control">
-          <label for="username">Username</label>
-        </div>
-
-        <div class="md-form">
-          <mdb-icon fas icon="key" class="prefix"></mdb-icon>
-          <input mdbInput type="password" id="password" class="form-control">
-          <label for="username">Password</label>
-        </div> -->
-
-
-
         <form [formGroup]="validatingForm">
           <div class="md-form">
             <mdb-icon fas icon="user" class="prefix"></mdb-icon>
@@ -26,7 +12,6 @@
             <mdb-error *ngIf="username.invalid && (username.dirty || username.touched)">Username required</mdb-error>
             <!-- <mdb-success *ngIf="input.valid && (input.dirty || input.touched)">Input valid</mdb-success> -->
           </div>
-
 
             <div class="md-form">
             <mdb-icon fas icon="key" class="prefix"></mdb-icon>
@@ -38,19 +23,13 @@
           </div>
         </form>
 
-
-
-
-
-
-        <button type="button" mdbBtn color="primary" block="true" (click)="handleLogin()" >Login</button>
-        <a class="forgot-password" href="https://idss.tm.com.my">Forgot password?</a>
-
-
-
-
-
+        <button type="button" mdbBtn class="centurionOrange text-white col-6 mx-auto d-block" (click)="handleLogin()" >Login</button>
+        <p class="text-center">
+          <a class="forgot-password" href="https://idss.tm.com.my">Forgot password?</a>
+        </p>
       </mdb-card-body>
     </mdb-card>
+    <p class="text-white-50 text-center mt-5">Innovation by TM RND</p>
   </div>
+
 </div>
