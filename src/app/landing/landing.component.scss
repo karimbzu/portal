@@ -1,0 +1,29 @@
+#area-home {
+  background-image: url("../../assets/images/banner-1.png");
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: cover;
+  height: 100vh;
+}
+
+.navbar {
+  background-color: transparent;
+}
+
+.top-nav-collapse {
+  background-color: #ff9200;
+}
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    background-color: #ff9200;
+  }
+}
+
+#area-about {
+  background-color: beige;
+}
+
+#area-reviews {
+  background-color: honeydew;
+}
