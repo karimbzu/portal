@@ -1,8 +1,10 @@
 <div class="d-flex justify-content-center align-items-center vh-100 centurionBlue">
   <div class="col-md-4">
     <img src="../../assets/images/centurionlogo3.png" class="mb-5 mx-auto d-block" height="48" />
-    <mdb-card>
-      <mdb-card-header class="centurionDarkBlue h3 white-text text-center py-4">Login</mdb-card-header>
+    <mdb-card cascade="true" narrower="true">
+      <div class="view view-cascade gradient-card-header centurionDarkBlue">
+        <h2 class="card-header-title">Login</h2>
+      </div>
       <mdb-card-body>
         <form [formGroup]="validatingForm">
           <div class="md-form">
@@ -23,7 +25,7 @@
           </div>
         </form>
 
-        <button type="button" mdbBtn class="centurionOrange text-white col-6 mx-auto d-block" (click)="handleLogin()" >Login</button>
+        <button type="button" mdbBtn rounded="true" class="centurionOrange text-white col-6 mx-auto d-block" (click)="handleLogin()" >Login</button>
         <p class="text-center">
           <a class="forgot-password" href="https://idss.tm.com.my">Forgot password?</a>
         </p>

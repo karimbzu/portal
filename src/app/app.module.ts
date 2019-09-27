@@ -3,13 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModulesPro } from 'ng-uikit-pro-standard';
+import { MDBSpinningPreloader } from 'ng-uikit-pro-standard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatRadioModule, MatStepperModule, MatBadgeModule, MatFormFieldModule, MatSelectModule, MatInputModule} from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
-import { Page1Component } from './page1/page1.component';
-import { Page2Component } from './page2/page2.component';
-import { Page3Component } from './page3/page3.component';
 import { MyCartComponent } from './my-cart/my-cart.component';
 import { MyAccountComponent } from './my-account/my-account.component';
 import { HeaderComponent } from './header/header.component';
@@ -20,14 +17,11 @@ import { TicketComponent } from './ticket/ticket.component';
 import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    Page1Component,
-    Page2Component,
-    Page3Component,
     MyCartComponent,
     MyAccountComponent,
     HeaderComponent,
@@ -43,17 +37,14 @@ import {HttpClientModule} from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot(),
+    MDBBootstrapModulesPro.forRoot(),
     BrowserAnimationsModule,
-    MatRadioModule,
     ReactiveFormsModule,
-    MatStepperModule,
-    MatBadgeModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInputModule
   ],
-  providers: [DisabledManualURLGuard],
+  providers: [
+    DisabledManualURLGuard,
+    MDBSpinningPreloader
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
