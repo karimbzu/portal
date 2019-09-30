@@ -1,6 +1,10 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {interval} from 'rxjs';
+import {MdbStepperComponent} from 'ng-uikit-pro-standard';
+import {Router} from '@angular/router';
+import {FileUploader} from 'ng2-file-upload';
+import {RequestService} from '../../services/request.service';
 
 @Component({
   selector: 'app-scan-request',
@@ -8,6 +12,13 @@ import {interval} from 'rxjs';
   styleUrls: ['./scan-request.component.scss']
 })
 export class ScanRequestComponent implements OnInit, OnDestroy {
+  @Input() flagBrowse: boolean;
+  @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
+  uploader: FileUploader;
+
+  public hasBaseDropZoneOver = false;
+  public hasAnotherDropZoneOver = false;
+
   myRequestForm = new FormGroup({
     scanType: new FormControl('mobile_app'),
     type: new FormControl('repo'),
@@ -15,7 +26,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     buildCommand: new FormControl({value: '', disabled: true})
   });
 
-  flagScanTypeNext = false;
+  flagSubmit = false;
   flagShowUpload = true;
   flagShowRepo = false;
   flagShowWeb = false;
@@ -27,22 +38,38 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.progressCount = this.pCount + '%';
   });
 
-  constructor() {
-/*    this.numberInterval = this.numbers.subscribe(val => {
-      this.pCount = val % 100;
-      this.progressCount = this.pCount + '%';
+  tempAccessToken = [];
+  optProgLangList = [
+    {value: 'javascript', label: 'JavaScript'},
+    {value: 'java', label: 'Java'},
+    {value: 'php', label: 'PHP'},
+    {value: 'python', label: 'Python'}
+  ];
+
+  constructor(public router: Router,
+              private myRequest: RequestService ) {
+    this.myRequest.currentListAuthToken.subscribe(val => {
+      if (val.length) {
+        function mapLabel2Value(item) {
+          const retJson = {
+            value : item.tokenId,
+            label : item.label
+          };
+          return retJson;
+        }
+
+        this.tempAccessToken = val.map(mapLabel2Value);
+      }
     });
- */
   }
 
   ngOnInit() {
-
+    this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
   }
 
   ngOnDestroy(): void {
     this.numberInterval.unsubscribe();
   }
-
 
   updateScanType(val) {
     this.myRequestForm.patchValue({
@@ -68,11 +95,52 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     }
   }
 
-  clickScanType() {
-    this.flagScanTypeNext = true;
-    setTimeout(() => {
-      this.flagScanTypeNext = false;
-    }, 3000);
+  openDialogAddToken() {
+    console.log ('Open the dialog modal');
+  }
+
+  updateDeliveryMethod(val) {
+    this.myRequestForm.patchValue({
+      type: val
+    });
+  }
+
+  public fileOverBase(e: any): void {
+    this.hasBaseDropZoneOver = e;
+  }
+
+  public fileOverAnother(e: any): void {
+    this.hasAnotherDropZoneOver = e;
+  }
+
+  public onFileSelected(event) {
+    const file: File = event[0];
+    console.log(file);
+  }
+
+  handleBrowse() {
+
+  }
+
+  /**
+   * Method to update the Build Command form input when changes of Programming Language dropdown list
+   */
+  updateProgLang(val) {
+    if (val === 'java') {
+      this.myRequestForm.get('buildCommand').enable();
+    } else {
+      this.myRequestForm.get('buildCommand').disable();
+    }
+  }
+
+  handleStepChange() {
+    // Set the submit button flag
+    this.flagSubmit = this.stepper.activeStepIndex < 4 ? false : true;
+  }
+
+  handleSubmit() {
+    // Dummy
+    this.router.navigate(['/my-account']);
   }
 
 }
