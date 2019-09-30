@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { invalid } from '@angular/compiler/src/render3/view/util';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'app-checkout',
@@ -9,7 +10,7 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
 })
 export class CheckoutComponent implements OnInit {
   validatingForm: FormGroup;
-  cek = true;
+  check:false;
   marked = false;
   count = 0;
   type = 'company';
@@ -17,10 +18,17 @@ export class CheckoutComponent implements OnInit {
   totalPrice;
   cartCount: number;
   totalToken: number;
-
-  
-  
+ 
   btnCheckout = "";
+
+  // templateUnchecked = false;
+  // templateChecked = true;
+  // template = true;
+
+  // getCheckboxesValue() {
+  //   console.log('ngModel value', this.template);
+  // }
+ 
 
 
   constructor() { }
@@ -37,7 +45,7 @@ export class CheckoutComponent implements OnInit {
     // if (this.validatingForm.get('projectname').status === 'VALID') {
     //   this.marked = true;
     // }
-    
+  
     return this.validatingForm.get('projectname');
    }
 
@@ -45,23 +53,31 @@ export class CheckoutComponent implements OnInit {
     // if (this.validatingForm.get('projectdesc').status === 'VALID') {
     //   this.marked = true;
     // }
+    
     return this.validatingForm.get('projectdesc');
    }
 
    Accept(e:any) {
-    // this.count++;
-    // if (this.count % 2) {
-    //   this.marked = true;
-    // } else {
-    //   this.marked = false;
-    // // }
-    const projectname = this.validatingForm.get('projectname').value;
-    const projectdesc = this.validatingForm.get('projectdesc').value;
-    console.log("aaaa"+projectname);
-    console.log("bbbb"+projectdesc);
-    if (false) {
-          this.cek = false;
-        }
+    this.count++;
+    if (this.count % 2) {
+      this.marked = true;
+    } else {
+      this.marked = false;
+     }
+    // const projectname = this.validatingForm.get('projectname').value;
+    // const projectdesc = this.validatingForm.get('projectdesc').value;
+    // console.log("aaaa"+projectname);
+    // console.log("bbbb"+projectdesc);
+    // if (false) {
+    //       this.cek = false;
+    //     }
+  }
+
+  controlChecked(a:any){
+  this.check = a;
+
+  return this.check;
+
   }
 
 

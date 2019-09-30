@@ -15,29 +15,33 @@
   <div class="row">
     <div class ="col-sm-1"></div>
     <div class ="col-sm-3">
-      <input type="radio" class="form-check-input" id="individual" name="individual" mdbInput>
+      <input type="radio" class="form-check-input" id="individual" name="individual" disabled mdbInput>
+      <!-- <input #i1c type="radio" class="radio" value="company" name="item" id="company" [(ngModel)]="type" (change)="0" checked /> -->
+     
       <label class="form-check-label" for="individual">Individual</label>
     </div>
     
   <!-- Material checked -->
   
      <div class ="col-sm-7">
-       <input type="radio" class="form-check-input" id="company" name="company" checked mdbInput>
-       <label class="form-check-label" for="company">Company</label>
+       <input type="radio" class="form-check-input" id="company" name="company" checked disabled mdbInput>
+       <!-- <input #i1c type="radio" class="radio" value="company" name="item" id="company" [(ngModel)]="type" (change)="0" checked /> -->
+       <label class="form-check-label disabled" for="company">Company</label>
      </div>
   </div>
+
    
   <div class="row">
       <div class ="col-sm-1"></div>
-      <div class ="col-sm-3" style="font-size:small">Payment using my wallet</div>
-      <div class ="col-sm-7" style="font-size:small">Payment made through COMPANY'S WALLET</div>
+      <div class ="col-sm-3" style="font-size:small">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Payment using my wallet</div>
+      <div class ="col-sm-7" style="font-size:small">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Payment made through COMPANY'S WALLET</div>
    </div>
 
    
   <div class="row">
       <div class ="col-sm-1"></div>
       <div class ="col-sm-3"></div>
-      <div class ="col-sm-7" style="font-size:small; font-style: oblique">* Pending approval by Account Manager</div>
+      <div class ="col-sm-7" style="font-size:small; font-style: oblique">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Pending approval by Account Manager</div>
   </div>
 
 
@@ -45,8 +49,43 @@
  </mdb-card-body>
 </mdb-card>
 
+
+<!-- Individual -->
+<div *ngIf="type==='Individual'"> 
+<mdb-card class="m-3">
+  <mdb-card-body>
+    <mdb-card-title><h5>
+        
+        <div class="row">                     
+            <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Order Review</b></div>                                      
+        </div></h5>   
+    
+        <div class="col-sm-12 mt-2">      
+          <div class="row">
+            <div class ="col-sm-1"></div>
+            <div class ="col-sm-3">Items:</div>
+            <div class ="col-sm-7">1</div>                                 
+          </div>
+
+          <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Delivered by:</div>
+              <div class ="col-sm-7">7 Working Days After Date of Approval</div>                          
+          </div> 
+          
+          <div class="row">
+              <div class ="col-sm-1"></div>
+              <div class ="col-sm-3">Total Tokens:</div>
+              <div class ="col-sm-7">{{totalPrice}}</div>                            
+          </div>      
+        </div>
+   </mdb-card-title>
+ </mdb-card-body>
+</mdb-card> 
+</div>
+
 <!-- company -->
-<!-- <div *ngIf="type==='company'"> c-->
+<div *ngIf="type==='company'"> 
 <mdb-card class="m-3">
   <mdb-card-body>
     <mdb-card-title><h5>
@@ -81,7 +120,7 @@
               
               <div class ="col-sm-7">
                   <div class="md-form">
-                    <input mdbInput mdbValidate type="text" id="projectname" class="md-textarea form-control" formControlName="projectname">
+                    <input mdbInput mdbValidate type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="30" required="required">
                     <!-- <input mdbInput placeholder = "Project Name" type="text" id="projectname" class="md-textarea form-control" minlength="5"> -->
                     <label for="projectname" class="">Project Name</label>
                     <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name required</mdb-error>
@@ -95,17 +134,22 @@
               
               <div class ="col-sm-7">
                <div class="md-form">
-                  <input mdbInput mdbValidate type="text" id="projectdesc" class="md-textarea form-control" formControlName="projectdesc" >
+                  <input value ="true" mdbInput mdbValidate type="text" id="projectdesc" class="md-textarea form-control" formControlName="projectdesc" maxlength="80" required="required">
                   <label for="projectdesc" class="">Project Description</label>
                   <mdb-error *ngIf="projectdesc.invalid && (projectdesc.dirty || projectdesc.touched)">Project Description required</mdb-error>
-                 </div> 
+                  <!-- <mdb-success *ngIf="projectdesc.valid && (projectdesc.dirty || projectdesc.touched)">Input valid</mdb-success>  -->
+                </div> 
               </div>
+
+          <br>{{projectdesc.invalid && (projectdesc.dirty || projectdesc.touched)}}
+          {{projectname.invalid && (projectname.dirty || projectname.touched)}}
           </div>        
         </form>
      </div>
    </mdb-card-title>
  </mdb-card-body>
 </mdb-card> 
+
 
 <mdb-card class="m-3">
     <mdb-card-body>
@@ -137,14 +181,25 @@
      </mdb-card-title>
    </mdb-card-body>
   </mdb-card> 
+</div>
+  
 
-  <!-- Material checked -->
-  <div class="d-flex flex-row-reverse">
+ 
+  <!-- <div class="d-flex flex-row-reverse"> -->
+    <div class="d-flex justify-content-end">
       <div class="p-2"></div>
       <div class="p-2">
         <!-- <mdb-checkbox [checked]="true" (click)="Accept($event)" [disabled]="(!projectname.length) || (!projectdesc.length)"><a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" style="font-size:small; color:black"> I have read and agree to the Terms and Conditions</a></mdb-checkbox> -->
-        <mdb-checkbox id="myCheck" [value]="0" (change)="Accept($event)" [disabled]="cek"><a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" style="font-size:small; color:black"> I have read and agree to the Terms and Conditions</a></mdb-checkbox>
-      </div> 
+        <!-- <mdb-checkbox id="myCheck" [value]
+          ="0" (change)="Accept($event)" [disabled]="cek"> <span class="text-body">I have read and agree to the </span><span class="text-primary"><a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" class="stretched-link">Terms and Conditions</a></span></mdb-checkbox> -->
+       
+        <mdb-checkbox [disabled]= "(!(projectname.valid && (projectname.dirty || projectname.touched))) || (!(projectdesc.valid && (projectdesc.dirty || projectdesc.touched)))">I have read and agree to the <a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" class="text-primary">Terms and Conditions</a></mdb-checkbox>
+      
+
+    
+
+    
+</div> 
   </div> 
 
   <div class="d-flex flex-row-reverse">
