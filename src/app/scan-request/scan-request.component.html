@@ -144,7 +144,7 @@
       </mdb-step>
     </mdb-stepper>
   </mdb-card-body>
-
+<!--
   <mdb-card-footer>
     <div class="btn-group-toggle" role="group">
       <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-2"
@@ -155,7 +155,20 @@
               mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Submit</button>
     </div>
   </mdb-card-footer>
+-->
 </mdb-card>
+<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+
+  <a mdbBtn floating="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="stepper.previous()">
+    <mdb-icon fas icon="arrow-left"></mdb-icon>
+  </a>
+  <a mdbBtn floating="true" size="lg" class="waves-light centurionDarkBlue" mdbWavesEffect (click)="stepper.next()" [hidden]="flagSubmit">
+    <mdb-icon fas icon="arrow-right"></mdb-icon>
+  </a>
+  <a mdbBtn floating="true" size="lg" class="waves-light centurionOrange" mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">
+    <mdb-icon fas icon="shopping-cart"></mdb-icon>
+  </a>
+</div>
 
 <div mdbModal #frame class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
