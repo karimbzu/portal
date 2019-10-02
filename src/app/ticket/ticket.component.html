@@ -23,14 +23,15 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="d-flex justify-content-center mt-3 col-12">
-              <a class="btn btn-success text-uppercase px-md-5 font-weight-bold" routerLink="/my-account">My Account</a>
-              <span>&nbsp;&nbsp;</span>
-              <a class="btn btn-outline-danger text-uppercase px-md-5 font-weight-bold" routerLink="/scan-request">Create New Request</a>
-            </div>
-          </div>
+        
         </div>
 <!-- <mdb-card-text>We shall populate the content of Ticket here</mdb-card-text> -->
   </mdb-card-body>
 </mdb-card>
+<div class="row">
+  <div class="d-flex justify-content-center mt-3 col-12">
+    <a mdbBtn type="button" class="btn btn-success text-uppercase px-md-5 font-weight-bold" routerLink="/my-account" rounded="true" mdbWavesEffect>My Account</a>
+    <span>&nbsp;&nbsp;</span>
+    <a mdbBtn type="button" class="btn btn-outline-danger text-uppercase px-md-5 font-weight-bold" rounded="true" outline="true" mdbWavesEffect routerLink="/scan-request">Create New Request</a>
+  </div>
+</div>
