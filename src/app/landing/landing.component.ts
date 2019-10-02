@@ -9,7 +9,10 @@ import { NavbarComponent } from 'ng-uikit-pro-standard';
 export class LandingComponent implements OnInit, AfterViewInit {
 //  @ViewChild('navbar', { static: true }) navbar: NavbarComponent
 
-  constructor() { }
+  constructor() {
+    // Temporary: Redirect to the physical landing
+    window.location.href = 'landing.html';
+  }
 
   ngOnInit() {
   }

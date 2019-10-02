@@ -84,27 +84,15 @@
               </mdb-card-header>
               <ng-template #elseUploadTitle><mdb-card-header>Upload</mdb-card-header></ng-template>
               <mdb-card-body>
-                <div class="col-md-12 text-center">
-                  <div *ngIf="!uploader?.queue?.length">
-                    <div ng2FileDrop
-                         [ngClass]="{'nv-file-over': hasBaseDropZoneOver}"
-                         (fileOver)="fileOverBase($event)"
-                         [uploader]="uploader"
-                         class="well my-drop-zone">
-                      <label class="label_item" for="typeUpload">Drag or select your file</label>
-                      <input accept=".zip" style="display:none" id="Upload" name="Browse" type="file"
-                             ng2FileSelect [uploader]="uploader" (onFileSelected)="onFileSelected($event)"
-                             [disabled]="!flagBrowse" />
-                      <br />
-                      <!--<label class="custom-file-input btn btn-primary" for="Upload" >Browse</label>-->
-                      <button mdbBtn (click)="handleBrowse()">Browse</button>
-                    </div>
-                  </div>
-                </div>
-
-
-
+                 <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>
               </mdb-card-body>
+              <ng-template #progressUpload>
+                <mdb-card-body>
+                  <mdb-progress value="35" min="0" max="100" type="success" aria-valuenow="35" aria-valuemin="0"
+                                aria-valuemax="100"></mdb-progress>
+                  Upload Progress: 35%
+                </mdb-card-body>
+              </ng-template>
             </mdb-card>
 
             <mdb-card class="m-3" *ngIf="flagShowWeb">

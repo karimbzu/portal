@@ -3,7 +3,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {interval} from 'rxjs';
 import {MdbStepperComponent} from 'ng-uikit-pro-standard';
 import {Router} from '@angular/router';
-import {FileUploader} from 'ng2-file-upload';
 import {RequestService} from '../../services/request.service';
 
 @Component({
@@ -14,10 +13,6 @@ import {RequestService} from '../../services/request.service';
 export class ScanRequestComponent implements OnInit, OnDestroy {
   @Input() flagBrowse: boolean;
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
-  uploader: FileUploader;
-
-  public hasBaseDropZoneOver = false;
-  public hasAnotherDropZoneOver = false;
 
   myRequestForm = new FormGroup({
     scanType: new FormControl('mobile_app'),
@@ -26,6 +21,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     buildCommand: new FormControl({value: '', disabled: true})
   });
 
+  file: File;
   flagSubmit = false;
   flagShowUpload = true;
   flagShowRepo = false;
@@ -105,21 +101,15 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     });
   }
 
-  public fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
+  onFileAdd(file: File) {
+    this.file = file;
+
+    const uploadFile = new FormData();
+    uploadFile.append('Payload', file);
   }
 
-  public fileOverAnother(e: any): void {
-    this.hasAnotherDropZoneOver = e;
-  }
-
-  public onFileSelected(event) {
-    const file: File = event[0];
-    console.log(file);
-  }
-
-  handleBrowse() {
-
+  onFileRemove() {
+    this.file = null;
   }
 
   /**

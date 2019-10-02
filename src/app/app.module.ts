@@ -18,7 +18,7 @@ import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HttpClientModule } from '@angular/common/http';
-import {FileUploadModule} from 'ng2-file-upload';
+import { MdbFileUploadModule } from 'mdb-file-upload';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import {FileUploadModule} from 'ng2-file-upload';
     MDBBootstrapModulesPro.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    FileUploadModule,
+    MdbFileUploadModule
   ],
   providers: [
     DisabledManualURLGuard,
