@@ -6,8 +6,18 @@
   height: 100vh;
 }
 
+.view {
+  background: url("../../assets/images/banner-1.png") no-repeat center center;
+  background-size: cover;
+  height: 100vh;
+}
+
 .navbar {
   background-color: transparent;
+}
+
+.navbar .nav-link.active {
+  background-color: lightblue;
 }
 
 .top-nav-collapse {
@@ -22,8 +32,48 @@
 
 #area-about {
   background-color: beige;
+  height: 100vh;
 }
 
 #area-reviews {
   background-color: honeydew;
+  height: 100vh;
+}
+
+#area-faq {
+  background-color: beige;
+  height: 500px;
+}
+
+#area-contact {
+  background-color: honeydew;
+  height: 500px;
+}
+
+
+
+.section {
+  height: 100vh;
+}
+.mdb-scrollspy {
+  display: block;
+  position: fixed;
+  top: 0 !important;
+  right: 0;
+  li {
+    display: block;
+    padding: 1rem 1rem;
+    &:first-child {
+      padding-top: 0.5rem;
+    }
+    &:last-child {
+      padding-bottom: 0.5rem;
+    }
+    a {
+      &.active {
+        font-weight: bold;
+        background-color: aquamarine;
+      }
+    }
+  }
 }
