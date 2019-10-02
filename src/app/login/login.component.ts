@@ -42,6 +42,7 @@ export class LoginComponent implements OnInit {
        })
        .catch((error) => {
          // TODO: Show the error notification
+         //if error status = 401
          console.log(JSON.stringify(error.status));
        });
 
