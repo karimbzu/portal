@@ -1,57 +1,59 @@
 <header class="h-100">
   <mdb-navbar
-    SideClass="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar intro-fixed-nav"
-    [containerInside]="false">
-    <mdb-navbar-brand><img src="../../assets/images/centurionlogo3.png" height="32" /></mdb-navbar-brand>
+    SideClass="navbar fixed-top navbar-expand-lg centurionDarkBlue navbar-dark scrolling-navbar intro-fixed-nav"
+    [containerInside]="false"
+    #navbar>
+    <mdb-navbar-brand><img src="../../assets/images/centurionlogo3.png" height="48" /></mdb-navbar-brand>
     <links>
-      <ul class="navbar-nav ml-auto">
+      <ul mdbScrollSpy="scrollSpyLanding" class="navbar-nav ml-auto">
         <li class="nav-item active waves-light" mdbWavesEffect>
-          <a class="nav-link">Home
+          <a mdbScrollSpyLink="area-home" class="nav-link text-black">Home
             <span class="sr-only">(current)</span>
           </a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">About</a>
+          <a mdbScrollSpyLink="area-about" class="nav-link text-black">About</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">Review</a>
+          <a mdbScrollSpyLink="area-reviews" class="nav-link text-black">Reviews</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">FAQ</a>
+          <a mdbScrollSpyLink="area-faq" class="nav-link">FAQ</a>
         </li>
         <li class="nav-item waves-light" mdbWavesEffect>
-          <a class="nav-link">Contact</a>
+          <a mdbScrollSpyLink="area-contact" class="nav-link">Contact</a>
         </li>
       </ul>
+
       <button mdbBtn type="button" color="success" rounded="true" routerLink="/login" mdbWavesEffect>Try Now!</button>
     </links>
   </mdb-navbar>
-  <section id="area-home" data-scroll-index="0">
+  <section id="area-home" mdbScrollSpyElement="scrollSpyLanding">
     <div class="container pt-5">
       <h1>Home</h1>
       <p>Welcome to Centurion Portal</p>
     </div>
   </section>
 </header>
-<section id="area-about" class="mx-auto p-3" data-scroll-index="1">
+<section id="area-about" class="mx-auto p-3" mdbScrollSpyElement="scrollSpyLanding">
   <div class="container">
     <h1>About</h1>
     <p>Everything you need to know about Centurion</p>
   </div>
 </section>
-<section id="area-reviews" class="mx-auto p-3" data-scroll-index="2">
+<section id="area-reviews" class="mx-auto p-3" mdbScrollSpyElement="scrollSpyLanding">
   <div class="container">
     <h1>Reviews</h1>
     <p>What our customers say</p>
   </div>
 </section>
-<section id="area-faq" data-scroll-index="3">
+<section id="area-faq" mdbScrollSpyElement="scrollSpyLanding">
   <div class="container">
     <h1>FAQ</h1>
     <p>Please check out these FAQ</p>
   </div>
 </section>
-<section id="area-contact" data-scroll-index="4">
+<section id="area-contact" mdbScrollSpyElement="scrollSpyLanding">
   <div class="container">
     <h1>Contact Us</h1>
     <p>Email: harris@tmrnd.com.my</p>
