@@ -2,19 +2,19 @@
 <mdb-card class="m-3">
   <mdb-card-header class="yellow accent-4 h5">My Cart</mdb-card-header>
   <mdb-card-body>
-    <mdb-card-text>    
-                
+    <mdb-card-text>
+
       <table mdbTable>
-      
+
         <table class="table table-striped">
           <thead >
           <tr >
             <th style="text-align:center">Type</th>
             <th>File / Repo Info</th>
             <th class="align-middle" style="text-align:center" >Scan Type</th>
-           
+
             <th style="text-align:center">Optional Service</th>
-            <th  style="text-align:center">Price (Token)</th>          
+            <th  style="text-align:center">Price (Token)</th>
             <th style="text-align:center" >Action</th>
           </tr>
           </thead>
@@ -23,29 +23,29 @@
             <td>
                 <div *ngIf="cart.type === 'repo'">
                   <img src="../../assets/images/git-icon-19.jpg" height="40" width="40">
-                </div> 
+                </div>
                 <div *ngIf="cart.type === 'file'">
                     <img src="../../assets/images/folder.svg" height="40" width="40">
-                </div> 
+                </div>
             </td>
             <td>
-             <div *ngIf="cart.fileName && cart.type === 'file'"> {{cart.fileName}} <br/> </div>              
+             <div *ngIf="cart.fileName && cart.type === 'file'"> {{cart.fileName}} <br/> </div>
              <div *ngIf="cart.fileSize && cart.type === 'file'"> {{fileSizetransform(cart.fileSize) }} <br/></div>
              <div *ngIf="cart.repoURL && cart.type === 'repo'">  {{cart.repoURL}} <br/></div>
-        
+
             </td>
             <td style="text-align:center">Source Code</td>
-          
+
             <td>
           <ul >
-              <span *ngIf="cart.optService.security_vulnerability"> <li>	 Security Vulnerability</li> </span> 
-              <span *ngIf="cart.optService.web_app"> <li> 	Web Application</li>  </span> 
-              <span *ngIf="cart.optService.android"> <li>  	Android</li></span> 
-              <span *ngIf="cart.optService.continuous_scanning"> <li> 	 Continious Scanning</li> </span> 
+              <span *ngIf="cart.optService.security_vulnerability"> <li>	 Security Vulnerability</li> </span>
+              <span *ngIf="cart.optService.web_app"> <li> 	Web Application</li>  </span>
+              <span *ngIf="cart.optService.android"> <li>  	Android</li></span>
+              <span *ngIf="cart.optService.continuous_scanning"> <li> 	 Continious Scanning</li> </span>
           </ul>
 
             </td>
-            <td style="text-align:center" >{{cart.price}}</td>              
+            <td style="text-align:center" >{{cart.price}}</td>
             <td style="text-align:center" width="1%">
               <!-- <button class="btn btn-xs btn-danger" (click)="btnDeleteCart(cart.cartId)" ><i class="fas fa-trash"></i></button> -->
               <button type="button" class="btn btn-danger px-3" (click)="btnDeleteCart(cart.cartId)"><i class="fas fa-trash" aria-hidden="true"></i></button>
@@ -65,10 +65,10 @@
 
 </mdb-card>
 
-<div class="row justify-content-end">
-<div class="col-2 action">
-  <button type="button" mdbBtn rounded="true" class="centurionOrange text-white mx-auto d-block"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
-</div>
+<div class="container">
+  <div class="row">
+      <button type="button" mdbBtn rounded="true" class="centurionOrange text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
+  </div>
 </div>
 
 
