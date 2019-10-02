@@ -2,56 +2,74 @@
 <mdb-card class="m-3">
   <mdb-card-header class="yellow accent-4 h5">My Cart</mdb-card-header>
   <mdb-card-body>
-    <mdb-card-text>
-      
-              <div class="col-md-4  ml-auto w-50" >            
-                <div class="card-group"> 
-                  <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col card-title">
-                                My Wallet:<br>Tokens
-                            </div>
-                            <div class="col">
-                                <p class="card-text blue-text"><span class="ml-2" style="font-size: 30px;">987</span></p>
-                            </div>
-                        </div>
-                     </div>
-                 
-                  </div>
-                  <div class="card mb-4">
-                      <div class="card-body">
-                          <div class="row">
-                              <div class="col">
-                                  <p class="card-text blue-text"><span class="ml-2" style="font-size: 30px;"><i class="fas fa-plus-circle"></i></span>Need More?</p>
-                              </div>
-                          </div>
-                      </div>                   
-                    </div> 
-                </div>
-              </div>
-    
+    <mdb-card-text>    
+                
       <table mdbTable>
-        <thead>
-          <tr>
-            <th *ngFor="let head of headElements" scope="col">{{head}} </th>
+      
+        <table class="table table-striped">
+          <thead >
+          <tr >
+            <th style="text-align:center">Type</th>
+            <th>File / Repo Info</th>
+            <th class="align-middle" style="text-align:center" >Scan Type</th>
+           
+            <th style="text-align:center">Optional Service</th>
+            <th  style="text-align:center">Price (Token)</th>          
+            <th style="text-align:center" >Action</th>
           </tr>
-        </thead>
-        <tbody>
-          <tr mdbTableCol *ngFor="let el of elements">
-            <th scope="row">{{el.id}}</th>
-            <td>{{el.first}}</td>
-            <td>{{el.last}}</td>
-            <td>{{el.handle}}</td>
+          </thead>
+          <tbody>
+          <tr mdbTableCol *ngFor="let cart of listCart; let i = index">
+            <td>
+                <div *ngIf="cart.type === 'repo'">
+                  <img src="../../assets/images/git-icon-19.jpg" height="40" width="40">
+                </div> 
+                <div *ngIf="cart.type === 'file'">
+                    <img src="../../assets/images/folder.svg" height="40" width="40">
+                </div> 
+            </td>
+            <td>
+             <div *ngIf="cart.fileName && cart.type === 'file'"> {{cart.fileName}} <br/> </div>              
+             <div *ngIf="cart.fileSize && cart.type === 'file'"> {{fileSizetransform(cart.fileSize) }} <br/></div>
+             <div *ngIf="cart.repoURL && cart.type === 'repo'">  {{cart.repoURL}} <br/></div>
+        
+            </td>
+            <td style="text-align:center">Source Code</td>
+          
+            <td>
+          <ul >
+              <span *ngIf="cart.optService.security_vulnerability"> <li>	 Security Vulnerability</li> </span> 
+              <span *ngIf="cart.optService.web_app"> <li> 	Web Application</li>  </span> 
+              <span *ngIf="cart.optService.android"> <li>  	Android</li></span> 
+              <span *ngIf="cart.optService.continuous_scanning"> <li> 	 Continious Scanning</li> </span> 
+          </ul>
+
+            </td>
+            <td style="text-align:center" >{{cart.price}}</td>              
+            <td style="text-align:center" width="1%">
+              <!-- <button class="btn btn-xs btn-danger" (click)="btnDeleteCart(cart.cartId)" ><i class="fas fa-trash"></i></button> -->
+              <button type="button" class="btn btn-danger px-3" (click)="btnDeleteCart(cart.cartId)"><i class="fas fa-trash" aria-hidden="true"></i></button>
+
+            </td>
           </tr>
-        </tbody>
+          </tbody>
+        </table>
+
+
+
       </table>
-      <div>
-        <button type="button" mdbBtn color="danger" mdbWavesEffect disabled>Prev</button>
-        <button type="button" mdbBtn color="primary" mdbWavesEffect>Next</button>
-      </div>
+
     </mdb-card-text>
 
-
   </mdb-card-body>
+
 </mdb-card>
+
+<div class="row justify-content-end">
+<div class="col-2 action">
+  <button type="button" mdbBtn rounded="true" class="centurionOrange text-white mx-auto d-block"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
+</div>
+</div>
+
+
+
