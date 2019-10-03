@@ -109,30 +109,20 @@ export class CheckoutComponent implements OnInit {
    }
 
    Accept(e:any) {
-    this.count++;
-    if (this.count % 2) {
-      this.marked = true;
-    } else {
-      this.marked = false;
-     }
-   }   
-  //   // const projectname = this.validatingForm.get('projectname').value;
-  //   // const projectdesc = this.validatingForm.get('projectdesc').value;
-  //   // console.log("aaaa"+projectname);
-  //   // console.log("bbbb"+projectdesc);
-  //   // if (false) {
-  //   //       this.cek = false;
-  //   //     }
-  // }
-
-  // controlChecked(a:any){
-  //    this.check = a;
-
-  //   return this.check;
-  // }
+    if (e.checked === true) {
+      this.marked = true;   
+    } 
+    else {
+      this.marked=false;
+    }
+    console.log (e);
+  }
+ 
 
   btnPlaceOrder() {
-    this.myTicket.placeOrder(this.projectname, this.projectdesc)
+    // console.log(this.validatingForm.get('projectname').value);
+
+    this.myTicket.placeOrder(this.validatingForm.get('projectname').value, this.validatingForm.get('projectdesc').value)
       .then(res => {
         // Remarks: Redirect to the ticket page
         this.router.navigate(['ticket']);
