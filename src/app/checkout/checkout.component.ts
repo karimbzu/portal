@@ -4,9 +4,11 @@ import { invalid } from '@angular/compiler/src/render3/view/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
 import {TicketService} from '../../services/ticket.service';
 import { CartService } from '../../services/cart.service';
-
+import Swal from 'sweetalert2';
 import { HeaderService } from '../../services/header.service';
 import { Router, Event, NavigationStart, NavigationError, NavigationEnd } from '@angular/router';
+
+@Injectable()
 
 @Component({
   selector: 'app-checkout',
@@ -27,17 +29,7 @@ export class CheckoutComponent implements OnInit {
   acctManagerName;
   acctManagerOrgName;
 
-
-  // templateUnchecked = false;
-  // templateChecked = true;
-  // template = true;
-
-  // getCheckboxesValue() {
-  //   console.log('ngModel value', this.template);
-  // }
- 
-
-
+  
   constructor(
     public router: Router,
     private myHeader: HeaderService,
@@ -92,19 +84,10 @@ export class CheckoutComponent implements OnInit {
   }
 
   get projectname() {
-    // console.log(this.validatingForm.get('projectname').status)
-    // if (this.validatingForm.get('projectname').status === 'VALID') {
-    //   this.marked = true;
-    // }
-  
     return this.validatingForm.get('projectname');
    }
 
   get projectdesc() {
-    // if (this.validatingForm.get('projectdesc').status === 'VALID') {
-    //   this.marked = true;
-    // }
-    
     return this.validatingForm.get('projectdesc');
    }
 
@@ -120,17 +103,32 @@ export class CheckoutComponent implements OnInit {
  
 
   btnPlaceOrder() {
-    // console.log(this.validatingForm.get('projectname').value);
-
+   
     this.myTicket.placeOrder(this.validatingForm.get('projectname').value, this.validatingForm.get('projectdesc').value)
       .then(res => {
         // Remarks: Redirect to the ticket page
+        // console.log ("Redirect to the ticket page");
         this.router.navigate(['ticket']);
       })
       .catch(err => {
         console.error (err);
 
         // Remarks: Need to show the error in SWAL
+        if (err.status === 400) {
+          Swal.fire(
+            'The backend?',
+            'Something is wrong!',
+            'question'
+          );
+        } else {
+          Swal.fire(
+            'Unknown error',
+            'Something is wrong!',
+            'question'
+          );
+        }
+
+
       }); 
   }
 
