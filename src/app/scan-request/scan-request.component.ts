@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import {interval} from 'rxjs';
 import {MdbStepperComponent} from 'ng-uikit-pro-standard';
@@ -22,6 +22,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   });
 
   file: File;
+  flagVerticalStepper = false;
   flagSubmit = false;
   flagShowUpload = true;
   flagShowRepo = false;
@@ -41,6 +42,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     {value: 'php', label: 'PHP'},
     {value: 'python', label: 'Python'}
   ];
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+//    this.innerWidth = window.innerWidth;
+    this.flagVerticalStepper = window.innerWidth < 1000 ? true : false;
+  }
 
   constructor(public router: Router,
               private myRequest: RequestService ) {

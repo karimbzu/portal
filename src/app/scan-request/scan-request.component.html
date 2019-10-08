@@ -2,11 +2,45 @@
 <mdb-card class="m-3">
   <mdb-card-header class="yellow darken-1 h5">Scan Request</mdb-card-header>
   <mdb-card-body>
-    <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()">
+    <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()" [vertical]="flagVerticalStepper">
       <mdb-step name="Scan" label="Type" [stepForm]="myRequestForm">
         <form [formGroup]="myRequestForm">
           <mdb-card-text>Please select the Type of Scan</mdb-card-text>
-          <div class="card-deck">
+          <div class="card-deck" style="height: 400px">
+            <mdb-card class="m-3">
+              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                <mdb-card-img src="../../assets/images/source-code.jpg"></mdb-card-img>
+              </div>
+              <mdb-card-body class="text-center">
+                <h4 class="card-title">Source Code</h4>
+                <mdb-card-text>Analyze the source code for security and quality issues</mdb-card-text>
+              </mdb-card-body>
+            </mdb-card>
+
+            <mdb-card class="m-3">
+              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                <mdb-card-img src="../../assets/images/mobile-app.jpg" ></mdb-card-img>
+              </div>
+              <mdb-card-body class="text-center">
+                <h4 class="card-title">Binary Application</h4>
+                <mdb-card-text>Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
+                  licensing term of open source components in the application</mdb-card-text>
+              </mdb-card-body>
+            </mdb-card>
+
+            <mdb-card class="m-3">
+              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+                <mdb-card-img src="../../assets/images/web-app.jpg"></mdb-card-img>
+              </div>
+              <mdb-card-body cascade="true" class="text-center">
+                <h4 class="card-title">Web Application</h4>
+                <mdb-card-text>Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not
+                  to perform on a production system</mdb-card-text>
+              </mdb-card-body>
+            </mdb-card>
+
+
+          <!--
             <mdb-card class="m-3" (click)="updateScanType('source_code')">
               <mdb-card-header class="custom-control custom-radio">
                 <span class="ml-3">&nbsp;</span>
@@ -48,6 +82,7 @@
                 </mdb-card-text>
               </mdb-card-body>
             </mdb-card>
+          -->
           </div>
         </form>
       </mdb-step>

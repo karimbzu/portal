@@ -9,6 +9,7 @@ import { TicketComponent } from './ticket/ticket.component';
 import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import {Page1Component} from './page1/page1.component';
 
 
 const routes: Routes = [
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'ticket', component: TicketComponent},
   {path: 'scan-request', component: ScanRequestComponent},
   {path: 'blocked', component: BlockedComponent},
-  {path: 'checkout', component: CheckoutComponent}
+  {path: 'checkout', component: CheckoutComponent},
+  {path: 'page1', component: Page1Component}
 ];
 
 @NgModule({
