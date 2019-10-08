@@ -20,6 +20,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbFileUploadModule } from 'mdb-file-upload';
 
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,6 +43,7 @@ import { MdbFileUploadModule } from 'mdb-file-upload';
     MDBBootstrapModulesPro.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
     MdbFileUploadModule
   ],
   providers: [
