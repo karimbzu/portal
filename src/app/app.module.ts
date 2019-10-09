@@ -19,8 +19,8 @@ import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbFileUploadModule } from 'mdb-file-upload';
-
-import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastModule } from 'ng-uikit-pro-standard';
+// import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -41,9 +41,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AppRoutingModule,
     HttpClientModule,
     MDBBootstrapModulesPro.forRoot(),
+    ToastModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
+    // NgxSpinnerModule,
     MdbFileUploadModule
   ],
   providers: [
