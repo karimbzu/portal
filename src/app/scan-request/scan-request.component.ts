@@ -27,6 +27,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   flagShowUpload = true;
   flagShowRepo = false;
   flagShowWeb = false;
+  flagUpload = false;
   pCount = 40;
   progressCount = this.pCount + '%';
   numbers = interval(1000);
@@ -43,10 +44,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     {value: 'python', label: 'Python'}
   ];
 
+  /**
+   * Method to handle changes in screen size
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-//    this.innerWidth = window.innerWidth;
-    this.flagVerticalStepper = window.innerWidth < 1000 ? true : false;
+    this.flagVerticalStepper = window.innerWidth < 1000;
   }
 
   constructor(public router: Router,
@@ -67,6 +70,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.flagVerticalStepper = window.innerWidth < 1000;
     this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
   }
 
@@ -108,13 +112,23 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     });
   }
 
+  /**
+   * Method to handle the user placing the file to the upload window
+   */
   onFileAdd(file: File) {
+    this.updateDeliveryMethod('file');
     this.file = file;
 
     const uploadFile = new FormData();
     uploadFile.append('Payload', file);
+
+    // Remarks: Trigger to uplaod the file
+    this.flagUpload = true;
   }
 
+  /**
+   * Method to handle when user remove the uploaded file
+   */
   onFileRemove() {
     this.file = null;
   }
@@ -132,7 +146,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
   handleStepChange() {
     // Set the submit button flag
-    this.flagSubmit = this.stepper.activeStepIndex < 4 ? false : true;
+    this.flagSubmit = this.stepper.activeStepIndex >= 4;
   }
 
   handleSubmit() {

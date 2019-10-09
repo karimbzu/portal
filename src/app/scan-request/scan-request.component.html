@@ -6,41 +6,7 @@
       <mdb-step name="Scan" label="Type" [stepForm]="myRequestForm">
         <form [formGroup]="myRequestForm">
           <mdb-card-text>Please select the Type of Scan</mdb-card-text>
-          <div class="card-deck" style="height: 400px">
-            <mdb-card class="m-3">
-              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-                <mdb-card-img src="../../assets/images/source-code.jpg"></mdb-card-img>
-              </div>
-              <mdb-card-body class="text-center">
-                <h4 class="card-title">Source Code</h4>
-                <mdb-card-text>Analyze the source code for security and quality issues</mdb-card-text>
-              </mdb-card-body>
-            </mdb-card>
-
-            <mdb-card class="m-3">
-              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-                <mdb-card-img src="../../assets/images/mobile-app.jpg" ></mdb-card-img>
-              </div>
-              <mdb-card-body class="text-center">
-                <h4 class="card-title">Binary Application</h4>
-                <mdb-card-text>Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
-                  licensing term of open source components in the application</mdb-card-text>
-              </mdb-card-body>
-            </mdb-card>
-
-            <mdb-card class="m-3">
-              <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-                <mdb-card-img src="../../assets/images/web-app.jpg"></mdb-card-img>
-              </div>
-              <mdb-card-body cascade="true" class="text-center">
-                <h4 class="card-title">Web Application</h4>
-                <mdb-card-text>Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not
-                  to perform on a production system</mdb-card-text>
-              </mdb-card-body>
-            </mdb-card>
-
-
-          <!--
+          <div class="card-deck">
             <mdb-card class="m-3" (click)="updateScanType('source_code')">
               <mdb-card-header class="custom-control custom-radio">
                 <span class="ml-3">&nbsp;</span>
@@ -82,7 +48,6 @@
                 </mdb-card-text>
               </mdb-card-body>
             </mdb-card>
-          -->
           </div>
         </form>
       </mdb-step>
@@ -96,7 +61,7 @@
                 <input type="radio" class="custom-control-input" id="typeRepo" name="type" value="repo" formControlName="type">
                 <label for="typeRepo" class="custom-control-label">GIT Repository</label>
               </mdb-card-header>
-              <mdb-card-body>
+              <mdb-card-body class="py-0">
                 <div class="md-form md-outline">
                   <input type="text" id="inputRepoURL" class="form-control" mdbInput>
                   <label for="inputRepoURL">Source Code Repository</label>
@@ -104,7 +69,7 @@
                 <div class="md-form md-outline">
                   <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
                               outline="true" label="Access Token"></mdb-select>
-                  <button mdbBtn color="link" class="pl-0"
+                  <button mdbBtn color="link" class="p-0 text-blue"
                           data-toggle="modal" data-target="#basicExample"
                           (click)="frame.show()" >Click here to add new Access Token</button>
                 </div>
@@ -118,7 +83,7 @@
                 <label for="typeUpload" class="custom-control-label">Upload</label>
               </mdb-card-header>
               <ng-template #elseUploadTitle><mdb-card-header>Upload</mdb-card-header></ng-template>
-              <mdb-card-body>
+              <mdb-card-body class="p-0" *ngIf="!flagUpload; else progressUpload">
                  <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>
               </mdb-card-body>
               <ng-template #progressUpload>
