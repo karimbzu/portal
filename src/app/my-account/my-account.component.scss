@@ -1,0 +1,72 @@
+#done {
+    background-color: green;
+    color:white;
+}
+
+#followup {
+    background-color: red;
+    color:white;
+}
+
+#scanning {
+    background-color: yellow;
+    color:black;
+}
+
+.btn-xs {
+    font-size: 12px;
+    padding: 1px 12px
+}
+
+/* modal */
+
+
+.modal-body h1 {
+    font-weight: 900;
+    font-size: 2.3em;
+    text-transform: uppercase;
+  }
+  .modal-body a.pre-order-btn {
+    color: #000;
+    background-color: gold;
+    border-radius: 1em;
+    padding: 1em;
+    display: block;
+    margin: 2em auto;
+    width: 50%;
+    font-size: 1.25em;
+    font-weight: 6600;
+  }
+  .modal-body a.pre-order-btn:hover {
+    background-color: #000;
+    text-decoration: none;
+    color: gold;
+  }
+
+  .blue {
+    color: #339999;
+   }
+
+   .grab {
+     cursor: pointer;
+     cursor: -webkit-pointer;
+   }
+
+   .tajukModal{
+    justify-content: center;
+    text-align: center;
+    font-size: 30px;
+    margin: 0 auto;
+    width: 90%;
+    
+    }
+
+    ul,li {
+      margin: -2 auto;
+      padding: 0;
+      margin-left: 0;
+      justify-content: left;
+      text-align: left;
+      padding-left: 1em;
+      text-indent: -1em;
+    }
