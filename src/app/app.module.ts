@@ -19,6 +19,8 @@ import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbFileUploadModule } from 'mdb-file-upload';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderNewComponent } from './header-new/header-new.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { MdbFileUploadModule } from 'mdb-file-upload';
     TicketComponent,
     ScanRequestComponent,
     BlockedComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    DashboardComponent,
+    HeaderNewComponent
   ],
   imports: [
     BrowserModule,
