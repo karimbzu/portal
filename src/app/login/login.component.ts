@@ -12,6 +12,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class LoginComponent implements OnInit {
   validatingForm: FormGroup;
+  loading = false;
 
   constructor(
     public router: Router,
@@ -19,11 +20,13 @@ export class LoginComponent implements OnInit {
     private srvLogin: LoginService) { }
 
   ngOnInit() {
-     this.spinner.show
+    
+     this.spinner.show();
     setTimeout(() => {
+      console.log("TimeOut");
       /** spinner ends after 5 seconds */
       this.spinner.hide();
-    }, 5000);
+    }, 50000);
 
 
     this.validatingForm = new FormGroup({
@@ -41,12 +44,14 @@ export class LoginComponent implements OnInit {
    }
 
    handleLogin() { 
-     this.spinner.show;
+    // console.log("Spinner");
+    // this.spinner.show();
 
      const username = this.validatingForm.get('username').value;
      const password = this.validatingForm.get('password').value;
      this.srvLogin.login(username, password)
        .then((response: any) => {
+         
          localStorage.setItem('userInfo', JSON.stringify(response.body.info));
          localStorage.setItem('authToken', response.headers.get('x-auth-token'));
 
@@ -73,7 +78,7 @@ export class LoginComponent implements OnInit {
             'question'
           );
         }
-        this.spinner.hide();
+        // this.spinner.hide();
         this.router.navigate(['/login']);
 
 
