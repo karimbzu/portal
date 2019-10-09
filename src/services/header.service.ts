@@ -6,6 +6,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HeaderService {
   private flagHeader = new BehaviorSubject(false);
+  private modeUpload = new BehaviorSubject(false);
+  private modeConfigure = new BehaviorSubject(false);
+  private modePayment = new BehaviorSubject(false);
 
   currentFlagHeader = this.flagHeader.asObservable();
 
@@ -17,5 +20,11 @@ export class HeaderService {
 
   hideHeader() {
     this.flagHeader.next(false);
+  }
+
+  setModePayment() {
+    this.modeUpload.next(false);
+    this.modeConfigure.next(false);
+    this.modePayment.next(true);
   }
 }
