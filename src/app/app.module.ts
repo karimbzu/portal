@@ -19,6 +19,8 @@ import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MdbFileUploadModule } from 'mdb-file-upload';
+import { ToastModule } from 'ng-uikit-pro-standard';
+// import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderNewComponent } from './header-new/header-new.component';
 
@@ -43,6 +45,7 @@ import { HeaderNewComponent } from './header-new/header-new.component';
     AppRoutingModule,
     HttpClientModule,
     MDBBootstrapModulesPro.forRoot(),
+    ToastModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MdbFileUploadModule

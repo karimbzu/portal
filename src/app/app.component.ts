@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {ToastService} from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-root',
