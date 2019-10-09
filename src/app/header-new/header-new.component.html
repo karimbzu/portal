@@ -1,0 +1,33 @@
+<mdb-navbar SideClass="navbar navbar-expand-lg" [containerInside]="false">
+  <mdb-navbar-brand>
+    <div class="navbar-brand">
+      <img src="../../assets/images/centurionlogo.png" height="32" />
+    </div>
+  </mdb-navbar-brand>
+
+  <links>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLink="/scan-request">
+        <span class="nav-link" mdbTooltip="New Scan Request" placement="bottom">
+          <mdb-icon fas icon="file-medical"></mdb-icon>
+        </span>
+      </li>
+      <li class="nav-item" routerLink="/my-cart">
+        <span class="nav-link" mdbTooltip="Show My Cart" placement="bottom">
+          <mdb-icon fas icon="shopping-cart"></mdb-icon>
+          <mdb-badge pill="true" danger="true" class="align-text-top">5</mdb-badge>
+        </span>
+      </li>
+      <li class="nav-item dropdown" dropdown>
+        <div dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light border-left" mdbWavesEffect>
+          <mdb-icon fas icon="user"></mdb-icon> Profile<span class="caret"></span>
+        </div>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/my-account">My Account</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/dashboard">Dashboard</a>
+          <a class="dropdown-item waves-light" mdbWavesEffect routerLink="/login">Log out</a>
+        </div>
+      </li>
+    </ul>
+  </links>
+</mdb-navbar>
