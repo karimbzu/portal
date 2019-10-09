@@ -38,7 +38,7 @@ import { Page1Component } from './page1/page1.component';
     ScanRequestComponent,
     BlockedComponent,
     CheckoutComponent,
-    Page1Component
+    Page1Component,
     CheckoutComponent,
     DashboardComponent,
     HeaderNewComponent

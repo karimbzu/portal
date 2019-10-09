@@ -24,7 +24,7 @@ const routes: Routes = [
   {path: 'scan-request', component: ScanRequestComponent},
   {path: 'blocked', component: BlockedComponent},
   {path: 'checkout', component: CheckoutComponent},
-  {path: 'page1', component: Page1Component}
+  {path: 'page1', component: Page1Component},
   {path: 'dashboard', component: DashboardComponent}
 ];
 
