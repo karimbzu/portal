@@ -2,7 +2,7 @@
 <mdb-card class="m-3">
   <mdb-card-header class="yellow darken-1 h5">Scan Request</mdb-card-header>
   <mdb-card-body>
-    <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()">
+    <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()" [vertical]="flagVerticalStepper">
       <mdb-step name="Scan" label="Type" [stepForm]="myRequestForm">
         <form [formGroup]="myRequestForm">
           <mdb-card-text>Please select the Type of Scan</mdb-card-text>
@@ -61,7 +61,7 @@
                 <input type="radio" class="custom-control-input" id="typeRepo" name="type" value="repo" formControlName="type">
                 <label for="typeRepo" class="custom-control-label">GIT Repository</label>
               </mdb-card-header>
-              <mdb-card-body>
+              <mdb-card-body class="py-0">
                 <div class="md-form md-outline">
                   <input type="text" id="inputRepoURL" class="form-control" mdbInput>
                   <label for="inputRepoURL">Source Code Repository</label>
@@ -69,7 +69,7 @@
                 <div class="md-form md-outline">
                   <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
                               outline="true" label="Access Token"></mdb-select>
-                  <button mdbBtn color="link" class="pl-0"
+                  <button mdbBtn color="link" class="p-0 text-blue"
                           data-toggle="modal" data-target="#basicExample"
                           (click)="frame.show()" >Click here to add new Access Token</button>
                 </div>
@@ -83,7 +83,7 @@
                 <label for="typeUpload" class="custom-control-label">Upload</label>
               </mdb-card-header>
               <ng-template #elseUploadTitle><mdb-card-header>Upload</mdb-card-header></ng-template>
-              <mdb-card-body>
+              <mdb-card-body class="p-0" *ngIf="!flagUpload; else progressUpload">
                  <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>
               </mdb-card-body>
               <ng-template #progressUpload>

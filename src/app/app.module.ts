@@ -23,6 +23,7 @@ import { ToastModule } from 'ng-uikit-pro-standard';
 // import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderNewComponent } from './header-new/header-new.component';
+import { Page1Component } from './page1/page1.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,8 @@ import { HeaderNewComponent } from './header-new/header-new.component';
     TicketComponent,
     ScanRequestComponent,
     BlockedComponent,
+    CheckoutComponent,
+    Page1Component,
     CheckoutComponent,
     DashboardComponent,
     HeaderNewComponent
