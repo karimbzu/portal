@@ -1,0 +1,76 @@
+<app-header-new></app-header-new>
+<div class="container-fluid">
+  <div class="row">
+    <span class="h6 p-3">Welcome to CENTURION, <strong>{{userName}}</strong></span>
+  </div>
+  <div class="row">
+    <div class="col col-9">
+      <mdb-card>
+        <mdb-card-header class="centurionBlue h5 text-white">What You want to Scan TODAY?</mdb-card-header>
+        <mdb-card-body>
+          <div class="card-deck">
+
+            <mdb-card class="mx-2 text-center">
+              <mdb-card-header>
+                <mdb-card-title class="h6">Source Code</mdb-card-title>
+              </mdb-card-header>
+              <mdb-card-img src="../../assets/images/source-code.jpg"></mdb-card-img>
+              <mdb-card-body class="pb-0">
+                <mdb-card-text>Analyze the source code for security and quality issues</mdb-card-text>
+              </mdb-card-body>
+              <button mdbBtn rounded="true" class="justify-content-end centurionOrange text-white"
+                      (click)="handleButtonClick('source_code')">Request Now!</button>
+            </mdb-card>
+
+            <mdb-card class="mx-2 text-center">
+              <mdb-card-header>
+                <mdb-card-title class="h6">Binary Application</mdb-card-title>
+              </mdb-card-header>
+              <mdb-card-img src="../../assets/images/mobile-app.jpg"></mdb-card-img>
+              <mdb-card-body class="pb-0">
+                <mdb-card-text class="font-small">
+                  Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
+                  licensing term of open source components in the application
+                </mdb-card-text>
+              </mdb-card-body>
+              <button mdbBtn rounded="true" class="justify-content-end centurionOrange text-white"
+                      (click)="handleButtonClick('mobile_app')">Request Now!</button>
+            </mdb-card>
+
+            <mdb-card class="mx-2 text-center">
+              <mdb-card-header>
+                <mdb-card-title class="h6">Web Application</mdb-card-title>
+              </mdb-card-header>
+              <mdb-card-img src="../../assets/images/web-app.jpg"></mdb-card-img>
+              <mdb-card-body class="pb-0">
+                <mdb-card-text>
+                  Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not to
+                  perform on a production system
+                </mdb-card-text>
+              </mdb-card-body>
+              <button mdbBtn rounded="true" class="justify-content-end centurionOrange text-white"
+                      (click)="handleButtonClick('web_app')" disabled="true">Request Now!</button>
+            </mdb-card>
+
+          </div>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+    <div class="col">
+      <mdb-card class="warning-color">
+        <mdb-card-header class="h5 text-white">Order History</mdb-card-header>
+        <mdb-card-body>
+          <mdb-card-text class="text-black-50">Show the list of user order history</mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+
+      <mdb-card class="mt-4 info-color">
+        <mdb-card-header class="h5 text-white">User Score Card</mdb-card-header>
+        <mdb-card-body>
+          <mdb-card-text class="text-black-50">Show the user performance</mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+
+    </div>
+  </div>
+</div>

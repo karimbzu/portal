@@ -1,16 +1,16 @@
-import {Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import {interval} from 'rxjs';
-import {MdbStepperComponent} from 'ng-uikit-pro-standard';
-import {Router} from '@angular/router';
-import {RequestService} from '../../services/request.service';
+import { interval } from 'rxjs';
+import { MdbStepperComponent } from 'ng-uikit-pro-standard';
+import { Router } from '@angular/router';
+import { RequestService } from '../../services/request.service';
 
 @Component({
   selector: 'app-scan-request',
   templateUrl: './scan-request.component.html',
   styleUrls: ['./scan-request.component.scss']
 })
-export class ScanRequestComponent implements OnInit, OnDestroy {
+export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewInit {
   @Input() flagBrowse: boolean;
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
 
@@ -21,6 +21,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     buildCommand: new FormControl({value: '', disabled: true})
   });
 
+  extrasState = null;
   file: File;
   flagVerticalStepper = false;
   flagSubmit = false;
@@ -67,6 +68,8 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         this.tempAccessToken = val.map(mapLabel2Value);
       }
     });
+
+    this.extrasState = this.router.getCurrentNavigation().extras.state;
   }
 
   ngOnInit() {
@@ -74,8 +77,19 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
   }
 
+  ngAfterViewInit(): void {
+    this.moveToStep2();
+  }
+
   ngOnDestroy(): void {
     this.numberInterval.unsubscribe();
+  }
+
+  moveToStep2() {
+    if (this.extrasState !== undefined) {
+      this.updateScanType(this.extrasState.scanType);
+      this.stepper.setNewActiveStep(1);
+    }
   }
 
   updateScanType(val) {
@@ -153,5 +167,4 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     // Dummy
     this.router.navigate(['/my-account']);
   }
-
 }
