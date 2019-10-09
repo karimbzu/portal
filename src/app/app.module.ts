@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MdbFileUploadModule } from 'mdb-file-upload';
 import { ToastModule } from 'ng-uikit-pro-standard';
 // import { NgxSpinnerModule } from 'ngx-spinner';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderNewComponent } from './header-new/header-new.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ToastModule } from 'ng-uikit-pro-standard';
     TicketComponent,
     ScanRequestComponent,
     BlockedComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    DashboardComponent,
+    HeaderNewComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +48,6 @@ import { ToastModule } from 'ng-uikit-pro-standard';
     ToastModule.forRoot(),
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    // NgxSpinnerModule,
     MdbFileUploadModule
   ],
   providers: [
