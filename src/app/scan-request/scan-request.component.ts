@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
-import { MdbStepperComponent } from 'ng-uikit-pro-standard';
+import {MdbStepperComponent, ToastService} from 'ng-uikit-pro-standard';
 import { Router } from '@angular/router';
 import { RequestService } from '../../services/request.service';
 
@@ -31,6 +31,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
     buildCommand: new FormControl({value: '', disabled: true})
   });
 
+  uploadId: number;
+  freshFile = true;
+  progressUploadCount = 0;
   extrasState = null;
   file: File;
   flagVerticalStepper = false;
@@ -64,6 +67,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
   }
 
   constructor(public router: Router,
+              private myToast: ToastService,
               private myRequest: RequestService ) {
     this.myRequest.currentListAuthToken.subscribe(val => {
       if (val.length) {
@@ -78,11 +82,16 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
         this.tempAccessToken = val.map(mapLabel2Value);
       }
     });
+    this.myRequest.currentProgressUpload.subscribe(val => {
+      console.log ('Progress:', val);
+      this.progressUploadCount = val;
+    });
 
     this.extrasState = this.router.getCurrentNavigation().extras.state;
   }
 
   ngOnInit() {
+    this.freshFile = true;
     this.flagVerticalStepper = window.innerWidth < 1000;
     this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
   }
@@ -150,20 +159,70 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
    */
   onFileAdd(file: File) {
     this.updateDeliveryMethod('file');
+
+    // Lets check if already uploaded a file
+    if (!this.freshFile) {
+      // Remove the file first, then upload the new file
+      this.myRequest.deleteUploadedFile(this.uploadId)
+        .then((res) => {
+          // @ts-ignore
+          this.myToast.info(res.info.originalName , 'Remove Old File');
+        })
+        .catch((err) => {})
+        .finally(() => {
+          // Wait for 500ms before triggering to upload the new file
+          setTimeout(() => { this.uploadTheFile(file); }, 500);
+        });
+    } else {
+      // Immediately upload the file
+      this.uploadTheFile(file);
+    }
+  }
+
+  /**
+   * Method to upload the file to server
+   */
+  uploadTheFile(file: File) {
     this.file = file;
 
     const uploadFile = new FormData();
     uploadFile.append('Payload', file);
 
-    // Remarks: Trigger to uplaod the file
+    // Remarks: Trigger to upload the file
+    this.progressUploadCount = 0;
     this.flagUpload = true;
+    this.myRequest.uploadFile(uploadFile)
+      .then(res => {
+        // @ts-ignore
+        this.myToast.success(res.info.name, 'Upload File');
+        // @ts-ignore
+        this.uploadId = res.uploadId;
+      })
+      .catch(err => {
+        console.error (err);
+      })
+      .finally(() => {
+        this.freshFile = false;
+        setTimeout(() => { this.flagUpload = false; }, 1000);
+      });
   }
 
   /**
    * Method to handle when user remove the uploaded file
    */
   onFileRemove() {
-    this.file = null;
+    this.myRequest.deleteUploadedFile(this.uploadId)
+      .then((res) => {
+        // @ts-ignore
+        this.myToast.success(res.info.originalName, 'Remove Old File');
+      })
+      .catch(err => {
+        this.myToast.error(err, 'Remove Old File');
+      })
+      .finally(() => {
+        this.file = null;
+        this.freshFile = true;
+      });
   }
 
   /**
