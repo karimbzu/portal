@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, EventEmitter, HostListener, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterContentChecked, AfterViewChecked,
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
 import { MdbStepperComponent } from 'ng-uikit-pro-standard';
@@ -10,7 +20,7 @@ import { RequestService } from '../../services/request.service';
   templateUrl: './scan-request.component.html',
   styleUrls: ['./scan-request.component.scss']
 })
-export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() flagBrowse: boolean;
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
 
@@ -77,7 +87,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewInit {
     this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
   }
 
-  ngAfterViewInit(): void {
+  /**
+   * Remarks: I have tried both AfterViewInit and AfterViewChecked, there still error with changes of template
+   * If I tried the AfterContentInit/AfterContentChecked, it is even worse. So, i just stick with AfterView
+   */
+  ngAfterViewChecked(): void {
     this.moveToStep2();
   }
 
@@ -88,10 +102,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewInit {
   moveToStep2() {
     if (this.extrasState !== undefined) {
       this.updateScanType(this.extrasState.scanType);
-      this.stepper.setNewActiveStep(1);
     }
   }
 
+  /**
+   * Method to update the changes of Scan Type selection. Automatically move to the next step
+   */
   updateScanType(val) {
     this.myRequestForm.patchValue({
       scanType: val
@@ -114,6 +130,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewInit {
         this.flagShowWeb = true;
         break;
     }
+
+    // Initiate to next step
+    this.stepper.setNewActiveStep(1);
   }
 
   openDialogAddToken() {
@@ -165,6 +184,6 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewInit {
 
   handleSubmit() {
     // Dummy
-    this.router.navigate(['/my-account']);
+    this.router.navigate(['/my-cart']);
   }
 }
