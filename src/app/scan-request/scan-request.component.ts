@@ -1,8 +1,6 @@
 import {
-  AfterContentChecked, AfterViewChecked,
-  AfterViewInit,
-  Component,
-  EventEmitter,
+  AfterViewChecked,
+  Component, ElementRef,
   HostListener,
   Input,
   OnDestroy,
@@ -11,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { interval } from 'rxjs';
-import {MdbStepperComponent, ToastService} from 'ng-uikit-pro-standard';
+import {MDBModalRef, MdbStepperComponent, ToastService} from 'ng-uikit-pro-standard';
 import { Router } from '@angular/router';
 import { RequestService } from '../../services/request.service';
 
@@ -23,14 +21,24 @@ import { RequestService } from '../../services/request.service';
 export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked {
   @Input() flagBrowse: boolean;
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
+  @ViewChild('tokenModal', {static: false}) tokenModal: MDBModalRef;
 
   myRequestForm = new FormGroup({
     scanType: new FormControl('mobile_app'),
     type: new FormControl('repo'),
+    repoURL: new FormControl(''),
+    tokenId: new FormControl(0),
+    uploadId: new FormControl(0),
     programLanguage: new FormControl('javascript'),
     buildCommand: new FormControl({value: '', disabled: true})
   });
 
+  myTokenForm = new FormGroup({
+    token: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    label: new FormControl('', [Validators.required, Validators.minLength(5)])
+  });
+
+  flagLoadingAddToken = false;
   uploadId: number;
   freshFile = true;
   progressUploadCount = 0;
@@ -82,10 +90,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
         this.tempAccessToken = val.map(mapLabel2Value);
       }
     });
-    this.myRequest.currentProgressUpload.subscribe(val => {
-      console.log ('Progress:', val);
-      this.progressUploadCount = val;
-    });
+    this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
 
     this.extrasState = this.router.getCurrentNavigation().extras.state;
   }
@@ -144,14 +149,38 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
     this.stepper.setNewActiveStep(1);
   }
 
-  openDialogAddToken() {
-    console.log ('Open the dialog modal');
-  }
-
   updateDeliveryMethod(val) {
     this.myRequestForm.patchValue({
       type: val
     });
+  }
+
+  /**
+   * Method to add the Personal Access Token
+   */
+  get label() { return this.myTokenForm.get('label'); }
+  get token() { return this.myTokenForm.get('token'); }
+
+  handleAddToken() {
+    console.log (this.myTokenForm.value);
+    this.flagLoadingAddToken = true;
+
+    this.myRequest.addAccessToken(this.myTokenForm.value.label, this.myTokenForm.value.token)
+      .then(res => {
+        console.log (res);
+        this.myToast.success('Token Added', 'Add Access Token');
+
+        // Refresh the list
+        this.myRequest.getListAccessToken();
+      })
+      .catch(err => {
+        console.log (err);
+        this.myToast.error('Failed to add token', 'Add Access Token');
+      })
+      .finally(() => {
+        this.flagLoadingAddToken = false;
+        this.tokenModal.hide();
+      });
   }
 
   /**
@@ -197,6 +226,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
         this.myToast.success(res.info.name, 'Upload File');
         // @ts-ignore
         this.uploadId = res.uploadId;
+        this.myRequestForm.patchValue({uploadId: this.uploadId});
       })
       .catch(err => {
         console.error (err);
@@ -215,6 +245,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
       .then((res) => {
         // @ts-ignore
         this.myToast.success(res.info.originalName, 'Remove Old File');
+        this.myRequestForm.patchValue ({ uploadId: 0});
       })
       .catch(err => {
         this.myToast.error(err, 'Remove Old File');

@@ -66,15 +66,16 @@
                     </mdb-card-header>
                     <mdb-card-body class="py-0">
                       <div class="md-form md-outline">
-                        <input type="text" id="inputRepoURL" class="form-control" mdbInput>
+                        <input type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
                         <label for="inputRepoURL">Source Code Repository</label>
                       </div>
                       <div class="md-form md-outline">
                         <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
+                                    formControlName="tokenId"
                                     outline="true" label="Access Token"></mdb-select>
                         <button mdbBtn color="link" class="p-0 text-blue"
                                 data-toggle="modal" data-target="#basicExample"
-                                (click)="frame.show()" >Click here to add new Access Token</button>
+                                (click)="tokenModal.show()" >Click here to add new Access Token</button>
                       </div>
                     </mdb-card-body>
                   </mdb-card>
@@ -170,21 +171,40 @@
 </div>
 
 <!-- Modal - Add Access Token -->
-<div mdbModal #frame class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+<div mdbModal #tokenModal class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Add Access Token</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="tokenModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body mx-3">
-        <p>Will be populated later</p>
+        <form [formGroup]="myTokenForm">
+          <div class="md-form md-outline">
+            <input mdbValidate type="text" id="inputLabel" class="form-control" formControlName="label" mdbInput>
+            <label for="inputLabel">Name</label>
+            <mdb-error *ngIf="label.invalid && (label.dirty || label.touched)">Insufficient Length. Min 5 characters</mdb-error>
+          </div>
+          <div class="md-form md-outline">
+            <input mdbValidate type="text" id="inputToken" class="form-control" formControlName="token" mdbInput>
+            <label for="inputToken">Value</label>
+            <mdb-error *ngIf="token.invalid && (token.dirty || token.touched)">Insufficient Length. Min 5 characters</mdb-error>
+          </div>
+        </form>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn color="success" block="true" rounded="true" class="waves-light" mdbWavesEffect>Submit</button>
+        <button mdbBtn block="true" rounded="true" class="waves-light centurionOrange text-white"
+                (click)="handleAddToken()"
+                [disabled]="flagLoadingAddToken"
+                mdbWavesEffect>
+          <span *ngIf="!flagLoadingAddToken else loadingAddToken">Submit</span>
+          <ng-template #loadingAddToken>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </ng-template>
+        </button>
       </div>
     </div>
   </div>

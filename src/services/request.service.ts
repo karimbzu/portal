@@ -109,8 +109,8 @@ export class RequestService {
         reject(new Error('No authToken available for this user'));
       }
 
-      console.log (token);
-      console.log (typeof token);
+      // console.log (token);
+      // console.log (typeof token);
 
       const formData = {
         label,
