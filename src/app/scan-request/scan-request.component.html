@@ -4,10 +4,10 @@
     <div class="col-md-12">
       <mdb-card class="my-3">
         <mdb-card-header class="centurionBlue h5 text-white">Scan Request</mdb-card-header>
-        <mdb-card-body>
+        <mdb-card-body class="pb-0">
           <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()" [vertical]="flagVerticalStepper">
-            <mdb-step name="Scan" label="Type" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm">
+            <mdb-step name="Scan" label="Type" [stepForm]="myScanTypeForm">
+              <form [formGroup]="myScanTypeForm">
                 <mdb-card-text>Please select the Type of Scan</mdb-card-text>
                 <div class="card-deck">
                   <mdb-card class="m-3" (click)="updateScanType('source_code')" style="min-width: 200px">
@@ -53,9 +53,15 @@
                   </mdb-card>
                 </div>
               </form>
+              <div class="d-flex justify-content-end">
+                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
+                        mdbWavesEffect (click)="stepper.previous()" disabled>Back</button>
+                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
+                        mdbWavesEffect (click)="stepper.next()">Next</button>
+              </div>
             </mdb-step>
-            <mdb-step name="Scan" label="Item" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm">
+            <mdb-step name="Scan" label="Item" [stepForm]="myScanItemForm">
+              <form [formGroup]="myScanItemForm">
                 <mdb-card-text>Please specify how to provide the scanning item to Centurion platform</mdb-card-text>
                 <div class="card-deck">
                   <mdb-card class="m-3" *ngIf="flagShowRepo" (click)="updateDeliveryMethod('repo')">
@@ -66,7 +72,7 @@
                     </mdb-card-header>
                     <mdb-card-body class="py-0">
                       <div class="md-form md-outline">
-                        <input type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
+                        <input mdbValidate type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
                         <label for="inputRepoURL">Source Code Repository</label>
                       </div>
                       <div class="md-form md-outline">
@@ -93,7 +99,7 @@
                     use the *ngIf/template approach.
                      -->
                     <mdb-card-body class="p-0" [hidden]="flagUpload">
-                      <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)" ></mdb-file-upload>
+                      <mdb-file-upload mdbValidate (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)" ></mdb-file-upload>
                     </mdb-card-body>
                     <mdb-card-body [hidden]="!flagUpload" style="height: 200px">
                       <mdb-progress [value]="progressUploadCount"
@@ -114,9 +120,15 @@
                   </mdb-card>
                 </div>
               </form>
+              <div class="d-flex justify-content-end">
+                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
+                        mdbWavesEffect (click)="stepper.previous()">Back</button>
+                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
+                        mdbWavesEffect (click)="stepper.next()">Next</button>
+              </div>
             </mdb-step>
-            <mdb-step name="Validate" label="Content" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm" class="requestForm">
+            <mdb-step name="Validate" label="Content" [stepForm]="myValidateForm">
+              <form [formGroup]="myValidateForm" class="requestForm">
                 <mdb-card-text>Please wait while we analysing your scan item (Progress: {{progressCount}})</mdb-card-text>
                 <div class="progress">
                   <div class="progress-bar"
@@ -126,9 +138,15 @@
                        aria-valuemax="100"></div>
                 </div>
               </form>
+              <div class="d-flex justify-content-end">
+                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
+                        mdbWavesEffect (click)="stepper.previous()">Back</button>
+                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
+                        mdbWavesEffect (click)="stepper.next()">Next</button>
+              </div>
             </mdb-step>
-            <mdb-step name="Programming" label="Language" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm" class="requestForm">
+            <mdb-step name="Programming" label="Language" [stepForm]="myProgLangForm">
+              <form [formGroup]="myProgLangForm" class="requestForm">
                 <mdb-card-text>Please specify the programming language used </mdb-card-text>
                 <div class="md-form md-outline">
                   <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
@@ -140,9 +158,15 @@
                   <label for="inputBuildCmd">Build Command</label>
                 </div>
               </form>
+              <div class="d-flex justify-content-end">
+                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
+                        mdbWavesEffect (click)="stepper.previous()">Back</button>
+                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
+                        mdbWavesEffect (click)="stepper.next()">Next</button>
+              </div>
             </mdb-step>
-            <mdb-step name="Optional" label="Services" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm" class="requestForm">
+            <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
+              <form [formGroup]="myOptServForm" class="requestForm">
                 <mdb-card-text>Please select optional services for this scan</mdb-card-text>
                 <div class="custom-control custom-checkbox">
                   <mdb-checkbox [checked]="true">Security Vulnerability</mdb-checkbox>
@@ -152,10 +176,17 @@
                 </div>
 
               </form>
+              <div class="d-flex justify-content-end">
+                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
+                        mdbWavesEffect (click)="stepper.previous()">Back</button>
+                <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
+                        mdbWavesEffect (click)="handleSubmit()">Submit</button>
+              </div>
             </mdb-step>
           </mdb-stepper>
         </mdb-card-body>
 
+        <!--
         <div class="d-flex justify-content-end">
           <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
                   mdbWavesEffect (click)="stepper.previous()">Back</button>
@@ -164,6 +195,7 @@
           <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
                   mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Submit</button>
         </div>
+        -->
       </mdb-card>
     </div>
   </div>

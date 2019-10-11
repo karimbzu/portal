@@ -7,11 +7,12 @@ import {
   OnInit,
   ViewChild
 } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {FormGroup, FormControl, Validators, ValidationErrors} from '@angular/forms';
 import { interval } from 'rxjs';
 import {MDBModalRef, MdbStepperComponent, ToastService} from 'ng-uikit-pro-standard';
 import { Router } from '@angular/router';
 import { RequestService } from '../../services/request.service';
+import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
 
 @Component({
   selector: 'app-scan-request',
@@ -23,14 +24,26 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
   @ViewChild('tokenModal', {static: false}) tokenModal: MDBModalRef;
 
-  myRequestForm = new FormGroup({
-    scanType: new FormControl('mobile_app'),
+  /**
+   * Remarks: We opt to create a form for each step so that
+   * it will be easier to manage when dealing with error
+   * on respective form
+   */
+  myScanTypeForm = new FormGroup({
+    scanType: new FormControl('source_code')
+  });
+  myScanItemForm = new FormGroup({
     type: new FormControl('repo'),
     repoURL: new FormControl(''),
     tokenId: new FormControl(0),
-    uploadId: new FormControl(0),
+    uploadId: new FormControl(0)
+  });
+  myValidateForm = new FormGroup({});
+  myProgLangForm = new FormGroup({
     programLanguage: new FormControl('javascript'),
     buildCommand: new FormControl({value: '', disabled: true})
+  });
+  myOptServForm = new FormGroup({
   });
 
   myTokenForm = new FormGroup({
@@ -98,7 +111,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.freshFile = true;
     this.flagVerticalStepper = window.innerWidth < 1000;
-    this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
+    this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
 
     // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
     // Previously, we use AfterInit or AfterView ... but it comes with a cost.
@@ -121,7 +134,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    * Method to update the changes of Scan Type selection. Automatically move to the next step
    */
   updateScanType(val) {
-    this.myRequestForm.patchValue({
+    this.myScanTypeForm.patchValue({
       scanType: val
     });
 
@@ -148,7 +161,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   }
 
   updateDeliveryMethod(val) {
-    this.myRequestForm.patchValue({
+    this.myScanItemForm.patchValue({
       type: val
     });
   }
@@ -224,7 +237,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         this.myToast.success(res.info.name, 'Upload File');
         // @ts-ignore
         this.uploadId = res.uploadId;
-        this.myRequestForm.patchValue({uploadId: this.uploadId});
+        this.myScanItemForm.patchValue({uploadId: this.uploadId});
       })
       .catch(err => {
         console.error (err);
@@ -243,7 +256,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       .then((res) => {
         // @ts-ignore
         this.myToast.success(res.info.originalName, 'Remove Old File');
-        this.myRequestForm.patchValue ({ uploadId: 0});
+        this.myScanItemForm.patchValue ({ uploadId: 0});
       })
       .catch(err => {
         this.myToast.error(err, 'Remove Old File');
@@ -259,9 +272,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    */
   updateProgLang(val) {
     if (val === 'java') {
-      this.myRequestForm.get('buildCommand').enable();
+      this.myProgLangForm.get('buildCommand').enable();
     } else {
-      this.myRequestForm.get('buildCommand').disable();
+      this.myProgLangForm.get('buildCommand').disable();
     }
   }
 
