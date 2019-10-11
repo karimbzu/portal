@@ -18,7 +18,7 @@ import { RequestService } from '../../services/request.service';
   templateUrl: './scan-request.component.html',
   styleUrls: ['./scan-request.component.scss']
 })
-export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked {
+export class ScanRequestComponent implements OnInit, OnDestroy {
   @Input() flagBrowse: boolean;
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
   @ViewChild('tokenModal', {static: false}) tokenModal: MDBModalRef;
@@ -99,14 +99,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
     this.freshFile = true;
     this.flagVerticalStepper = window.innerWidth < 1000;
     this.myRequestForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
-  }
 
-  /**
-   * Remarks: I have tried both AfterViewInit and AfterViewChecked, there still error with changes of template
-   * If I tried the AfterContentInit/AfterContentChecked, it is even worse. So, i just stick with AfterView
-   */
-  ngAfterViewChecked(): void {
-    this.moveToStep2();
+    // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
+    // Previously, we use AfterInit or AfterView ... but it comes with a cost.
+    setTimeout(() => {
+      this.moveToStep2();
+    }, 100);
   }
 
   ngOnDestroy(): void {
@@ -146,7 +144,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy, AfterViewChecked
     }
 
     // Initiate to next step
-    this.stepper.setNewActiveStep(1);
+    this.stepper.next();
   }
 
   updateDeliveryMethod(val) {

@@ -10,20 +10,20 @@
               <form [formGroup]="myRequestForm">
                 <mdb-card-text>Please select the Type of Scan</mdb-card-text>
                 <div class="card-deck">
-                  <mdb-card class="m-3" (click)="updateScanType('source_code')">
+                  <mdb-card class="m-3" (click)="updateScanType('source_code')" style="min-width: 200px">
                     <mdb-card-header class="custom-control custom-radio">
                       <span class="ml-3">&nbsp;</span>
                       <input type="radio" class="custom-control-input" id="typeSourceCode" name="scanType"
                              value="source_code" formControlName="scanType">
                       <label for="typeSourceCode" class="custom-control-label">Source Code</label>
                     </mdb-card-header>
-                    <mdb-card-body style="height:200px">
+                    <mdb-card-body style="min-height:200px">
                       <mdb-card-text>
                         Analyze the source code for security and quality issues
                       </mdb-card-text>
                     </mdb-card-body>
                   </mdb-card>
-                  <mdb-card class="m-3" (click)="updateScanType('mobile_app')">
+                  <mdb-card class="m-3" (click)="updateScanType('mobile_app')" style="min-width: 200px">
                     <mdb-card-header class="custom-control custom-radio">
                       <span class="ml-3">&nbsp;</span>
                       <input type="radio" class="custom-control-input" id="typeMobileApp" name="scanType"
@@ -37,7 +37,7 @@
                       </mdb-card-text>
                     </mdb-card-body>
                   </mdb-card>
-                  <mdb-card class="m-3" (click)="updateScanType('web_app')">
+                  <mdb-card class="m-3" (click)="updateScanType('web_app')" style="min-width: 200px">
                     <mdb-card-header class="custom-control custom-radio">
                       <span class="ml-3">&nbsp;</span>
                       <input type="radio" class="custom-control-input" id="typeWebApp" name="scanType"
@@ -108,7 +108,7 @@
 
                   <mdb-card class="m-3" *ngIf="flagShowWeb">
                     <mdb-card-header>Web Configuration</mdb-card-header>
-                    <mdb-card-body>
+                    <mdb-card-body style="min-height:200px">
                       <p>This section will be updated in MILESTONE 3</p>
                     </mdb-card-body>
                   </mdb-card>
@@ -116,7 +116,7 @@
               </form>
             </mdb-step>
             <mdb-step name="Validate" label="Content" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm">
+              <form [formGroup]="myRequestForm" class="requestForm">
                 <mdb-card-text>Please wait while we analysing your scan item (Progress: {{progressCount}})</mdb-card-text>
                 <div class="progress">
                   <div class="progress-bar"
@@ -128,7 +128,7 @@
               </form>
             </mdb-step>
             <mdb-step name="Programming" label="Language" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm">
+              <form [formGroup]="myRequestForm" class="requestForm">
                 <mdb-card-text>Please specify the programming language used </mdb-card-text>
                 <div class="md-form md-outline">
                   <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
@@ -142,7 +142,7 @@
               </form>
             </mdb-step>
             <mdb-step name="Optional" label="Services" [stepForm]="myRequestForm">
-              <form [formGroup]="myRequestForm">
+              <form [formGroup]="myRequestForm" class="requestForm">
                 <mdb-card-text>Please select optional services for this scan</mdb-card-text>
                 <div class="custom-control custom-checkbox">
                   <mdb-checkbox [checked]="true">Security Vulnerability</mdb-checkbox>
@@ -155,17 +155,16 @@
             </mdb-step>
           </mdb-stepper>
         </mdb-card-body>
-      </mdb-card>
-    </div>
-  </div>
-  <div class="row">
-    <div class="d-flex justify-content-center col-12">
-      <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-2"
+
+        <div class="d-flex justify-content-end">
+          <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
                   mdbWavesEffect (click)="stepper.previous()">Back</button>
-      <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-2 text-white"
+          <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
                   mdbWavesEffect (click)="stepper.next()" [hidden]="flagSubmit">Next</button>
-      <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-2 text-white"
+          <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
                   mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Submit</button>
+        </div>
+      </mdb-card>
     </div>
   </div>
 </div>
