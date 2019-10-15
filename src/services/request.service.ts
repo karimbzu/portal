@@ -188,4 +188,114 @@ export class RequestService {
       });
     });
   }
+
+  /**
+   * Evaluate Repo based item
+   * POST: /ticketing/evaluate/check/repo
+   */
+  evaluateCheckRepo(repoURL, tokenId) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      const formData = {
+        repoURL,
+        tokenId
+      };
+
+      this.http.post(environment.baseUrl + 'ticketing/evaluate/check/repo', formData, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => {
+        if (response.status === 200) {
+          resolve(response.body.path);
+        } else {
+          reject(new Error(response.body.message));
+        }
+      });
+    });
+  }
+
+  /**
+   * Evaluate file based item
+   * POST: /ticketing/evaluate/check/file
+   */
+  evaluateCheckFile(uploadId) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      const formData = {
+        uploadId
+      };
+
+      this.http.post(environment.baseUrl + 'ticketing/evaluate/check/file', formData, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => {
+        if (response.status === 200) {
+          resolve(response.body.path);
+        } else {
+          reject(new Error(response.body.message));
+        }
+      });
+    });
+  }
+
+  /**
+   * Evaluate the programming language
+   * POST: /ticketing/evaluate/check/language
+   */
+  evaluateCheckLanguage(path) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      const formData = {
+        path
+      };
+
+      this.http.post(environment.baseUrl + 'ticketing/evaluate/check/language', formData, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => {
+        resolve(response.body);
+      });
+    });
+  }
+
+  /**
+   * Clean up the evaluation item
+   * DELETE: /ticketing/evaluate/clean
+   */
+  evaluateClean() {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      this.http.delete(environment.baseUrl + 'ticketing/evaluate/clean', {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => {
+        resolve(response.body);
+      });
+    });
+  }
+
 }

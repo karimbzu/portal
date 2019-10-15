@@ -53,18 +53,13 @@
                   </mdb-card>
                 </div>
               </form>
-              <div class="d-flex justify-content-end">
-                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
-                        mdbWavesEffect (click)="stepper.previous()" disabled>Back</button>
-                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
-                        mdbWavesEffect (click)="stepper.next()">Next</button>
-              </div>
             </mdb-step>
             <mdb-step name="Scan" label="Item" [stepForm]="myScanItemForm">
               <form [formGroup]="myScanItemForm">
                 <mdb-card-text>Please specify how to provide the scanning item to Centurion platform</mdb-card-text>
                 <div class="card-deck">
-                  <mdb-card class="m-3" *ngIf="flagShowRepo" (click)="updateDeliveryMethod('repo')">
+                  <mdb-card class="m-3" *ngIf="flagShowRepo"
+                            (click)="updateDeliveryMethod('repo')">
                     <mdb-card-header class="custom-control custom-radio">
                       <span class="ml-3">&nbsp;</span>
                       <input type="radio" class="custom-control-input" id="typeRepo" name="type" value="repo" formControlName="type">
@@ -72,21 +67,24 @@
                     </mdb-card-header>
                     <mdb-card-body class="py-0">
                       <div class="md-form md-outline">
-                        <input mdbValidate type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
+                        <input type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
                         <label for="inputRepoURL">Source Code Repository</label>
                       </div>
                       <div class="md-form md-outline">
                         <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
                                     formControlName="tokenId"
                                     outline="true" label="Access Token"></mdb-select>
-                        <button mdbBtn color="link" class="p-0 text-blue"
+                        <button mdbBtn color="link" class="p-0 blue-text"
                                 data-toggle="modal" data-target="#basicExample"
-                                (click)="tokenModal.show()" >Click here to add new Access Token</button>
+                                (click)="tokenModal.show()" >
+                          <i class="fas fa-plus-circle"></i>
+                          Click here to add new Access Token</button>
                       </div>
                     </mdb-card-body>
                   </mdb-card>
 
-                  <mdb-card class="m-3" *ngIf="flagShowUpload" (click)="updateDeliveryMethod('file')">
+                  <mdb-card class="m-3" *ngIf="flagShowUpload"
+                            (click)="updateDeliveryMethod('file')">
                     <mdb-card-header class="custom-control custom-radio" *ngIf="flagShowRepo; else elseUploadTitle">
                       <span class="ml-3">&nbsp;</span>
                       <input type="radio" class="custom-control-input" id="typeUpload" name="type" value="file" formControlName="type">
@@ -99,7 +97,7 @@
                     use the *ngIf/template approach.
                      -->
                     <mdb-card-body class="p-0" [hidden]="flagUpload">
-                      <mdb-file-upload mdbValidate (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)" ></mdb-file-upload>
+                      <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)" ></mdb-file-upload>
                     </mdb-card-body>
                     <mdb-card-body [hidden]="!flagUpload" style="height: 200px">
                       <mdb-progress [value]="progressUploadCount"
@@ -120,16 +118,11 @@
                   </mdb-card>
                 </div>
               </form>
-              <div class="d-flex justify-content-end">
-                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
-                        mdbWavesEffect (click)="stepper.previous()">Back</button>
-                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
-                        mdbWavesEffect (click)="stepper.next()">Next</button>
-              </div>
             </mdb-step>
             <mdb-step name="Validate" label="Content" [stepForm]="myValidateForm">
               <form [formGroup]="myValidateForm" class="requestForm">
                 <mdb-card-text>Please wait while we analysing your scan item (Progress: {{progressCount}})</mdb-card-text>
+                <!--
                 <div class="progress">
                   <div class="progress-bar"
                        role="progressbar" [style.width]="progressCount"
@@ -137,13 +130,30 @@
                        aria-valuemin="0"
                        aria-valuemax="100"></div>
                 </div>
+                -->
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <mdb-icon fas icon="check-circle"></mdb-icon>
+                      </td>
+                      <td>Fetching the scanning item</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="spinner-border spinner-border-sm" role="status">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                      </td>
+                      <td>Evaluate the programming language</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>Clean up the evaluation materials</td>
+                    </tr>
+                  </tbody>
+                </table>
               </form>
-              <div class="d-flex justify-content-end">
-                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
-                        mdbWavesEffect (click)="stepper.previous()">Back</button>
-                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
-                        mdbWavesEffect (click)="stepper.next()">Next</button>
-              </div>
             </mdb-step>
             <mdb-step name="Programming" label="Language" [stepForm]="myProgLangForm">
               <form [formGroup]="myProgLangForm" class="requestForm">
@@ -158,12 +168,6 @@
                   <label for="inputBuildCmd">Build Command</label>
                 </div>
               </form>
-              <div class="d-flex justify-content-end">
-                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
-                        mdbWavesEffect (click)="stepper.previous()">Back</button>
-                <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
-                        mdbWavesEffect (click)="stepper.next()">Next</button>
-              </div>
             </mdb-step>
             <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
               <form [formGroup]="myOptServForm" class="requestForm">
@@ -176,17 +180,10 @@
                 </div>
 
               </form>
-              <div class="d-flex justify-content-end">
-                <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
-                        mdbWavesEffect (click)="stepper.previous()">Back</button>
-                <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
-                        mdbWavesEffect (click)="handleSubmit()">Submit</button>
-              </div>
             </mdb-step>
           </mdb-stepper>
         </mdb-card-body>
 
-        <!--
         <div class="d-flex justify-content-end">
           <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
                   mdbWavesEffect (click)="stepper.previous()">Back</button>
@@ -195,7 +192,6 @@
           <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
                   mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Submit</button>
         </div>
-        -->
       </mdb-card>
     </div>
   </div>

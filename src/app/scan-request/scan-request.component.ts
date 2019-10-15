@@ -14,6 +14,32 @@ import { Router } from '@angular/router';
 import { RequestService } from '../../services/request.service';
 import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
 
+/**
+ * Custom cross field validation component. It need to return null for valid form checking
+ */
+// @ts-ignore
+const validateStep2: ValidateFn = (control: FormGroup): ValidationErrors | null => {
+  const type = control.get('type');
+  const repoURL = control.get('repoURL');
+  const tokenId = control.get('tokenId');
+  const uploadId = control.get('uploadId');
+
+  if (type.value === 'repo') {
+    console.log (type.value, repoURL.value, tokenId.value);
+    if (repoURL.value.length < 5) {
+      repoURL.setErrors({minLength: true});
+    } else if (tokenId.value === 0) {
+      tokenId.setErrors({min: true});
+    }
+  } else {
+    if (uploadId.value === 0) {
+      uploadId.setErrors({min: true});
+    }
+  }
+
+  return null;
+};
+
 @Component({
   selector: 'app-scan-request',
   templateUrl: './scan-request.component.html',
@@ -23,6 +49,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   @Input() flagBrowse: boolean;
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
   @ViewChild('tokenModal', {static: false}) tokenModal: MDBModalRef;
+
 
   /**
    * Remarks: We opt to create a form for each step so that
@@ -37,7 +64,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     repoURL: new FormControl(''),
     tokenId: new FormControl(0),
     uploadId: new FormControl(0)
+//  }, {validators: validateStep2, updateOn: 'blur'});
   });
+
   myValidateForm = new FormGroup({});
   myProgLangForm = new FormGroup({
     programLanguage: new FormControl('javascript'),
@@ -164,6 +193,19 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.myScanItemForm.patchValue({
       type: val
     });
+
+    // Validate
+    if (val === 'repo') {
+      this.myScanItemForm.setErrors(null);
+    } else {
+      const uploadId = this.myScanItemForm.get('uploadId');
+      if (uploadId.value === 0) {
+        this.myScanItemForm.setErrors({uploadFile: true});
+      } else {
+        this.myScanItemForm.setErrors(null);
+      }
+    }
+
   }
 
   /**
@@ -281,6 +323,83 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   handleStepChange() {
     // Set the submit button flag
     this.flagSubmit = this.stepper.activeStepIndex >= 4;
+
+    if (this.stepper.activeStepIndex === 2) { this.handleStep3(); }
+  }
+
+  /**
+   * Process the Step 3 - Validate Content
+   */
+  handleStep3() {
+    // Get the data from Step 2
+    const type = this.myScanItemForm.get('type').value;
+    const repoURL = this.myScanItemForm.get('repoURL').value;
+    const tokenId = this.myScanItemForm.get('tokenId').value;
+    const uploadId = this.myScanItemForm.get('uploadId').value;
+
+    if (type === 'repo') {
+      // URL can't be empty
+      if (!repoURL.length) {
+        console.error ('RepoURL field is EMPTY');
+        this.myToast.error ('RepoURL field is EMPTY', 'Validate Item');
+        return;
+      }
+
+      if (!tokenId) {
+        console.error ('No Access Token is selected');
+        this.myToast.error ('No Access Token is selected', 'Validate Item');
+        return;
+      }
+
+      // Send the request to validate repo
+      this.myRequest.evaluateCheckRepo(repoURL, tokenId)
+        .then(path => this.processEvaluateLanguage(path))
+        .catch(err => {
+          console.error (err);
+          this.myToast.error (err.message);
+        });
+    } else {
+      if (!uploadId) {
+        console.error ('No file is uploaded');
+        this.myToast.error ('No file is uploaded', 'Validate Item');
+        return;
+      }
+
+      // Send the request to validate file
+      this.myRequest.evaluateCheckFile(uploadId)
+        .then(path => this.processEvaluateLanguage(path))
+        .catch(err => {
+          console.error (err);
+          this.myToast.error (err.message);
+        });
+    }
+  }
+
+  processEvaluateLanguage(path) {
+    console.log ('Lets Proceed to evaluate language');
+    console.log (path);
+
+    this.myRequest.evaluateCheckLanguage(path)
+      .then(res => {
+        console.log (res);
+        this.processEvaluateClean();
+      })
+      .catch(err => {
+        console.error (err);
+        this.myToast.error (err.message);
+      });
+  }
+
+  processEvaluateClean() {
+    this.myRequest.evaluateClean()
+      .then(res => {
+        console.log (res);
+        console.log ('OK, all good. We can proceed');
+      })
+      .catch(err => {
+        console.error (err);
+        this.myToast.error(err.message);
+      });
   }
 
   handleSubmit() {
