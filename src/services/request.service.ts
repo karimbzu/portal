@@ -210,13 +210,7 @@ export class RequestService {
           .set('Authorization', environment.oipToken)
           .set('x-auth-token', localStorage.getItem('authToken')),
         observe: 'response'
-      }).subscribe((response: any) => {
-        if (response.status === 200) {
-          resolve(response.body.path);
-        } else {
-          reject(new Error(response.body.message));
-        }
-      });
+      }).subscribe((response: any) => resolve(response.body.path), err => reject(new Error(err.error.message)));
     });
   }
 
@@ -240,13 +234,10 @@ export class RequestService {
           .set('Authorization', environment.oipToken)
           .set('x-auth-token', localStorage.getItem('authToken')),
         observe: 'response'
-      }).subscribe((response: any) => {
-        if (response.status === 200) {
-          resolve(response.body.path);
-        } else {
-          reject(new Error(response.body.message));
-        }
-      });
+      }).subscribe(
+        (response: any) => resolve(response.body.path),
+        err => reject(new Error(err.error.message))
+      );
     });
   }
 
@@ -270,9 +261,7 @@ export class RequestService {
           .set('Authorization', environment.oipToken)
           .set('x-auth-token', localStorage.getItem('authToken')),
         observe: 'response'
-      }).subscribe((response: any) => {
-        resolve(response.body);
-      });
+      }).subscribe((response: any) => resolve(response.body), err => reject(new Error(err.error.message)));
     });
   }
 
@@ -292,9 +281,7 @@ export class RequestService {
           .set('Authorization', environment.oipToken)
           .set('x-auth-token', localStorage.getItem('authToken')),
         observe: 'response'
-      }).subscribe((response: any) => {
-        resolve(response.body);
-      });
+      }).subscribe((response: any) => resolve(response.body), err => reject(new Error(err.error.message)));
     });
   }
 

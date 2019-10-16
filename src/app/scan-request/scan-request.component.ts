@@ -67,7 +67,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 //  }, {validators: validateStep2, updateOn: 'blur'});
   });
 
-  myValidateForm = new FormGroup({});
+  myValidateForm = new FormGroup({
+    dummy: new FormControl(0, [Validators.min(1)])
+  });
   myProgLangForm = new FormGroup({
     programLanguage: new FormControl('javascript'),
     buildCommand: new FormControl({value: '', disabled: true})
@@ -92,13 +94,17 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   flagShowRepo = false;
   flagShowWeb = false;
   flagUpload = false;
-  pCount = 40;
-  progressCount = this.pCount + '%';
-  numbers = interval(1000);
-  numberInterval = this.numbers.subscribe(val => {
-    this.pCount = (val % 21) * 5;
-    this.progressCount = this.pCount + '%';
-  });
+
+  flagNeedValidation: boolean;  // indicate if need to perform the Content Validation (Step 3), or not
+  flagValidationFetchLoading: boolean;
+  flagValidationFetchDone: boolean;
+  flagValidationFetchError: boolean;
+  flagValidationLanguageLoading: boolean;
+  flagValidationLanguageDone: boolean;
+  flagValidationLanguageError: boolean;
+  flagValidationCleanLoading: boolean;
+  flagValidationCleanDone: boolean;
+  flagValidationCleanError: boolean;
 
   tempAccessToken = [];
   optProgLangList = [
@@ -140,6 +146,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.freshFile = true;
     this.flagVerticalStepper = window.innerWidth < 1000;
+    this.flagNeedValidation = true;
     this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
 
     // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
@@ -150,7 +157,6 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.numberInterval.unsubscribe();
   }
 
   moveToStep2() {
@@ -189,10 +195,15 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.stepper.next();
   }
 
+  /**
+   * Method to handle the changes in Type selection
+   */
   updateDeliveryMethod(val) {
     this.myScanItemForm.patchValue({
       type: val
     });
+
+    this.flagNeedValidation = true;
 
     // Validate
     if (val === 'repo') {
@@ -205,7 +216,6 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         this.myScanItemForm.setErrors(null);
       }
     }
-
   }
 
   /**
@@ -324,7 +334,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     // Set the submit button flag
     this.flagSubmit = this.stepper.activeStepIndex >= 4;
 
-    if (this.stepper.activeStepIndex === 2) { this.handleStep3(); }
+    if (this.stepper.activeStepIndex === 2 && this.flagNeedValidation) { this.handleStep3(); }
   }
 
   /**
@@ -336,6 +346,18 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     const repoURL = this.myScanItemForm.get('repoURL').value;
     const tokenId = this.myScanItemForm.get('tokenId').value;
     const uploadId = this.myScanItemForm.get('uploadId').value;
+
+    // Initialize the flag visual
+    this.flagValidationFetchLoading = true;
+    this.flagValidationFetchDone = false;
+    this.flagValidationFetchError = false;
+    this.flagValidationLanguageLoading = false;
+    this.flagValidationLanguageDone = false;
+    this.flagValidationLanguageError = false;
+    this.flagValidationCleanLoading = false;
+    this.flagValidationCleanDone = false;
+    this.flagValidationCleanError = false;
+    this.myValidateForm.get('dummy').setValue(0);
 
     if (type === 'repo') {
       // URL can't be empty
@@ -353,10 +375,17 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
       // Send the request to validate repo
       this.myRequest.evaluateCheckRepo(repoURL, tokenId)
-        .then(path => this.processEvaluateLanguage(path))
+        .then(path => {
+          this.flagValidationFetchDone = true;
+          this.processEvaluateLanguage(path);
+        })
         .catch(err => {
-          console.error (err);
+          this.flagValidationFetchError = true;
+          console.error (err.message);
           this.myToast.error (err.message);
+        })
+        .finally(() => {
+          this.flagValidationFetchLoading = false;
         });
     } else {
       if (!uploadId) {
@@ -367,38 +396,69 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
       // Send the request to validate file
       this.myRequest.evaluateCheckFile(uploadId)
-        .then(path => this.processEvaluateLanguage(path))
+        .then(path => {
+          console.log ('Path', path);
+          this.flagValidationFetchDone = true;
+          this.processEvaluateLanguage(path);
+        })
         .catch(err => {
+          this.flagValidationFetchError = true;
           console.error (err);
           this.myToast.error (err.message);
+        })
+        .finally(() => {
+          this.flagValidationFetchLoading = false;
         });
     }
   }
 
   processEvaluateLanguage(path) {
-    console.log ('Lets Proceed to evaluate language');
-    console.log (path);
-
+    this.flagValidationLanguageLoading = true;
     this.myRequest.evaluateCheckLanguage(path)
-      .then(res => {
-        console.log (res);
+      .then((res: any) => {
+        this.flagValidationLanguageDone = true;
+
+        // TODO: Update the Programming Language (Step 4) accordingly
+        console.log ('Programming Language', res.language);
+        if (typeof res.language === 'string') {
+          this.myProgLangForm.get('programLanguage').setValue(res.language.toLocaleLowerCase());
+        } else {
+          console.log (typeof res.language);
+        }
+
         this.processEvaluateClean();
       })
       .catch(err => {
+        this.flagValidationLanguageError = true;
         console.error (err);
         this.myToast.error (err.message);
+      })
+      .finally(() => {
+        this.flagValidationLanguageLoading = false;
       });
   }
 
   processEvaluateClean() {
+    this.flagValidationCleanLoading = true;
     this.myRequest.evaluateClean()
       .then(res => {
-        console.log (res);
-        console.log ('OK, all good. We can proceed');
+        this.flagValidationCleanDone = true;
+        // If all goes well, we can skip the validation
+        // until changes in selection
+        this.flagNeedValidation = false;
+
+        // Remarks: We set the dummy value to 2, so that
+        // this form can be valid
+        this.myValidateForm.get('dummy').setValue(2);
       })
       .catch(err => {
+        this.flagValidationCleanError = true;
         console.error (err);
         this.myToast.error(err.message);
+        this.myValidateForm.setErrors({required: true});
+      })
+      .finally(() => {
+        this.flagValidationCleanLoading = false;
       });
   }
 

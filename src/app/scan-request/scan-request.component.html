@@ -121,34 +121,37 @@
             </mdb-step>
             <mdb-step name="Validate" label="Content" [stepForm]="myValidateForm">
               <form [formGroup]="myValidateForm" class="requestForm">
-                <mdb-card-text>Please wait while we analysing your scan item (Progress: {{progressCount}})</mdb-card-text>
-                <!--
-                <div class="progress">
-                  <div class="progress-bar"
-                       role="progressbar" [style.width]="progressCount"
-                       aria-valuenow="10"
-                       aria-valuemin="0"
-                       aria-valuemax="100"></div>
-                </div>
-                -->
+                <mdb-card-text>Please wait while we analysing your scan item</mdb-card-text>
                 <table class="table">
                   <tbody>
                     <tr>
                       <td>
-                        <mdb-icon fas icon="check-circle"></mdb-icon>
+                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="flagValidationFetchLoading">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <mdb-icon fas icon="check-circle" class="text-success" *ngIf="flagValidationFetchDone"></mdb-icon>
+                        <mdb-icon fas icon="exclamation-circle" class="text-danger" *ngIf="flagValidationFetchError"></mdb-icon>
                       </td>
                       <td>Fetching the scanning item</td>
                     </tr>
                     <tr>
                       <td>
-                        <div class="spinner-border spinner-border-sm" role="status">
+                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="flagValidationLanguageLoading">
                           <span class="sr-only">Loading...</span>
                         </div>
+                        <mdb-icon fas icon="check-circle" class="text-success" *ngIf="flagValidationLanguageDone"></mdb-icon>
+                        <mdb-icon fas icon="exclamation-circle" class="text-danger" *ngIf="flagValidationLanguageError"></mdb-icon>
                       </td>
                       <td>Evaluate the programming language</td>
                     </tr>
                     <tr>
-                      <td></td>
+                      <td>
+                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="flagValidationCleanLoading">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <mdb-icon fas icon="check-circle" class="text-success" *ngIf="flagValidationCleanDone"></mdb-icon>
+                        <mdb-icon fas icon="exclamation-circle" class="text-danger" *ngIf="flagValidationCleanError"></mdb-icon>
+                      </td>
                       <td>Clean up the evaluation materials</td>
                     </tr>
                   </tbody>
