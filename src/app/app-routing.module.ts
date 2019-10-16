@@ -23,7 +23,7 @@ const routes: Routes = [
   {path: 'ticket', component: TicketComponent},
   {path: 'scan-request', component: ScanRequestComponent},
   {path: 'blocked', component: BlockedComponent},
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [DisabledManualURLGuard]},
   {path: 'page1', component: Page1Component},
   {path: 'dashboard', component: DashboardComponent}
 ];
