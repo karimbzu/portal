@@ -29,6 +29,7 @@
                       <input type="radio" class="custom-control-input" id="typeMobileApp" name="scanType"
                              value="mobile_app" formControlName="scanType">
                       <label for="typeMobileApp" class="custom-control-label">Binary Application</label>
+                      <mdb-badge pill="true" warning="true" class="float-right">COMING SOON</mdb-badge>
                     </mdb-card-header>
                     <mdb-card-body>
                       <mdb-card-text>
@@ -37,12 +38,13 @@
                       </mdb-card-text>
                     </mdb-card-body>
                   </mdb-card>
-                  <mdb-card class="m-3" (click)="updateScanType('web_app')" style="min-width: 200px">
+                  <mdb-card class="m-3" style="min-width: 200px">
                     <mdb-card-header class="custom-control custom-radio">
                       <span class="ml-3">&nbsp;</span>
                       <input type="radio" class="custom-control-input" id="typeWebApp" name="scanType"
-                             value="web_app" formControlName="scanType">
+                             value="web_app" formControlName="scanType" disabled>
                       <label for="typeWebApp" class="custom-control-label">Web Application</label>
+                      <mdb-badge pill="true" info="true" class="float-right">Q1 2020</mdb-badge>
                     </mdb-card-header>
                     <mdb-card-body>
                       <mdb-card-text>
@@ -175,12 +177,44 @@
             <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
               <form [formGroup]="myOptServForm" class="requestForm">
                 <mdb-card-text>Please select optional services for this scan</mdb-card-text>
-                <div class="custom-control custom-checkbox">
-                  <mdb-checkbox [checked]="true">Security Vulnerability</mdb-checkbox>
-                  <mdb-checkbox>Android</mdb-checkbox>
-                  <mdb-checkbox>Web Application</mdb-checkbox>
-                  <mdb-checkbox>Continuous Scan</mdb-checkbox>
-                </div>
+                <!--<div class="custom-control custom-checkbox">
+                  <mdb-checkbox formControlName="securityVulnerability">Security Vulnerability</mdb-checkbox>
+                  <mdb-checkbox formControlName="android">Android</mdb-checkbox>
+                  <mdb-checkbox formControlName="webApplication">Web Application</mdb-checkbox>
+                  <mdb-checkbox formControlName="continuousScan">Continuous Scan</mdb-checkbox>
+                </div>-->
+                <table mdbTable hover="true" small="true">
+                  <thead>
+                    <tr>
+                      <th size="80%">Services</th>
+                      <th class="text-center">Token</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mdb-checkbox formControlName="securityVulnerability">Security Vulnerability</mdb-checkbox></td>
+                      <td class="text-center">1</td>
+                    </tr>
+                    <tr>
+                      <td><mdb-checkbox formControlName="android">Android</mdb-checkbox></td>
+                      <td class="text-center"><span *ngIf="android.value">1</span></td>
+                    </tr>
+                    <tr>
+                      <td><mdb-checkbox formControlName="webApplication">Web Application</mdb-checkbox></td>
+                      <td class="text-center"><span *ngIf="webApplication.value">1</span></td>
+                    </tr>
+                    <tr>
+                      <td><mdb-checkbox formControlName="continuousScan">Continuous Scan</mdb-checkbox></td>
+                      <td class="text-center"><span *ngIf="continuousScan.value">-</span></td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="grey lighten-3">
+                    <tr>
+                      <th><strong>Total Token</strong></th>
+                      <th class="text-center"><strong>{{totalToken}}</strong></th>
+                    </tr>
+                  </tfoot>
+                </table>
 
               </form>
             </mdb-step>

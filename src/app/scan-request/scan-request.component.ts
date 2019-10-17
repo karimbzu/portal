@@ -75,6 +75,10 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     buildCommand: new FormControl({value: '', disabled: true})
   });
   myOptServForm = new FormGroup({
+    securityVulnerability: new FormControl({value: true, disabled: true}),
+    android: new FormControl(false),
+    webApplication: new FormControl(false),
+    continuousScan: new FormControl(false)
   });
 
   myTokenForm = new FormGroup({
@@ -94,6 +98,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   flagShowRepo = false;
   flagShowWeb = false;
   flagUpload = false;
+  totalToken = 1;
 
   flagNeedValidation: boolean;  // indicate if need to perform the Content Validation (Step 3), or not
   flagValidationFetchLoading: boolean;
@@ -148,6 +153,15 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.flagVerticalStepper = window.innerWidth < 1000;
     this.flagNeedValidation = true;
     this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
+
+    this.totalToken = 1;
+    this.myOptServForm.valueChanges.subscribe(val => {
+      let tempToken = 1;
+      if (val.android) { tempToken++; }
+      if (val.webApplication) { tempToken++; }
+
+      this.totalToken = tempToken;
+    });
 
     // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
     // Previously, we use AfterInit or AfterView ... but it comes with a cost.
@@ -215,6 +229,13 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       } else {
         this.myScanItemForm.setErrors(null);
       }
+    }
+
+    // Enable/Disable the Continuous Scanning
+    if (val === 'repo') {
+      this.myOptServForm.get('continuousScan').enable();
+    } else {
+      this.myOptServForm.get('continuousScan').disable();
     }
   }
 
@@ -462,7 +483,15 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       });
   }
 
+  get android() { return this.myOptServForm.get('android'); }
+  get webApplication() { return this.myOptServForm.get('webApplication'); }
+  get continuousScan() { return this.myOptServForm.get('continuousScan'); }
+
+  /**
+   * Handle the Form Submission
+   */
   handleSubmit() {
+    console.log (this.myOptServForm.value);
     // Dummy
     this.router.navigate(['/my-cart']);
   }
