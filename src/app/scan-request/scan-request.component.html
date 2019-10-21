@@ -177,12 +177,6 @@
             <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
               <form [formGroup]="myOptServForm" class="requestForm">
                 <mdb-card-text>Please select optional services for this scan</mdb-card-text>
-                <!--<div class="custom-control custom-checkbox">
-                  <mdb-checkbox formControlName="securityVulnerability">Security Vulnerability</mdb-checkbox>
-                  <mdb-checkbox formControlName="android">Android</mdb-checkbox>
-                  <mdb-checkbox formControlName="webApplication">Web Application</mdb-checkbox>
-                  <mdb-checkbox formControlName="continuousScan">Continuous Scan</mdb-checkbox>
-                </div>-->
                 <table mdbTable hover="true" small="true">
                   <thead>
                     <tr>
@@ -227,7 +221,7 @@
           <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
                   mdbWavesEffect (click)="stepper.next()" [hidden]="flagSubmit">Next</button>
           <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
-                  mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Submit</button>
+                  mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Add to Cart</button>
         </div>
       </mdb-card>
     </div>

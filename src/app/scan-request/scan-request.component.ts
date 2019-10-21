@@ -1,18 +1,11 @@
-import {
-  AfterViewChecked,
-  Component, ElementRef,
-  HostListener,
-  Input,
-  OnDestroy,
-  OnInit,
-  ViewChild
-} from '@angular/core';
-import {FormGroup, FormControl, Validators, ValidationErrors} from '@angular/forms';
-import { interval } from 'rxjs';
-import {MDBModalRef, MdbStepperComponent, ToastService} from 'ng-uikit-pro-standard';
+import { Component, HostListener, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
+import { MDBModalRef, MdbStepperComponent, ToastService } from 'ng-uikit-pro-standard';
 import { Router } from '@angular/router';
 import { RequestService } from '../../services/request.service';
-import {ValidateFn} from 'codelyzer/walkerFactory/walkerFn';
+import { ValidateFn } from 'codelyzer/walkerFactory/walkerFn';
+import {CartService} from '../../services/cart.service';
+import {OptService, Request} from '../../models/request';
 
 /**
  * Custom cross field validation component. It need to return null for valid form checking
@@ -129,22 +122,8 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
   constructor(public router: Router,
               private myToast: ToastService,
-              private myRequest: RequestService ) {
-    this.myRequest.currentListAuthToken.subscribe(val => {
-      if (val.length) {
-        function mapLabel2Value(item) {
-          const retJson = {
-            value : item.tokenId,
-            label : item.label
-          };
-          return retJson;
-        }
-
-        this.tempAccessToken = val.map(mapLabel2Value);
-      }
-    });
-    this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
-
+              private myRequest: RequestService,
+              private myCart: CartService) {
     this.extrasState = this.router.getCurrentNavigation().extras.state;
   }
 
@@ -154,14 +133,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.flagNeedValidation = true;
     this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
 
-    this.totalToken = 1;
-    this.myOptServForm.valueChanges.subscribe(val => {
-      let tempToken = 1;
-      if (val.android) { tempToken++; }
-      if (val.webApplication) { tempToken++; }
+    this.myRequest.currentListAuthToken.subscribe(val => this.appendAuthToken(val));
+    this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
 
-      this.totalToken = tempToken;
-    });
+    this.totalToken = 1;
+    this.myOptServForm.valueChanges.subscribe(val => this.calculateTotalToken(val));
 
     // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
     // Previously, we use AfterInit or AfterView ... but it comes with a cost.
@@ -171,6 +147,35 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+  }
+
+  /**
+   * Method to append the Access Token upon callback of the subscription
+   */
+  appendAuthToken(val) {
+    if (val.length) {
+      function mapLabel2Value(item) {
+        const retJson = {
+          value : item.tokenId,
+          label : item.label
+        };
+        return retJson;
+      }
+
+      this.tempAccessToken = val.map(mapLabel2Value);
+    }
+  }
+
+  /**
+   * Method to calculate the total token used upon callback of subscription
+   * of changes to the Optional Services
+   */
+  calculateTotalToken(val) {
+    let tempToken = 1;
+    if (val.android) { tempToken++; }
+    if (val.webApplication) { tempToken++; }
+
+    this.totalToken = tempToken;
   }
 
   moveToStep2() {
@@ -492,7 +497,34 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    */
   handleSubmit() {
     console.log (this.myOptServForm.value);
-    // Dummy
-    this.router.navigate(['/my-cart']);
+
+    // Populate the requestData structure
+    const optServiceData: OptService = {
+      security_vulnerability: this.myOptServForm.get('securityVulnerability').value,
+      web_app: this.myOptServForm.get('webApplication').value,
+      android: this.myOptServForm.get('android').value,
+      continuous_scanning: this.myOptServForm.get('continuousScan').value
+    };
+    const requestData: Request = {
+      scanType: this.myScanTypeForm.get('scanType').value,
+      type: this.myScanItemForm.get('type').value,
+      repoURL: this.myScanItemForm.get('repoURL').value,
+      tokenId: this.myScanItemForm.get('tokenId').value,
+      uploadId: this.myScanItemForm.get('uploadId').value,
+      optService: optServiceData,
+      programLanguage: this.myProgLangForm.get('programLanguage').value,
+      buildCommand: this.myProgLangForm.get('buildCommand').value,
+      price: this.totalToken
+    };
+
+    this.myCart.addCart(requestData)
+      .then(res => {
+        console.log (res);
+        this.router.navigate(['/my-cart']);
+      })
+      .catch(err => {
+        console.error (err);
+        this.myToast.error('Failed to add to Cart');
+      });
   }
 }

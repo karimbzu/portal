@@ -25,6 +25,8 @@ export class RequestService {
       android: false,
       continuous_scanning: false
     },
+    programLanguage: '',
+    buildCommand: '',
     price: 0
   });
   currentRequestData = this.requestData.asObservable();
@@ -66,6 +68,8 @@ export class RequestService {
         android: false,
         continuous_scanning: false
       },
+      programLanguage: '',
+      buildCommand: '',
       price: 0
     });
   }
