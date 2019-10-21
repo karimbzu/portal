@@ -368,6 +368,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    */
   handleStep3() {
     // Get the data from Step 2
+    const scanType = this.myScanTypeForm.get('scanType').value;
     const type = this.myScanItemForm.get('type').value;
     const repoURL = this.myScanItemForm.get('repoURL').value;
     const tokenId = this.myScanItemForm.get('tokenId').value;
@@ -425,7 +426,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         .then(path => {
           console.log ('Path', path);
           this.flagValidationFetchDone = true;
-          this.processEvaluateLanguage(path);
+          if (scanType === 'source_code') { this.processEvaluateLanguage(path);
+          } else if (scanType === 'mobile_app') { this.processEvaluateBinary(path);
+          } else {
+            console.log ('Need to handle evaluation for web app');
+          }
         })
         .catch(err => {
           this.flagValidationFetchError = true;
@@ -462,6 +467,13 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       .finally(() => {
         this.flagValidationLanguageLoading = false;
       });
+  }
+
+  processEvaluateBinary(path) {
+    // Dummy - just skip this part
+    this.flagValidationLanguageLoading = false;
+    this.flagValidationLanguageDone = true;
+    this.processEvaluateClean();
   }
 
   processEvaluateClean() {

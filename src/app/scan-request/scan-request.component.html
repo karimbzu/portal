@@ -3,7 +3,9 @@
   <div class="row">
     <div class="col-md-12">
       <mdb-card class="my-3">
-        <mdb-card-header class="centurionBlue h5 text-white">Scan Request</mdb-card-header>
+        <mdb-card-header class="centurionBlue h5 text-white">
+          <mdb-icon fas icon="file-medical" class="pr-1"></mdb-icon>Scan Request
+        </mdb-card-header>
         <mdb-card-body class="pb-0">
           <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()" [vertical]="flagVerticalStepper">
             <mdb-step name="Scan" label="Type" [stepForm]="myScanTypeForm">
