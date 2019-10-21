@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject} from 'rxjs';
-import { Request, AccessToken, SCAN_TYPE, TYPE} from '../models/request';
-import { environment } from '../environments/environment';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {AccessToken, Request, SCAN_TYPE, TYPE} from '../models/request';
+import {environment} from '../environments/environment';
 import {FileUploader} from 'ng2-file-upload';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-
+import {HttpClient, HttpEventType, HttpHeaders, HttpRequest, HttpResponse} from '@angular/common/http';
 
 
 @Injectable({
@@ -26,6 +25,8 @@ export class RequestService {
       android: false,
       continuous_scanning: false
     },
+    programLanguage: '',
+    buildCommand: '',
     price: 0
   });
   currentRequestData = this.requestData.asObservable();
@@ -45,6 +46,10 @@ export class RequestService {
   }));
   currentUploader = this.uploader.asObservable();
 
+  // Lets attempt to create a variable progressUpload
+  private progressUpload: BehaviorSubject<number> = new BehaviorSubject(0);
+  currentProgressUpload = this.progressUpload.asObservable();
+
   constructor(public http: HttpClient) {
     this.getListAccessToken();
   }
@@ -63,6 +68,8 @@ export class RequestService {
         android: false,
         continuous_scanning: false
       },
+      programLanguage: '',
+      buildCommand: '',
       price: 0
     });
   }
@@ -106,8 +113,8 @@ export class RequestService {
         reject(new Error('No authToken available for this user'));
       }
 
-      console.log (token);
-      console.log (typeof token);
+      // console.log (token);
+      // console.log (typeof token);
 
       const formData = {
         label,
@@ -130,30 +137,156 @@ export class RequestService {
   }
 
   /**
-   * Upload file
+   * Upload file, take note that you need to subscribe to the currentProgressUpload
+   * to get the latest update on the progress
    */
   uploadFile(file) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('uploadFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
 
+      const headers = new HttpHeaders({'x-auth-token': this.tokenValue});
+      const req = new HttpRequest('POST', environment.uploadUrl + 'ticketing/upload', file, {
+        headers,
+        reportProgress: true
+      });
+
+      this.http.request(req).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const progress = Math.round (100 * event.loaded / event.total );
+          this.progressUpload.next (progress);
+        } else if (event instanceof HttpResponse) {
+          if (event.ok) {
+            console.log ('File uploaded');
+            resolve(event.body);
+          } else {
+            // @ts-ignore
+            console.error ('uploadFile', event.body.message);
+            // @ts-ignore
+            reject(new Error(event.body.message));
+          }
+        }
+      });
+    });
   }
 
   /**
    * Delete Uploaded file
    */
   deleteUploadedFile(uploadId) {
-    if (!localStorage.getItem('authToken')) {
-      console.error ('addAccessToken', 'No authToken available for this user');
-      return;
-    }
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
 
-    this.http.delete(environment.baseUrl + 'ticketing/upload/' + uploadId, {
-      headers: new HttpHeaders()
-        .set('Authorization', environment.oipToken)
-        .set('x-auth-token', localStorage.getItem('authToken')),
-      observe: 'response'
-    }).subscribe((response: any) => {
-      console.log (response.body);
-
-      // Remarks: Need to handle clearing the parameter
+      this.http.delete(environment.baseUrl + 'ticketing/upload/' + uploadId, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => {
+        resolve(response.body);
+      });
     });
   }
+
+  /**
+   * Evaluate Repo based item
+   * POST: /ticketing/evaluate/check/repo
+   */
+  evaluateCheckRepo(repoURL, tokenId) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      const formData = {
+        repoURL,
+        tokenId
+      };
+
+      this.http.post(environment.baseUrl + 'ticketing/evaluate/check/repo', formData, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => resolve(response.body.path), err => reject(new Error(err.error.message)));
+    });
+  }
+
+  /**
+   * Evaluate file based item
+   * POST: /ticketing/evaluate/check/file
+   */
+  evaluateCheckFile(uploadId) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      const formData = {
+        uploadId
+      };
+
+      this.http.post(environment.baseUrl + 'ticketing/evaluate/check/file', formData, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe(
+        (response: any) => resolve(response.body.path),
+        err => reject(new Error(err.error.message))
+      );
+    });
+  }
+
+  /**
+   * Evaluate the programming language
+   * POST: /ticketing/evaluate/check/language
+   */
+  evaluateCheckLanguage(path) {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      const formData = {
+        path
+      };
+
+      this.http.post(environment.baseUrl + 'ticketing/evaluate/check/language', formData, {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => resolve(response.body), err => reject(new Error(err.error.message)));
+    });
+  }
+
+  /**
+   * Clean up the evaluation item
+   * DELETE: /ticketing/evaluate/clean
+   */
+  evaluateClean() {
+    return new Promise((resolve, reject) => {
+      if (!localStorage.getItem('authToken')) {
+        console.error ('deleteUploadedFile', 'No authToken available for this user');
+        reject(new Error('No authToken available for this user'));
+      }
+
+      this.http.delete(environment.baseUrl + 'ticketing/evaluate/clean', {
+        headers: new HttpHeaders()
+          .set('Authorization', environment.oipToken)
+          .set('x-auth-token', localStorage.getItem('authToken')),
+        observe: 'response'
+      }).subscribe((response: any) => resolve(response.body), err => reject(new Error(err.error.message)));
+    });
+  }
+
 }

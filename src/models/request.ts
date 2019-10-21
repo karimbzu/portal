@@ -5,6 +5,8 @@ export interface Request {
   repoURL: string;
   tokenId: number;
   optService: OptService;
+  programLanguage: string;
+  buildCommand: string;
   price: number;
 }
 

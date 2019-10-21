@@ -1,190 +1,270 @@
 <app-header-new></app-header-new>
-<mdb-card class="m-3">
-  <mdb-card-header class="yellow darken-1 h5">Scan Request</mdb-card-header>
-  <mdb-card-body>
-    <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()" [vertical]="flagVerticalStepper">
-      <mdb-step name="Scan" label="Type" [stepForm]="myRequestForm">
-        <form [formGroup]="myRequestForm">
-          <mdb-card-text>Please select the Type of Scan</mdb-card-text>
-          <div class="card-deck">
-            <mdb-card class="m-3" (click)="updateScanType('source_code')">
-              <mdb-card-header class="custom-control custom-radio">
-                <span class="ml-3">&nbsp;</span>
-                <input type="radio" class="custom-control-input" id="typeSourceCode" name="scanType"
-                       value="source_code" formControlName="scanType">
-                <label for="typeSourceCode" class="custom-control-label">Source Code</label>
-              </mdb-card-header>
-              <mdb-card-body>
-                <mdb-card-text>
-                  Analyze the source code for security and quality issues
-                </mdb-card-text>
-              </mdb-card-body>
-            </mdb-card>
-            <mdb-card class="m-3" (click)="updateScanType('mobile_app')">
-              <mdb-card-header class="custom-control custom-radio">
-                <span class="ml-3">&nbsp;</span>
-                <input type="radio" class="custom-control-input" id="typeMobileApp" name="scanType"
-                       value="mobile_app" formControlName="scanType">
-                <label for="typeMobileApp" class="custom-control-label">Binary Application</label>
-              </mdb-card-header>
-              <mdb-card-body>
-                <mdb-card-text>
-                  Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
-                  licensing term of open source components in the application
-                </mdb-card-text>
-              </mdb-card-body>
-            </mdb-card>
-            <mdb-card class="m-3" (click)="updateScanType('web_app')">
-              <mdb-card-header class="custom-control custom-radio">
-                <span class="ml-3">&nbsp;</span>
-                <input type="radio" class="custom-control-input" id="typeWebApp" name="scanType"
-                       value="web_app" formControlName="scanType">
-                <label for="typeWebApp" class="custom-control-label">Web Application</label>
-              </mdb-card-header>
-              <mdb-card-body>
-                <mdb-card-text>
-                  Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not
-                  to perform on a production system
-                </mdb-card-text>
-              </mdb-card-body>
-            </mdb-card>
-          </div>
-        </form>
-      </mdb-step>
-      <mdb-step name="Delivery" label="Method" [stepForm]="myRequestForm">
-        <form [formGroup]="myRequestForm">
-          <mdb-card-text>Please specify how to provide the scanning item to Centurion platform</mdb-card-text>
-          <div class="card-deck">
-            <mdb-card class="m-3" *ngIf="flagShowRepo" (click)="updateDeliveryMethod('repo')">
-              <mdb-card-header class="custom-control custom-radio">
-                <span class="ml-3">&nbsp;</span>
-                <input type="radio" class="custom-control-input" id="typeRepo" name="type" value="repo" formControlName="type">
-                <label for="typeRepo" class="custom-control-label">GIT Repository</label>
-              </mdb-card-header>
-              <mdb-card-body class="py-0">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <mdb-card class="my-3">
+        <mdb-card-header class="centurionBlue h5 text-white">
+          <mdb-icon fas icon="file-medical" class="pr-1"></mdb-icon>Scan Request
+        </mdb-card-header>
+        <mdb-card-body class="pb-0">
+          <mdb-stepper #stepper [linear]="true" (stepChange)="handleStepChange()" [vertical]="flagVerticalStepper">
+            <mdb-step name="Scan" label="Type" [stepForm]="myScanTypeForm">
+              <form [formGroup]="myScanTypeForm">
+                <mdb-card-text>Please select the Type of Scan</mdb-card-text>
+                <div class="card-deck">
+                  <mdb-card class="m-3" (click)="updateScanType('source_code')" style="min-width: 200px">
+                    <mdb-card-header class="custom-control custom-radio">
+                      <span class="ml-3">&nbsp;</span>
+                      <input type="radio" class="custom-control-input" id="typeSourceCode" name="scanType"
+                             value="source_code" formControlName="scanType">
+                      <label for="typeSourceCode" class="custom-control-label">Source Code</label>
+                    </mdb-card-header>
+                    <mdb-card-body style="min-height:200px">
+                      <mdb-card-text>
+                        Analyze the source code for security and quality issues
+                      </mdb-card-text>
+                    </mdb-card-body>
+                  </mdb-card>
+                  <mdb-card class="m-3" (click)="updateScanType('mobile_app')" style="min-width: 200px">
+                    <mdb-card-header class="custom-control custom-radio">
+                      <span class="ml-3">&nbsp;</span>
+                      <input type="radio" class="custom-control-input" id="typeMobileApp" name="scanType"
+                             value="mobile_app" formControlName="scanType">
+                      <label for="typeMobileApp" class="custom-control-label">Binary Application</label>
+                      <mdb-badge pill="true" warning="true" class="float-right">COMING SOON</mdb-badge>
+                    </mdb-card-header>
+                    <mdb-card-body>
+                      <mdb-card-text>
+                        Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
+                        licensing term of open source components in the application
+                      </mdb-card-text>
+                    </mdb-card-body>
+                  </mdb-card>
+                  <mdb-card class="m-3" style="min-width: 200px">
+                    <mdb-card-header class="custom-control custom-radio">
+                      <span class="ml-3">&nbsp;</span>
+                      <input type="radio" class="custom-control-input" id="typeWebApp" name="scanType"
+                             value="web_app" formControlName="scanType" disabled>
+                      <label for="typeWebApp" class="custom-control-label">Web Application</label>
+                      <mdb-badge pill="true" info="true" class="float-right">Q1 2020</mdb-badge>
+                    </mdb-card-header>
+                    <mdb-card-body>
+                      <mdb-card-text>
+                        Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not
+                        to perform on a production system
+                      </mdb-card-text>
+                    </mdb-card-body>
+                  </mdb-card>
+                </div>
+              </form>
+            </mdb-step>
+            <mdb-step name="Scan" label="Item" [stepForm]="myScanItemForm">
+              <form [formGroup]="myScanItemForm">
+                <mdb-card-text>Please specify how to provide the scanning item to Centurion platform</mdb-card-text>
+                <div class="card-deck">
+                  <mdb-card class="m-3" *ngIf="flagShowRepo"
+                            (click)="updateDeliveryMethod('repo')">
+                    <mdb-card-header class="custom-control custom-radio">
+                      <span class="ml-3">&nbsp;</span>
+                      <input type="radio" class="custom-control-input" id="typeRepo" name="type" value="repo" formControlName="type">
+                      <label for="typeRepo" class="custom-control-label">GIT Repository</label>
+                    </mdb-card-header>
+                    <mdb-card-body class="py-0">
+                      <div class="md-form md-outline">
+                        <input type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
+                        <label for="inputRepoURL">Source Code Repository</label>
+                      </div>
+                      <div class="md-form md-outline">
+                        <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
+                                    formControlName="tokenId"
+                                    outline="true" label="Access Token"></mdb-select>
+                        <button mdbBtn color="link" class="p-0 blue-text"
+                                data-toggle="modal" data-target="#basicExample"
+                                (click)="tokenModal.show()" >
+                          <i class="fas fa-plus-circle"></i>
+                          Click here to add new Access Token</button>
+                      </div>
+                    </mdb-card-body>
+                  </mdb-card>
+
+                  <mdb-card class="m-3" *ngIf="flagShowUpload"
+                            (click)="updateDeliveryMethod('file')">
+                    <mdb-card-header class="custom-control custom-radio" *ngIf="flagShowRepo; else elseUploadTitle">
+                      <span class="ml-3">&nbsp;</span>
+                      <input type="radio" class="custom-control-input" id="typeUpload" name="type" value="file" formControlName="type">
+                      <label for="typeUpload" class="custom-control-label">Upload</label>
+                    </mdb-card-header>
+                    <ng-template #elseUploadTitle><mdb-card-header>Upload</mdb-card-header></ng-template>
+
+                    <!-- Remarks: We had to switch from *ngIf/template to hidden approach
+                    because the mdb-file-upload seems to revert to default view if we
+                    use the *ngIf/template approach.
+                     -->
+                    <mdb-card-body class="p-0" [hidden]="flagUpload">
+                      <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)" ></mdb-file-upload>
+                    </mdb-card-body>
+                    <mdb-card-body [hidden]="!flagUpload" style="height: 200px">
+                      <mdb-progress [value]="progressUploadCount"
+                                    min="0" max="100" type="success"
+                                    aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                      </mdb-progress>
+                      <mdb-card-text *ngIf="progressUploadCount < 100">Uploading file to server. Please wait ...</mdb-card-text>
+                      <mdb-card-text *ngIf="progressUploadCount < 100">Progress: <strong>{{progressUploadCount}} %</strong></mdb-card-text>
+                      <mdb-card-text *ngIf="progressUploadCount == 100">File successfully uploaded to server</mdb-card-text>
+                    </mdb-card-body>
+                  </mdb-card>
+
+                  <mdb-card class="m-3" *ngIf="flagShowWeb">
+                    <mdb-card-header>Web Configuration</mdb-card-header>
+                    <mdb-card-body style="min-height:200px">
+                      <p>This section will be updated in MILESTONE 3</p>
+                    </mdb-card-body>
+                  </mdb-card>
+                </div>
+              </form>
+            </mdb-step>
+            <mdb-step name="Validate" label="Content" [stepForm]="myValidateForm">
+              <form [formGroup]="myValidateForm" class="requestForm">
+                <mdb-card-text>Please wait while we analysing your scan item</mdb-card-text>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="flagValidationFetchLoading">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <mdb-icon fas icon="check-circle" class="text-success" *ngIf="flagValidationFetchDone"></mdb-icon>
+                        <mdb-icon fas icon="exclamation-circle" class="text-danger" *ngIf="flagValidationFetchError"></mdb-icon>
+                      </td>
+                      <td>Fetching the scanning item</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="flagValidationLanguageLoading">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <mdb-icon fas icon="check-circle" class="text-success" *ngIf="flagValidationLanguageDone"></mdb-icon>
+                        <mdb-icon fas icon="exclamation-circle" class="text-danger" *ngIf="flagValidationLanguageError"></mdb-icon>
+                      </td>
+                      <td>Evaluate the programming language</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="spinner-border spinner-border-sm" role="status" *ngIf="flagValidationCleanLoading">
+                          <span class="sr-only">Loading...</span>
+                        </div>
+                        <mdb-icon fas icon="check-circle" class="text-success" *ngIf="flagValidationCleanDone"></mdb-icon>
+                        <mdb-icon fas icon="exclamation-circle" class="text-danger" *ngIf="flagValidationCleanError"></mdb-icon>
+                      </td>
+                      <td>Clean up the evaluation materials</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </mdb-step>
+            <mdb-step name="Programming" label="Language" [stepForm]="myProgLangForm">
+              <form [formGroup]="myProgLangForm" class="requestForm">
+                <mdb-card-text>Please specify the programming language used </mdb-card-text>
                 <div class="md-form md-outline">
-                  <input type="text" id="inputRepoURL" class="form-control" mdbInput>
-                  <label for="inputRepoURL">Source Code Repository</label>
+                  <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
+                              formControlName="programLanguage" id="inputProgramLang"
+                              outline="true" label="Programming Language"></mdb-select>
                 </div>
                 <div class="md-form md-outline">
-                  <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
-                              outline="true" label="Access Token"></mdb-select>
-                  <button mdbBtn color="link" class="p-0 text-blue"
-                          data-toggle="modal" data-target="#basicExample"
-                          (click)="frame.show()" >Click here to add new Access Token</button>
+                  <input type="text" id="inputBuildCmd" class="form-control" mdbInput formControlName="buildCommand">
+                  <label for="inputBuildCmd">Build Command</label>
                 </div>
-              </mdb-card-body>
-            </mdb-card>
+              </form>
+            </mdb-step>
+            <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
+              <form [formGroup]="myOptServForm" class="requestForm">
+                <mdb-card-text>Please select optional services for this scan</mdb-card-text>
+                <table mdbTable hover="true" small="true">
+                  <thead>
+                    <tr>
+                      <th size="80%">Services</th>
+                      <th class="text-center">Token</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><mdb-checkbox formControlName="securityVulnerability">Security Vulnerability</mdb-checkbox></td>
+                      <td class="text-center">1</td>
+                    </tr>
+                    <tr>
+                      <td><mdb-checkbox formControlName="android">Android</mdb-checkbox></td>
+                      <td class="text-center"><span *ngIf="android.value">1</span></td>
+                    </tr>
+                    <tr>
+                      <td><mdb-checkbox formControlName="webApplication">Web Application</mdb-checkbox></td>
+                      <td class="text-center"><span *ngIf="webApplication.value">1</span></td>
+                    </tr>
+                    <tr>
+                      <td><mdb-checkbox formControlName="continuousScan">Continuous Scan</mdb-checkbox></td>
+                      <td class="text-center"><span *ngIf="continuousScan.value">-</span></td>
+                    </tr>
+                  </tbody>
+                  <tfoot class="grey lighten-3">
+                    <tr>
+                      <th><strong>Total Token</strong></th>
+                      <th class="text-center"><strong>{{totalToken}}</strong></th>
+                    </tr>
+                  </tfoot>
+                </table>
 
-            <mdb-card class="m-3" *ngIf="flagShowUpload" (click)="updateDeliveryMethod('file')">
-              <mdb-card-header class="custom-control custom-radio" *ngIf="flagShowRepo; else elseUploadTitle">
-                <span class="ml-3">&nbsp;</span>
-                <input type="radio" class="custom-control-input" id="typeUpload" name="type" value="file" formControlName="type">
-                <label for="typeUpload" class="custom-control-label">Upload</label>
-              </mdb-card-header>
-              <ng-template #elseUploadTitle><mdb-card-header>Upload</mdb-card-header></ng-template>
-              <mdb-card-body class="p-0" *ngIf="!flagUpload; else progressUpload">
-                 <mdb-file-upload (fileRemoved)="onFileRemove()" (fileAdded)="onFileAdd($event)"></mdb-file-upload>
-              </mdb-card-body>
-              <ng-template #progressUpload>
-                <mdb-card-body>
-                  <mdb-progress value="35" min="0" max="100" type="success" aria-valuenow="35" aria-valuemin="0"
-                                aria-valuemax="100"></mdb-progress>
-                  Upload Progress: 35%
-                </mdb-card-body>
-              </ng-template>
-            </mdb-card>
+              </form>
+            </mdb-step>
+          </mdb-stepper>
+        </mdb-card-body>
 
-            <mdb-card class="m-3" *ngIf="flagShowWeb">
-              <mdb-card-header>Web Configuration</mdb-card-header>
-              <mdb-card-body>
-                <p>This section will be updated in MILESTONE 3</p>
-              </mdb-card-body>
-            </mdb-card>
-          </div>
-        </form>
-      </mdb-step>
-      <mdb-step name="Analysis" [stepForm]="myRequestForm">
-        <form [formGroup]="myRequestForm">
-          <mdb-card-text>Please wait while we analysing your scan item (Progress: {{progressCount}})</mdb-card-text>
-          <div class="progress">
-            <div class="progress-bar"
-                 role="progressbar" [style.width]="progressCount"
-                 aria-valuenow="10"
-                 aria-valuemin="0"
-                 aria-valuemax="100"></div>
-          </div>
-        </form>
-      </mdb-step>
-      <mdb-step name="Programming" label="Language" [stepForm]="myRequestForm">
-        <form [formGroup]="myRequestForm">
-          <mdb-card-text>Please specify the programming language used </mdb-card-text>
-          <div class="md-form md-outline">
-            <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
-                        formControlName="programLanguage" id="inputProgramLang"
-                        outline="true" label="Programming Language"></mdb-select>
-          </div>
-          <div class="md-form md-outline">
-            <input type="text" id="inputBuildCmd" class="form-control" mdbInput formControlName="buildCommand">
-            <label for="inputBuildCmd">Build Command</label>
-          </div>
-        </form>
-      </mdb-step>
-      <mdb-step name="Optional" label="Services" [stepForm]="myRequestForm">
-        <form [formGroup]="myRequestForm">
-          <mdb-card-text>Please select optional services for this scan</mdb-card-text>
-          <div class="custom-control custom-checkbox">
-            <mdb-checkbox [checked]="true">Security Vulnerability</mdb-checkbox>
-            <mdb-checkbox>Android</mdb-checkbox>
-            <mdb-checkbox>Web Application</mdb-checkbox>
-            <mdb-checkbox>Continuous Scan</mdb-checkbox>
-          </div>
-
-        </form>
-      </mdb-step>
-    </mdb-stepper>
-  </mdb-card-body>
-<!--
-  <mdb-card-footer>
-    <div class="btn-group-toggle" role="group">
-      <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-2"
-              mdbWavesEffect (click)="stepper.previous()">Back</button>
-      <button mdbBtn type="button" rounded="true" class="waves-light centurionDarkBlue col-2 text-white"
-              mdbWavesEffect (click)="stepper.next()" [hidden]="flagSubmit">Next</button>
-      <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-2 text-white"
-              mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Submit</button>
+        <div class="d-flex justify-content-end">
+          <button mdbBtn type="button" color="danger" rounded="true" outline="true" class="waves-light col-md-2"
+                  mdbWavesEffect (click)="stepper.previous()">Back</button>
+          <button mdbBtn type="button" rounded="true" class="waves-light centurionBlue col-md-2 text-white"
+                  mdbWavesEffect (click)="stepper.next()" [hidden]="flagSubmit">Next</button>
+          <button mdbBtn type="button" color="success" rounded="true" class="waves-light col-md-2 text-white"
+                  mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">Add to Cart</button>
+        </div>
+      </mdb-card>
     </div>
-  </mdb-card-footer>
--->
-</mdb-card>
-<div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-
-  <a mdbBtn floating="true" size="lg" color="red" class="waves-light" mdbWavesEffect (click)="stepper.previous()">
-    <mdb-icon fas icon="arrow-left"></mdb-icon>
-  </a>
-  <a mdbBtn floating="true" size="lg" class="waves-light centurionDarkBlue" mdbWavesEffect (click)="stepper.next()" [hidden]="flagSubmit">
-    <mdb-icon fas icon="arrow-right"></mdb-icon>
-  </a>
-  <a mdbBtn floating="true" size="lg" class="waves-light centurionOrange" mdbWavesEffect (click)="handleSubmit()" [hidden]="!flagSubmit">
-    <mdb-icon fas icon="shopping-cart"></mdb-icon>
-  </a>
+  </div>
 </div>
 
-<div mdbModal #frame class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
+<!-- Modal - Add Access Token -->
+<div mdbModal #tokenModal class="modal fade left" id="frameModalTop" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Add Access Token</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="frame.hide()">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="tokenModal.hide()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body mx-3">
-        <p>Will be populated later</p>
+        <form [formGroup]="myTokenForm">
+          <div class="md-form md-outline">
+            <input mdbValidate type="text" id="inputLabel" class="form-control" formControlName="label" mdbInput>
+            <label for="inputLabel">Name</label>
+            <mdb-error *ngIf="label.invalid && (label.dirty || label.touched)">Insufficient Length. Min 5 characters</mdb-error>
+          </div>
+          <div class="md-form md-outline">
+            <input mdbValidate type="text" id="inputToken" class="form-control" formControlName="token" mdbInput>
+            <label for="inputToken">Value</label>
+            <mdb-error *ngIf="token.invalid && (token.dirty || token.touched)">Insufficient Length. Min 5 characters</mdb-error>
+          </div>
+        </form>
       </div>
       <div class="modal-footer d-flex justify-content-center">
-        <button mdbBtn color="success" block="true" rounded="true" class="waves-light" mdbWavesEffect>Submit</button>
+        <button mdbBtn block="true" rounded="true" class="waves-light centurionOrange text-white"
+                (click)="handleAddToken()"
+                [disabled]="flagLoadingAddToken"
+                mdbWavesEffect>
+          <span *ngIf="!flagLoadingAddToken else loadingAddToken">Submit</span>
+          <ng-template #loadingAddToken>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          </ng-template>
+        </button>
       </div>
     </div>
   </div>
