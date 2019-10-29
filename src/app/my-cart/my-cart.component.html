@@ -1,5 +1,7 @@
 <app-header-new></app-header-new>
 <div class="container-fluid">
+  <div class="row">
+<div class="col-md-8">
 <mdb-card class="m-3">
   <mdb-card-header class="centurionBlue h5 text-white">My Cart</mdb-card-header>
   <mdb-card-body>
@@ -65,10 +67,17 @@
   </mdb-card-body>
 
 </mdb-card>
+</div>
+<!-- widget -->
+<div class="col-md-4">
+  <app-widget [widget]="false"></app-widget>
+</div>
 
+
+</div>
 <div class="container">
   <div class="row">
-      <button type="button" mdbBtn rounded="true" class="centurionOrange text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
+      <button type="button" mdbBtn rounded="true" class="centurionBlue text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
   </div>
 </div>
 

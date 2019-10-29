@@ -13,6 +13,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class MyCartComponent implements OnInit {
   validatingForm: FormGroup;
   mark=false;
+  widget:true;
 
   listCart: Cart[];
   isEmpty:boolean;

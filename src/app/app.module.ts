@@ -23,6 +23,7 @@ import { ToastModule } from 'ng-uikit-pro-standard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderNewComponent } from './header-new/header-new.component';
 import { Page1Component } from './page1/page1.component';
+import { WidgetComponent } from './widget/widget.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { Page1Component } from './page1/page1.component';
     Page1Component,
     CheckoutComponent,
     DashboardComponent,
-    HeaderNewComponent
+    HeaderNewComponent,
+    WidgetComponent
   ],
   imports: [
     BrowserModule,

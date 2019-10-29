@@ -1,23 +1,12 @@
 <app-header-new></app-header-new>
 <div class="container-fluid">
+<div class="row">
+  <div class="col-md-8">
   <mdb-card class="m-3">
     <mdb-card-header class="centurionBlue h5 text-white">My Account</mdb-card-header>
     <mdb-card-body>
       <mdb-card-text>
-        <!-- Nav tabs -->
-        <mdb-tabset [buttonClass]="'pills-primary white mb-2'" [contentClass]="'card'">
-          <!--Panel 1-->
-          <mdb-tab heading="Account Data">
-            <div class="row">
-              <div class="col-12">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil odit magnam minima, soluta
-                  doloribus reiciendis molestiae placeat unde eos molestias. Quisquam aperiam, pariatur. Tempora,
-                  placeat ratione porro voluptate odit minima.</p>
-              </div>
-            </div>
-          </mdb-tab>
-          <!--Panel 2-->
-          <mdb-tab heading="Order History">
+
             <div class="row">
               <div class="col-12">
 
@@ -117,15 +106,19 @@
 
 
             </div>
-          </mdb-tab>
-
-        </mdb-tabset>
-
+  
 
 
 
       </mdb-card-text>
     </mdb-card-body>
   </mdb-card>
+</div>
+<div class="col-md-4">
+    <app-widget [widget]="true"></app-widget>
+  </div>
+</div>
+
+
 </div>
 

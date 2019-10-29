@@ -1,0 +1,118 @@
+       
+        <ul class="list-group mb-3 z-depth-1">       
+            <li class="list-group-item d-flex justify-content-between bg-light">
+                    <table>                      
+                            <tbody>
+                                <tr>                    
+                                  <td><h6 class="justify-content-middle"> Current Token Balance</h6></td>
+                                  <td></td>
+                                  <td><h3>136</h3></td>                                                                  
+                                </tr>
+                                <tr>  
+                                    <td></td>
+                                    <td> <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white"  >Add Tokens</button> </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>                            
+                    </table>
+            </li>
+          </ul>
+
+         
+
+          <ul class="list-group mb-3 z-depth-1" *ngIf="widget">       
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                  <table mdbTable> 
+                    <tbody>
+                      <tr>
+                        <th> <h6 class="justify-content-middle">Successfull Scans</h6> </th>
+                        <td>  <h3 class="font-weight-bold">23</h3> </td>
+                      </tr>                
+                    </tbody>
+                </table>
+                </li>
+        </ul>
+
+          <ul class="list-group mb-3 z-depth-1">       
+              <li class="list-group-item  bg-primary">
+                    <table > 
+                            <tbody>
+                              <tr>
+                                <td><i class="fa fa-star" aria-hidden="true">  </i></td>
+                                <td colspan="2">Score Card</td>
+                               
+                              </tr>    
+                              <tr>
+                                <td><h1>A</h1></td>
+                                <td>  </td>
+                                <td><p>  Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns
+                                    </p></td>
+                            </tr>              
+                            </tbody>
+                    </table>
+                <!-- <div >
+                    <i class="fa fa-star" aria-hidden="true"> Score Card </i>
+                    <h1>A</h1>
+                <p>  Per the documentation, nesting is easy—just put a row of columns within an existing column. This gives you two columns
+               </p>
+                </div> -->
+              
+              </li>
+            </ul>
+
+            <ul class="list-group mb-3 z-depth-1">       
+                <li class="list-group-item  bg-white">
+                  <div>
+                      <i class="fa fa-file" aria-hidden="true"> History </i>
+                 
+            <table mdbTable>                      
+                <thead>
+                    <tr>                    
+                      <th style="text-align:center">Item ID</th>
+                      <th>Item</th>
+                      <th>Status</th>
+                      <th style="text-align:center"></th>                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                          <td>1 </td>
+                          <td>aa</td>
+                          <td>  Pending</td>
+                          <td>  aa</td>
+                    </tr>
+                    <tr>
+                          <td>1</td>
+                          <td>aa</td>
+                          <td>In Progress</td>
+                          <td>  aa</td>
+                    </tr>
+                    <tr>
+                          <td>2</td>
+                          <td>aa</td>
+                          <td>Done</td>
+                          <td>  aa</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+                
+                </li>
+              </ul>
+         
+        <div class="card card-body" *ngIf="widget">
+
+                    <table>                      
+                            <tbody>
+                                <tr>                    
+                                  <td><i class="fas fa-bell"></i></td>
+                                  <td> 5 items in my cart</td>
+                                  <td></td>
+                                  <td> <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white"  [disabled]="!listCart.length" >Checkout</button>
+                                  </td>                      
+                                </tr>
+                            </tbody>                            
+                    </table>
+
+        </div>
+
