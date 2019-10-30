@@ -1,5 +1,5 @@
-<app-header-new></app-header-new>
-<div class="container-fluid">
+<!-- <app-header-new></app-header-new> -->
+<!-- <div class="container-fluid">
 <div class="row">
   <div class="col-md-8">
   <mdb-card class="m-3">
@@ -14,7 +14,7 @@
 
                   <thead>
                   <tr>
-                    <!-- <th>#</th> -->
+                 
                     <th style="text-align:center">Order ID</th>
                     <th>Scan Type</th>
                     <th>Project</th>
@@ -25,7 +25,7 @@
                   </thead>
                   <tbody>
                   <tr *ngFor="let order of myListOrder; let i = index">
-                    <!-- <td>{{i+1}}</td> -->
+                  
                     <td class="align-middle" style="text-align:center;text-decoration: underline" ><button style="text-align:center;text-decoration: underline" type="button" mdbBtn type="button" flat="true" size="lg" mdbWavesEffect (click)="basicModal.show()" mdbWavesEffect>{{order.id}}</button>
                     </td>
                     <td class="align-middle">{{order.scanType}}</td>
@@ -120,5 +120,109 @@
 </div>
 
 
-</div>
+</div> -->
 
+<app-header-new></app-header-new>
+<div class="container-fluid">
+ 
+  <div class="row">
+    <div class="col col-9">
+        <mdb-card >
+            <mdb-card-header class="centurionBlue h5 text-white">My Account</mdb-card-header>
+            <mdb-card-body>
+              <mdb-card-text>        
+                    <div class="row">
+                      <div class="col-12">        
+                        <table mdbTable>        
+                          <thead>
+                          <tr>                         
+                            <th style="text-align:center">Order ID</th>
+                            <th>Scan Type</th>
+                            <th>Project</th>
+                            <th style="text-align:center">Status</th>
+                            <th>Date</th>
+                            <th>Report</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let order of myListOrder; let i = index">                          
+                            <td class="align-middle" style="text-align:center;text-decoration: underline" ><button style="text-align:center;text-decoration: underline" type="button" mdbBtn type="button" flat="true" size="lg" mdbWavesEffect (click)="basicModal.show()" mdbWavesEffect>{{order.id}}</button>
+                            </td>
+                            <td class="align-middle">{{order.scanType}}</td>
+                            <td class="align-middle">{{order.project}}</td>
+                            <td class="align-middle"><span id={{removeSpace(order.status)}} class="badge badge-warning" >{{order.status}}</span></td>
+                            <td class="align-middle">{{order.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                            <td class="align-middle"><div *ngIf="order.status == 'done'"><button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button></div>
+        
+                            </td>        
+                            <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                                 aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <label class="tajukModal"> Ticket Information</label>
+                                    <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                      <span aria-hidden="true">×</span>
+                                    </button>        
+                                  </div>
+                                  <div class="modal-body">
+                                    <h4 class="modal-title text-center" id="myModalLabel">
+                                      Your Order Request ID: <span class="badge badge-warning">{{order.id}}</span>
+                                    </h4>
+                                    <table mdbTable>
+                                      <tbody>
+                                      <tr>
+                                        <th>Project Name</th> <td>:</td>
+                                        <td>  {{order.project}} </td>
+                                      </tr>
+                                      <tr>
+                                        <th>Project Description</th><td>:</td>
+                                        <td>{{order.description}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th>Date</th><td>:</td>
+                                        <td>{{order.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                      </tr>
+                                      <tr>
+                                        <th>Service</th><td>:</td>
+                                        <td>
+                                          <ul >
+                                            <span *ngIf="optService(order.optService).security_vulnerability"><li> Security Vulnerability</li></span>
+                                            <span *ngIf="optService(order.optService).web_app">  <li>  Web Application</li></span>
+                                            <span *ngIf="optService(order.optService).android"> <li>  Android</li></span>
+                                            <span *ngIf="optService(order.optService).continuous_scanning"> <li>  Continious Scanning</li></span>
+                                          </ul >
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <th>Price</th><td>:</td>
+                                        <td> {{order.price}} </td>
+                                      </tr>
+                                      <tr>
+                                        <th>Message </th><td>:</td>
+                                        <td> {{order.message}} </td>
+                                      </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" mdbBtn color="primary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>        
+                          </tr>
+                          </tbody>
+                        </table> 
+                      </div>
+                    </div>
+              </mdb-card-text>
+            </mdb-card-body>
+          </mdb-card>
+    </div>
+    <div class="col">
+        <app-widget [widget]="true"></app-widget>
+
+    </div>
+  </div>
+</div>
