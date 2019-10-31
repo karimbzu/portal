@@ -1,19 +1,25 @@
 <app-header-new></app-header-new>
-<mdb-card class="m-3">
+<!-- <mdb-card class="m-3">
   <mdb-card-header class="yellow accent-4 h5">Checkout</mdb-card-header>
    <mdb-card-body>
-    <!-- <mdb-card-text>We shall populate the content of Checkout here</mdb-card-text> -->
-     <mdb-card-title>
-
-  <mdb-card class="m-3">
-    <mdb-card-body>
-      <mdb-card-title><h5>
+     <mdb-card-title> -->
+        <div class="container-fluid">
+ 
+            <div class="row">
+              <div class="col col-9">
+                  <mdb-card >
+                      <mdb-card-header class="centurionBlue h5 text-white">Checkout</mdb-card-header>
+                      <mdb-card-body>
+                        <mdb-card-text>
+       
+        <h5>
 
         <div class="row">
 
           <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">1</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Checkout Method</b></div>
 
-      </div></h5>
+      </div>
+    </h5>
 
       <!-- Material unchecked -->
 
@@ -45,14 +51,15 @@
         <div class ="col-sm-3"></div>
         <div class ="col-sm-7" style="font-size:small; font-style: oblique">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Pending approval by Account Manager</div>
     </div>
-     </mdb-card-title>
+     <!-- </mdb-card-title>
    </mdb-card-body>
-  </mdb-card>
+  </mdb-card> -->
 <!-- Individual -->
 <div *ngIf="type==='Individual'">
-  <mdb-card class="m-3">
+  <!-- <mdb-card class="m-3">
     <mdb-card-body>
-      <mdb-card-title><h5>
+      <mdb-card-title> -->
+        <h5>
 
           <div class="row">
               <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Order Review</b></div>
@@ -77,16 +84,17 @@
                 <div class ="col-sm-7">{{totalPrice}}</div>
             </div>
           </div>
-     </mdb-card-title>
+     <!-- </mdb-card-title>
    </mdb-card-body>
-  </mdb-card>
+  </mdb-card> -->
   </div>
 
   <!-- company -->
   <div *ngIf="type==='company'">
-  <mdb-card class="m-3">
+  <!-- <mdb-card class="m-3">
     <mdb-card-body>
-      <mdb-card-title><h5>
+      <mdb-card-title> -->
+        <h5>
 
           <div class="row">
               <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Company Approval</b></div>
@@ -139,14 +147,15 @@
             </div>
           </form>
        </div>
-     </mdb-card-title>
+     <!-- </mdb-card-title>
    </mdb-card-body>
-  </mdb-card>
+  </mdb-card> -->
 
 
-  <mdb-card class="m-3">
+  <!-- <mdb-card class="m-3">
       <mdb-card-body>
-        <mdb-card-title><h5>
+        <mdb-card-title> -->
+          <h5>
 
             <div class="row">
                 <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Order Review</b></div>
@@ -171,23 +180,30 @@
                   <div class ="col-sm-7">{{totalPrice}}</div>
               </div>
             </div>
-       </mdb-card-title>
+       <!-- </mdb-card-title>
      </mdb-card-body>
-    </mdb-card>
+    </mdb-card> -->
   </div>
 
 
 
-  </mdb-card-title>
- </mdb-card-body>
+</mdb-card-text>
+          
+</mdb-card-body>
 </mdb-card>
+</div>
 
+<div class="col">
+    <app-widget [widget]="false"></app-widget>
+
+</div>
 
 
   <!-- <div class="d-flex flex-row-reverse"> -->
-    <div class="d-flex justify-content-end">
-      <div class="p-2"></div>
-      <div class="p-2">
+  <div class="container">
+    <!-- <div class="d-flex justify-content-end"> -->
+      <div class="row"></div>
+      <div class="row">
         <!-- <mdb-checkbox name="option" (change)= "Accept($event)" [disabled]="(!(projectname.valid && (projectname.dirty || projectname.touched))) || (!(projectdesc.valid && (projectdesc.dirty || projectdesc.touched)))" [inline]="true">I have read and agree to the</mdb-checkbox><a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank" class="text-primary">Terms and Conditions</a>    -->
         <mdb-checkbox (change)= "Accept($event)" [disabled]="(!(projectname.valid && (projectname.dirty || projectname.touched))) || (!(projectdesc.valid && (projectdesc.dirty || projectdesc.touched)))">I hereby acknowledged that I have read and agree to the <a href="https://osesuat.tm.com.my/oses/TermCondition.jsp" target="_blank">Terms and Conditions</a>.</mdb-checkbox>
         <!-- <tr> -->
@@ -197,13 +213,21 @@
           <!-- name="pda" id="pda" -->
 
       </div>
-    </div>
-
-      <div class="p-2">
+    <!-- </div> -->
+  </div> 
+    <div class="container">
+      <div class="row">
          <button mdbBtn type="button" rounded="true" (click)="btnPlaceOrder()" [disabled]="!marked || (!(projectname.valid && (projectname.dirty || projectname.touched))) || (!(projectdesc.valid && (projectdesc.dirty || projectdesc.touched)))"  class="centurionOrange text-white col-2 mx-auto d-block">PLACE ORDER</button>
       </div>
-
+    </div>
   <br/>
   <br/>
+  <!-- <div class="container">
+      <div class="row">
+          <button type="button" mdbBtn rounded="true" class="centurionBlue text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
+      </div>
+    </div> -->
+</div>
+</div>
 
 
