@@ -1,4 +1,5 @@
 import { Component, OnInit , Input} from '@angular/core';
+import {CartService} from '../../services/cart.service';
 
 @Component({
   selector: 'app-widget',
@@ -8,9 +9,13 @@ import { Component, OnInit , Input} from '@angular/core';
 export class WidgetComponent implements OnInit {
 
   @Input() widget: boolean;
-  constructor() { }
+  
+
+  cartCount: number;
+
+  constructor(private myCart: CartService) { }
 
   ngOnInit() {
+    this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
   }
-
 }

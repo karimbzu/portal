@@ -6,6 +6,7 @@
   <div class="row">
     <div class="col col-9">
         <mdb-card >
+          
             <mdb-card-header class="centurionBlue h5 text-white">My Cart</mdb-card-header>
             <mdb-card-body>
               <mdb-card-text>
@@ -68,15 +69,16 @@
           
             </mdb-card-body>
           </mdb-card>
+ 
+          <button type="button" mdbBtn rounded="true" class="mt-4 centurionBlue text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
+<div class="container-fluid">
+    &nbsp; 	&nbsp;
+</div>
     </div>
     <div class="col">
         <app-widget [widget]="false"></app-widget>
 
     </div>
-    <div class="container">
-        <div class="row">
-            <button type="button" mdbBtn rounded="true" class="centurionBlue text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
-        </div>
-      </div>
+
   </div>
 </div>
