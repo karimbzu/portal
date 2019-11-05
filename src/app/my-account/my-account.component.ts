@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OrderService} from '../../services/order.service';
-import { DomSanitizer } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -10,15 +9,30 @@ import { environment } from '../../environments/environment';
   templateUrl: './my-account.component.html',
   styleUrls: ['./my-account.component.scss']
 })
-export class MyAccountComponent implements OnInit {
+export class MyAccountComponent implements OnInit, OnDestroy {
   myListOrder;
+  handlerSubscribeOrder;
   constructor(
     private myOrder: OrderService,
-    private sanitizer: DomSanitizer,
     private http: HttpClient) { }
 
   ngOnInit() {
-    this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
+    this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
+    this.refreshList();
+  }
+
+  ngOnDestroy() {
+    this.handlerSubscribeOrder.unsubscribe ();
+  }
+
+  /**
+   * Continously refresh the list every 60 seconds
+   */
+  refreshList() {
+    setTimeout(() => {
+      this.myOrder.getListOrder();
+      this.refreshList();
+    }, 60000);
   }
 
   downloadFile(s: any, reportId: any) {

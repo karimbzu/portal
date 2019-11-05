@@ -4,6 +4,7 @@ import { TicketService } from '../../services/ticket.service';
 import { CartService } from '../../services/cart.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import {OrderService} from '../../services/order.service';
 
 @Injectable()
 
@@ -33,6 +34,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   constructor(
     public router: Router,
+    private myOrder: OrderService,
     private myCart: CartService,
     private myTicket: TicketService) {
     }
@@ -102,6 +104,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
       .then(res => {
         // Remarks: Redirect to the ticket page
         // console.log ("Redirect to the ticket page");
+        this.myOrder.getListOrder();
         this.router.navigate(['ticket']);
       })
       .catch(err => {

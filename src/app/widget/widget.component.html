@@ -1,27 +1,17 @@
 <mdb-card class="rgba-yellow-light">
     <mdb-card-header class="h5 text-black-50">
-        Current Token Balance
+      <mdb-icon fas icon="hand-holding-usd" class="pr-1"></mdb-icon>
+        Token Balance
     </mdb-card-header>
         <mdb-card-body class="py-0">
           <table mdbTable borderless="true" small="true" class="mt-0">
             <tbody>
               <tr>
-                <td class="align-middle"><span class="aa">21</span></td>
+                <td class="align-middle"><span class="aa">999</span></td>
                 <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button></td>
               </tr>
             </tbody>
           </table>
-<!--
-                <div class="row">
-                  <div class="col">
-                    <span class="aa">136</span>
-                  </div>
-                  <div class="col align-middle">
-                    <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button>
-                  </div>
-                </div>
--->
-
         </mdb-card-body>
       </mdb-card>
 
@@ -38,10 +28,6 @@
               </tr>
             </tbody>
           </table>
-
-<!--
-              <i class="fas fa-bell"></i> 	&nbsp;	&nbsp;Your have {{cartCount}} items in cart <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
--->
 
         </mdb-card-body>
       </mdb-card>
@@ -74,7 +60,7 @@
                 <mdb-card-body>
 
                   <mdb-card-text class="text-black-50">
-                        <table mdbTable>
+                        <table mdbTable small="true" hover="true">
                                 <thead>
                                     <tr class="text-center">
                                       <th style="text-align:center">ID</th>
