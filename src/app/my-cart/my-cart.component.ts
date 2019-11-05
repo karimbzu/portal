@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { HeaderService } from '../../services/header.service';
 import {CartService} from '../../services/cart.service';
 import {Cart} from '../../models/cart';
@@ -10,7 +10,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './my-cart.component.html',
   styleUrls: ['./my-cart.component.scss']
 })
-export class MyCartComponent implements OnInit {
+export class MyCartComponent implements OnInit, OnDestroy {
+  handlerSubscribeCart;
+
   validatingForm: FormGroup;
   mark = false;
   widget: true;
@@ -42,10 +44,14 @@ export class MyCartComponent implements OnInit {
     private myCart: CartService) { }
 
   ngOnInit() {
-    this.myCart.currentListCart.subscribe(val => this.listCart = val);
+    this.handlerSubscribeCart = this.myCart.currentListCart.subscribe(val => this.listCart = val);
     this.validatingForm = new FormGroup({
       required: new FormControl(null, Validators.required)
     });
+  }
+
+  ngOnDestroy() {
+    this.handlerSubscribeCart.unsubscribe();
   }
 
   btnDeleteCart(cartId) {
@@ -62,21 +68,20 @@ export class MyCartComponent implements OnInit {
     this.router.navigate(['checkout']);
   }
 
-  typetoString(s:any){
-
-    if (s === 'repo')
-    return 'Repo';
-    if (s === 'file')
-    return 'File';
-
+  typetoString(s: any) {
+    if (s === 'repo') {
+      return 'Repo';
+    }
+    if (s === 'file') {
+      return 'File';
+    }
   }
 
   fileSizetransform(bytes: number, precision: number = 2  ) {
 
-    if ( isNaN( parseFloat( String(bytes) )) || ! isFinite( bytes ) ) return '?';
+    if ( isNaN( parseFloat( String(bytes) )) || ! isFinite( bytes ) ) { return '?'; }
 
     let unit = 0;
-
     while ( bytes >= 1024 ) {
       bytes /= 1024;
       unit ++;
@@ -90,7 +95,6 @@ export class MyCartComponent implements OnInit {
   }
 
   get az() {
-
     return this.validatingForm.get('required').value;
  }
 

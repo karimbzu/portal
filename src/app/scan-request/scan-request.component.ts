@@ -531,6 +531,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
     this.myCart.addCart(requestData)
       .then(res => {
+        this.myCart.getListCart();
         console.log (res);
         this.router.navigate(['/my-cart']);
       })

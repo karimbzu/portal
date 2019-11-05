@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {OrderService} from '../../services/order.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import * as FileSaver from 'file-saver';
-import { HttpClient,HttpHeaders,HttpParams  } from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-
-
 
 @Component({
   selector: 'app-my-account',
@@ -20,11 +18,7 @@ export class MyAccountComponent implements OnInit {
     private http: HttpClient) { }
 
   ngOnInit() {
-    this.myOrder.currentListOrder.subscribe(val => this.processListOrder(val));
-  }
-  processListOrder(val) {
-    console.log (val);
-    this.myListOrder = val;
+    this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
   }
 
   downloadFile(s: any, reportId: any) {
@@ -35,12 +29,12 @@ export class MyAccountComponent implements OnInit {
     }
 
   // Fetch the data
-  this.http.get(environment.baseUrl + 'ticketing/report/' + reportId, {
+    this.http.get(environment.baseUrl + 'ticketing/report/' + reportId, {
     headers: new HttpHeaders()
-      .set('Authorization',environment.oipToken)
+      .set('Authorization', environment.oipToken)
       .set('x-auth-token',  localStorage.getItem('authToken')),
     observe: 'response',
-    responseType:'blob'
+    responseType: 'blob'
    }).subscribe(data => {
     const blob = new Blob([data.body], { type: 'application/zip' });
     FileSaver.saveAs(blob, s);
@@ -53,23 +47,21 @@ export class MyAccountComponent implements OnInit {
           alert('Please disable your Pop-up blocker and try again.');
       }
  */
-}, error => {
-   console.log(error);
-  });
-}
+  }, error => {
+     console.log(error);
+    });
+  }
 
-optService(s : any){
+  optService(s: any) {
+      let js: any;
+      js = JSON.parse(s);
 
-    let js : any;
-    js = JSON.parse(s);
+      return js;
+  }
 
-    return js;
-}
-
-myModal(s : any){
-  return "myModal"+s;
-
-}
+  myModal(s: any) {
+    return 'myModal' + s;
+  }
 
 
 }

@@ -6,7 +6,7 @@
           <table mdbTable borderless="true" small="true" class="mt-0">
             <tbody>
               <tr>
-                <td class="align-middle"><span class="aa">1337</span></td>
+                <td class="align-middle"><span class="aa">21</span></td>
                 <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button></td>
               </tr>
             </tbody>
@@ -76,14 +76,27 @@
                   <mdb-card-text class="text-black-50">
                         <table mdbTable>
                                 <thead>
-                                    <tr>
-                                      <th style="text-align:center"> ID</th>
-                                      <th>Item</th>
+                                    <tr class="text-center">
+                                      <th style="text-align:center">ID</th>
+                                      <th>Project</th>
                                       <th>Status</th>
-                                      <th style="text-align:center"></th>
+                                      <th>Report</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                  <tr *ngFor="let order of myListOrder.slice(0,5); let i = index" class="text-center">
+                                    <td>{{order.id}}</td>
+                                    <td>{{order.project}}</td>
+                                    <td><mdb-badge
+                                      pill="true"
+                                      [success]="order.status == 'done'"
+                                      [warning]="order.status == 'scanning' || order.status == 'approved'"
+                                      [danger]="order.status == 'follow up'">
+                                      {{order.status}}
+                                    </mdb-badge></td>
+                                    <td><i class="far fa-file"></i></td>
+                                  </tr>
+                                  <!--
                                     <tr>
                                           <td>1 </td>
                                           <td>One</td>
@@ -102,6 +115,7 @@
                                           <td>Done</td>
                                           <td>  <i class="far fa-file"></i></td>
                                     </tr>
+                                    -->
                                 </tbody>
                             </table>
                          </mdb-card-text>
