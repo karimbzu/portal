@@ -15,7 +15,7 @@ import {ErrorComponent} from './error/error.component';
 
 
 const routes: Routes = [
-  {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
+  {path: '', redirectTo: 'landing', pathMatch: 'full'},
   {path: 'landing', component: LandingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'my-cart', component: MyCartComponent, canActivate: [AuthGuard, DisabledManualURLGuard]},

@@ -35,24 +35,24 @@
                               <img src="../../assets/images/folder.svg" height="40" width="40">
                           </div>
                       </td>
-                      <td class="text-center align-middle">
+                      <td class="align-middle">
                        <div *ngIf="cart.fileName && cart.type === 'file'"> {{cart.fileName}} <br/> </div>
                        <div *ngIf="cart.fileSize && cart.type === 'file'"> {{fileSizetransform(cart.fileSize) }} <br/></div>
                        <div *ngIf="cart.repoURL && cart.type === 'repo'">  {{cart.repoURL}} <br/></div>
                       </td>
-                      <td class="text-center align-middle">{{cart.scanType}}</td>
+                      <td class="text-center align-middle">{{scanTypeList[cart.scanType]}}</td>
                       <td class="text-center align-middle">
-                        <ul >
-                            <span *ngIf="cart.optService.security_vulnerability"> <li>	 Security Vulnerability</li> </span>
-                            <span *ngIf="cart.optService.web_app"> <li> 	Web Application</li>  </span>
-                            <span *ngIf="cart.optService.android"> <li>  	Android</li></span>
-                            <span *ngIf="cart.optService.continuous_scanning"> <li> 	 Continious Scanning</li> </span>
-                        </ul>
+                        <span *ngIf="cart.optService.security_vulnerability">Security Vulnerability<br/></span>
+                        <span *ngIf="cart.optService.web_app">Web Application<br/></span>
+                        <span *ngIf="cart.optService.android">Android<br/></span>
+                        <span *ngIf="cart.optService.continuous_scanning">Continious Scanning</span>
                       </td>
                       <td class="text-center align-middle" >{{cart.price}}</td>
-                      <td class="text-center align-middle" width="1%">
+                      <td class="text-center align-middle">
+                        <mdb-icon fas icon="trash-alt" size="2x" class="red-text" (click)="btnDeleteCart(cart.cartId)"></mdb-icon>
+<!--
                            <button type="button" class="btn btn-danger px-3" (click)="btnDeleteCart(cart.cartId)"><i class="fas fa-trash" aria-hidden="true"></i></button>
-
+-->
                       </td>
                     </tr>
                     </tbody>

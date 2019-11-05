@@ -20,6 +20,12 @@ export class MyCartComponent implements OnInit, OnDestroy {
   listCart: Cart[];
   isEmpty: boolean;
 
+  scanTypeList = {
+    source_code : 'Source Code',
+    mobile_app : 'Binary Application',
+    web_app : 'Web Application'
+  };
+
   private units = [
     'bytes',
     'KB',
