@@ -13,79 +13,53 @@
               
        <div class="container">
         <div class="mt-4 row">
-          <!-- <div class ="col-sm-1"></div> -->
-          <!-- <div class ="col-1"></div> -->
-          <!-- <div class="container"> -->
+          
               <div class="row">
-                <div class="col-10">Please select the payment method:</div>
-                <div class="col-4"></div>
-                <div class="col-4"></div>
-              </div>
-            
-              <!-- <div class="row">
-                <div class="col-sm-4">.col-sm-4</div>
-                <div class="col-sm-4">.col-sm-4</div>
-                <div class="col-sm-4">.col-sm-4</div>
-              </div>
-            
-              <div class="row">
-                <div class="col-md-4">.col-md-4</div>
-                <div class="col-md-4">.col-md-4</div>
-                <div class="col-md-4">.col-md-4</div>
-              </div> -->
-            
-              <!-- <div class="row">
-                <div class="col-lg-4">.col-lg-4</div>
-                <div class="col-lg-4">.col-lg-4</div>
-                <div class="col-lg-4">.col-lg-4</div>
-              </div>
-            
-              <div class="row">
-                <div class="col-xl-4">.col-xl-4</div>
-                <div class="col-xl-4">.col-xl-4</div>
-                <div class="col-xl-4">.col-xl-4</div>
-              </div> -->
-                 
-           
-           
-           </div>  
+                <div class="col-12">Please select the payment method:</div>
+                
+              </div>                      
+        </div>  
      
         
-
-      <!-- Material unchecked -->
-      <!-- <div class="container"> -->
-          <!-- <div class="row"></div> -->
-        
-    <div class="mt-3 row">
-      <div class ="col-lg-1"></div>
-      <div class ="col-lg-1">
+    <div class="mt-3 row"></div>
+    <div class="row">
+     
+       <div class ="col-4">
         <input type="radio" class="form-check-input" id="individual" name="individual" disabled mdbInput>
         <label class="form-check-label" for="individual">Individual</label>
-      </div>
-      <div class ="col-lg-1"></div>
+         <div class="row">
+            <div class ="col-1"></div>
+            <div class ="col-8" style="font-size:small">Payment using my wallet</div>
+         </div>         
+       </div>
+      
     
       
-
-
-       <div class ="col-sm-7">
+       <div class ="col-8">
          <input type="radio" class="form-check-input" id="company" name="company" checked disabled mdbInput>
-         <label class="form-check-label disabled" for="company">Company</label>
+         <label class="form-check-label disabled" for="s">Company <br>          
+            <div  style="font-size:small">Payment made using company's e-wallet system
+                      <span><br> *Subject to approval by Account Manager</span></div>
+  
+          </label>
+         <!-- <div class="row">
+            <div class ="col-1"></div>
+            <div class ="col-8" style="font-size:small">Payment made through COMPANY'S WALLET</div>           
+        </div> -->
+        <!-- <div class="row">
+          <div class ="col-1"></div>
+          <div class ="col-8" style="font-size:small; font-style: oblique">* Pending approval by Account Manager</div>
+      </div> -->
+       
+      
        </div>
     </div>
 
 
-    <div class="row">
-        <div class ="col-sm-1"></div>
-        <div class ="col-sm-3" style="font-size:small">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Payment using my wallet</div>
-        <div class ="col-sm-7" style="font-size:small">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Payment made through COMPANY'S WALLET</div>
-     </div>
+    
 
 
-    <div class="row">
-        <div class ="col-sm-1"></div>
-        <div class ="col-sm-3"></div>
-        <div class ="col-sm-7" style="font-size:small; font-style: oblique">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Pending approval by Account Manager</div>
-    </div>
+    
      <!-- </mdb-card-title>
    </mdb-card-body>
   </mdb-card> -->
@@ -134,6 +108,88 @@
           <div class="row">
               <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Company Approval</b></div>
           </div></h5> -->
+          <div class="mt-4 row">
+           
+                <div class="row">
+                  <div class="col-12">Please complete the form below:</div>
+                  
+                </div>                      
+          </div> 
+        
+      
+
+        <div class="mt-3 row"></div>
+
+        <form [formGroup]="validatingForm"> 
+            <div class="row">
+             
+              <div class ="col-sm-3">Company:
+                <!-- <div class ="col-sm-7"> -->
+                  <div class="md-form md-outline">
+                    <input type="text" id="companyname" value="TM" class="md-textarea form-control" formControlName="companyname" maxlength="4" disabled>
+                    <!-- <label for="projectname" class="">Project Name</label> -->
+                    <!-- <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error> -->
+                 </div>                
+             
+              </div>
+              <div class ="col-sm-7">Project Name
+                <div class="md-form md-outline">
+                  <input mdbInput type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="25" required="required">
+                  <label for="projectname" class="">Project Name</label>
+                  <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
+               </div>   
+              </div>                                 
+            </div>
+        </form>
+
+     
+
+
+        
+          <div class="row">
+
+
+            
+            <div class ="col-3"> Company</div>
+
+            <div class ="col-7">  
+                <div class="md-form md-outline">
+                    <input mdbInput mdbValidate type="text" id="projectname" class="text form-control" formControlName="projectname" maxlength="10" required="required">
+                    <label for="projectname" class="">Project Name</label>
+                    <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
+                   </div>
+
+            </div>
+        </div>
+           
+        <!-- <div class="mt-1 row"></div> -->
+        <div class="row">
+        
+           <!-- <div class ="col-3"> <input name="TM" value="TM" disabled mdbInput> </div> -->
+           <div class ="col-3">
+           <div class="md-form md-outline">
+              <input type="text" id="projectname" class="text form-control" formControlName="projectname">
+              <!-- ?<label or="projectname" class="">Project Name</label> -->
+              <!-- <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error> -->
+             </div>
+            </div>
+           
+          <!-- <div class ="col-sm-5">
+              <div class="md-form md-outline">
+            <input mdbInput mdbValidate type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="30" required="required">
+            <label for="projectname" class="">Project Name</label>
+            <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
+              </div>
+          </div> -->
+         </div>
+         
+         
+           
+
+               
+               
+            
+          
 
           <div class="col-sm-12 mt-2">
             <form [formGroup]="validatingForm">
@@ -162,7 +218,7 @@
                 <div class ="col-sm-7">
                     <div class="md-form md-outline">
                       <input mdbInput mdbValidate type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="30" required="required">
-                      <label for="projectname" class="">Project Name</label>
+                      <!-- <label for="projectname" class="">Project Name</label> -->
                       <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
                    </div>
                 </div>
@@ -187,16 +243,9 @@
   </mdb-card> -->
 
 
-  <!-- <mdb-card class="m-3">
-      <mdb-card-body>
-        <mdb-card-title> -->
-          <!-- <h5>
+  
 
-            <div class="row">
-                <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Order Review</b></div>
-            </div></h5> -->
-
-            <div class="col-sm-12 mt-2">
+            <!-- <div class="col-sm-12 mt-2">
               <div class="row">
                 <div class ="col-sm-1"></div>
                 <div class ="col-sm-3">Items:</div>
@@ -214,12 +263,13 @@
                   <div class ="col-sm-3">Total Tokens:</div>
                   <div class ="col-sm-7">{{totalPrice}}</div>
               </div>
-            </div>
-       <!-- </mdb-card-title>
-     </mdb-card-body>
-    </mdb-card> -->
+            </div> -->
+
+            
+      
   </div>
 </div>
+
 
 
 
