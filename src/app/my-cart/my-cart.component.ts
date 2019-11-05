@@ -12,11 +12,11 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class MyCartComponent implements OnInit {
   validatingForm: FormGroup;
-  mark=false;
-  widget:true;
+  mark = false;
+  widget: true;
 
   listCart: Cart[];
-  isEmpty:boolean;
+  isEmpty: boolean;
 
   private units = [
     'bytes',
@@ -28,7 +28,7 @@ export class MyCartComponent implements OnInit {
   ];
 
   elements: any = [
-    {id: 1, first: 'My_Code.zip', last: "Security Vulnerability<br/>50MB", handle: '11/10/2019'},
+    {id: 1, first: 'My_Code.zip', last: 'Security Vulnerability<br/>50MB', handle: '11/10/2019'},
     {id: 2, first: 'Repo URL', last: 'Security Vulnerability', handle: '11/10/2019'},
     {id: 3, first: 'His_Code.zip', last: 'Security Vulnerability', handle: '11/10/2019'},
   ];
@@ -36,12 +36,12 @@ export class MyCartComponent implements OnInit {
   headElements = ['FILE', 'FILE INFO', 'SERVICE SELECTED', 'TOKEN'];
 
 
-  constructor(    public router: Router,
+  constructor(
+    public router: Router,
     private myHeader: HeaderService,
     private myCart: CartService) { }
 
   ngOnInit() {
-    // this.myHeader.setModePayment();
     this.myCart.currentListCart.subscribe(val => this.listCart = val);
     this.validatingForm = new FormGroup({
       required: new FormControl(null, Validators.required)
@@ -63,7 +63,7 @@ export class MyCartComponent implements OnInit {
   }
 
   typetoString(s:any){
-    
+
     if (s === 'repo')
     return 'Repo';
     if (s === 'file')
@@ -72,7 +72,7 @@ export class MyCartComponent implements OnInit {
   }
 
   fileSizetransform(bytes: number, precision: number = 2  ) {
-   
+
     if ( isNaN( parseFloat( String(bytes) )) || ! isFinite( bytes ) ) return '?';
 
     let unit = 0;
@@ -85,13 +85,13 @@ export class MyCartComponent implements OnInit {
     return bytes.toFixed( + precision ) + ' ' + this.units[ unit ];
   }
 
-  get input() {     
-      return this.validatingForm.get('required'); 
+  get input() {
+      return this.validatingForm.get('required');
   }
 
-  get az() {     
-   
-    return this.validatingForm.get('required').value; 
+  get az() {
+
+    return this.validatingForm.get('required').value;
  }
 
 }

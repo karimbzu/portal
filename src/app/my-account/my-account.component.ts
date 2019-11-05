@@ -14,7 +14,8 @@ import { environment } from '../../environments/environment';
 })
 export class MyAccountComponent implements OnInit {
   myListOrder;
-  constructor(private myOrder: OrderService,
+  constructor(
+    private myOrder: OrderService,
     private sanitizer: DomSanitizer,
     private http: HttpClient) { }
 
@@ -26,11 +27,7 @@ export class MyAccountComponent implements OnInit {
     this.myListOrder = val;
   }
 
-  removeSpace(s: any) {
-    return s.replace(' ', '');
-  }
-
-  downloadFile(s:any, reportId:any){
+  downloadFile(s: any, reportId: any) {
 
     if (!localStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
@@ -58,14 +55,14 @@ export class MyAccountComponent implements OnInit {
  */
 }, error => {
    console.log(error);
-  });  
+  });
 }
 
 optService(s : any){
-  
+
     let js : any;
     js = JSON.parse(s);
-      
+
     return js;
 }
 

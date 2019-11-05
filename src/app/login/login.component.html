@@ -24,14 +24,14 @@
 
           </div>
         </form>
-        
+
         <button *ngIf="!loading" type="button" [disabled]="marked ||  !((username.valid && (username.dirty || username.touched)) && (password.valid && (password.dirty && password.touched))) " mdbBtn rounded="true" class="centurionOrange text-white col-6 mx-auto d-block" (click)="handleLogin()">Login
         </button>
-        
-          <div class="d-flex justify-content-center">  
+
+          <div class="d-flex justify-content-center">
             <span><mdb-spinner *ngIf="loading" spinnerColor="blue"></mdb-spinner></span>
-          </div> 
-              
+          </div>
+
         <p class="text-center">
           <a class="forgot-password" href="https://idss.tm.com.my">Forgot password?</a>
         </p>

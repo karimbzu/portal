@@ -6,7 +6,7 @@
           <table mdbTable borderless="true" small="true" class="mt-0">
             <tbody>
               <tr>
-                <td class="align-middle"><span class="aa">136</span></td>
+                <td class="align-middle"><span class="aa">1337</span></td>
                 <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button></td>
               </tr>
             </tbody>
@@ -25,13 +25,13 @@
         </mdb-card-body>
       </mdb-card>
 
- <mdb-card class="mt-4 rgba-green-light " *ngIf="widget">
+ <mdb-card class="mt-4 rgba-green-light " *ngIf="widget && cartCount">
         <mdb-card-body class="py-0">
           <table mdbTable borderless="true" small="true" class="my-0">
             <tbody>
               <tr>
                 <td class="align-middle"><i class="fas fa-bell"></i></td>
-                <td class="align-middle">Your have {{cartCount}} items in cart</td>
+                <td class="align-middle">You have {{cartCount}} items in cart</td>
                 <td class="text-right">
                   <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
                 </td>
