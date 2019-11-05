@@ -9,21 +9,22 @@ import { TicketComponent } from './ticket/ticket.component';
 import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import {DashboardComponent} from './dashboard/dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from '../services/auth.guard';
 
 
 const routes: Routes = [
   {path: '', redirectTo: 'dashboard', pathMatch: 'full'},
   {path: 'landing', component: LandingComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'my-cart', component: MyCartComponent, canActivate: [DisabledManualURLGuard]},
-  {path: 'my-account', component: MyAccountComponent},
-  {path: 'scan-request', component: ScanRequestComponent},
-  {path: 'ticket', component: TicketComponent},
-  {path: 'scan-request', component: ScanRequestComponent},
-  {path: 'blocked', component: BlockedComponent},
-  {path: 'checkout', component: CheckoutComponent, canActivate: [DisabledManualURLGuard]},
-  {path: 'dashboard', component: DashboardComponent}
+  {path: 'my-cart', component: MyCartComponent, canActivate: [AuthGuard, DisabledManualURLGuard]},
+  {path: 'my-account', component: MyAccountComponent, canActivate: [AuthGuard]},
+  {path: 'scan-request', component: ScanRequestComponent, canActivate: [AuthGuard]},
+  {path: 'ticket', component: TicketComponent, canActivate: [AuthGuard]},
+  {path: 'scan-request', component: ScanRequestComponent, canActivate: [AuthGuard]},
+  {path: 'blocked', component: BlockedComponent, canActivate: [AuthGuard]},
+  {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard, DisabledManualURLGuard]},
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -28,15 +28,12 @@ export class LoginComponent implements OnInit {
     // }
 
   ngOnInit() {
-    
-    
     //  this.spinner.show();
     // setTimeout(() => {
     //   console.log("TimeOut");
     //   /** spinner ends after 5 seconds */
     //   this.spinner.hide();
     // }, 50000);
-
 
     this.validatingForm = new FormGroup({
      username: new FormControl(null, Validators.required),
@@ -52,37 +49,30 @@ export class LoginComponent implements OnInit {
     return this.validatingForm.get('password');
    }
 
-  
-
-   handleLogin() { 
-  
+   handleLogin() {
     this.loading = true;
-   
-     const username = this.validatingForm.get('username').value;
-     const password = this.validatingForm.get('password').value;
-     this.srvLogin.login(username, password)
-       .then((response: any) => {
-               
+
+    const username = this.validatingForm.get('username').value;
+    const password = this.validatingForm.get('password').value;
+    this.srvLogin.login(username, password)
+      .then((response: any) => {
          localStorage.setItem('userInfo', JSON.stringify(response.body.info));
          localStorage.setItem('authToken', response.headers.get('x-auth-token'));
-            
-         this.loading=false;
-         this.router.navigate(['/scan-request']);
-        
+
+         this.loading = false;
+         this.router.navigate(['/dashboard']);
        })
        .catch((error) => {
-         // TODO: Show the error notification
-         //if error status = 401
+         if (error.status === 401) {
+           this.toastrService.error('Invalid Username or Password!');
+         } else {
+           this.toastrService.warning('Backend Problem!');
+         }
 
-         if (error.status === 401) 
-            this.toastrService.error('Invalid Username or Password!');
-         else
-            this.toastrService.warning('Backend Problem!');    
-     
-        this.loading = false;
-        this.router.navigate(['/login']);
+         this.loading = false;
+         this.router.navigate(['/login']);
        });
-       
+
    }
   }
 
