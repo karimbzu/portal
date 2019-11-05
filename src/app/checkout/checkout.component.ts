@@ -1,12 +1,9 @@
-import {Component, OnInit, Injectable, Input, OnDestroy} from '@angular/core';
+import {Component, OnInit, Injectable, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { invalid } from '@angular/compiler/src/render3/view/util';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
-import {TicketService} from '../../services/ticket.service';
+import { TicketService } from '../../services/ticket.service';
 import { CartService } from '../../services/cart.service';
 import Swal from 'sweetalert2';
-import { HeaderService } from '../../services/header.service';
-import { Router, Event, NavigationStart, NavigationError, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Injectable()
 
@@ -89,12 +86,11 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     return this.validatingForm.get('projectdesc');
    }
 
-   Accept(e:any) {
+   Accept(e: any) {
     if (e.checked === true) {
       this.marked = true;
-    }
-    else {
-      this.marked=false;
+    } else {
+      this.marked = false;
     }
     console.log (e);
   }
