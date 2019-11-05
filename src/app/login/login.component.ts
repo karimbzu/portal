@@ -28,12 +28,10 @@ export class LoginComponent implements OnInit {
     // }
 
   ngOnInit() {
-    //  this.spinner.show();
-    // setTimeout(() => {
-    //   console.log("TimeOut");
-    //   /** spinner ends after 5 seconds */
-    //   this.spinner.hide();
-    // }, 50000);
+    // If already login, proceed to dashboard
+    if (localStorage.getItem('authToken')) {
+      this.router.navigate(['/dashboard']);
+    }
 
     this.validatingForm = new FormGroup({
      username: new FormControl(null, Validators.required),
