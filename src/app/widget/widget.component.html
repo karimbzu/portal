@@ -1,66 +1,66 @@
-<mdb-card class="rgba-yellow-light"> 
-    <mdb-card-header class="h5 text-white">      
+<mdb-card class="rgba-yellow-light">
+    <mdb-card-header class="h5 text-black-50">
         Current Total Balance
-    </mdb-card-header>   
+    </mdb-card-header>
         <mdb-card-body>
-         
-                <div class="row"> 
-                  <div class="col">   <span class="aa">136</span>  </div>    
-                  <div class="col">  
+
+                <div class="row">
+                  <div class="col">   <span class="aa">136</span>  </div>
+                  <div class="col">
                     <div class="container-fluid">
                           &nbsp; 	&nbsp;
                     </div>
                     <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white text-align right"   >Add Tokens</button>
-                  </div>  
-                </div> 
-           
-        
+                  </div>
+                </div>
+
+
         </mdb-card-body>
       </mdb-card>
 
- <mdb-card class="mt-4 rgba-green-light " *ngIf="widget">      
+ <mdb-card class="mt-4 rgba-green-light " *ngIf="widget">
         <mdb-card-body>
-       
-              <i class="fas fa-bell"></i> 	&nbsp;	&nbsp;Your have {{cartCount}} items in cart <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button> 
-         
+
+              <i class="fas fa-bell"></i> 	&nbsp;	&nbsp;Your have {{cartCount}} items in cart <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
+
         </mdb-card-body>
       </mdb-card>
 
-      
 
-      <mdb-card class="mt-4 blue lighten-4" >  
-          <mdb-card-header class="h5 text-white"> 
-              <i class="fa fa-star" aria-hidden="true">  </i>  	&nbsp; 	&nbsp;Score Card   
-          </mdb-card-header>    
+
+      <mdb-card class="mt-4 blue lighten-4" >
+          <mdb-card-header class="h5 text-black-50">
+              <i class="fa fa-star" aria-hidden="true">  </i>  	&nbsp; 	&nbsp;Score Card
+          </mdb-card-header>
             <mdb-card-body>
 
-            
-                    <table>                      
+
+                    <table>
                             <tbody>
-                                <tr>                    
-                                  <td width="20%"><span class="aa">&#65;</span></td>                                
-                                  <td width="80%">Identify all third-party libraries used by the binary and analyze if they raise any security, license or operational risk.  </td>                                                     
+                                <tr>
+                                  <td width="20%"><span class="aa">&#65;</span></td>
+                                  <td width="80%">Identify all third-party libraries used by the binary and analyze if they raise any security, license or operational risk.  </td>
                                 </tr>
-                            </tbody>                            
+                            </tbody>
                     </table>
-         
+
             </mdb-card-body>
           </mdb-card>
 
-          <mdb-card class="mt-4 rgba-yellow-light">   
-              <mdb-card-header class="h5 text-white"> 
-                  <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;History   
-              </mdb-card-header>  
+          <mdb-card class="mt-4 rgba-yellow-light">
+              <mdb-card-header class="h5 text-black-50">
+                  <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;History
+              </mdb-card-header>
                 <mdb-card-body>
-            
+
                   <mdb-card-text class="text-black-50">
-                        <table mdbTable>                      
+                        <table mdbTable>
                                 <thead>
-                                    <tr>                    
+                                    <tr>
                                       <th style="text-align:center"> ID</th>
                                       <th>Item</th>
                                       <th>Status</th>
-                                      <th style="text-align:center"></th>                      
+                                      <th style="text-align:center"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -87,3 +87,5 @@
                          </mdb-card-text>
                 </mdb-card-body>
               </mdb-card>
+
+<br />
