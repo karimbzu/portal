@@ -1,27 +1,47 @@
 <mdb-card class="rgba-yellow-light">
     <mdb-card-header class="h5 text-black-50">
-        Current Total Balance
+        Current Token Balance
     </mdb-card-header>
-        <mdb-card-body>
-
+        <mdb-card-body class="py-0">
+          <table mdbTable borderless="true" small="true" class="mt-0">
+            <tbody>
+              <tr>
+                <td class="align-middle"><span class="aa">136</span></td>
+                <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button></td>
+              </tr>
+            </tbody>
+          </table>
+<!--
                 <div class="row">
-                  <div class="col">   <span class="aa">136</span>  </div>
                   <div class="col">
-                    <div class="container-fluid">
-                          &nbsp; 	&nbsp;
-                    </div>
-                    <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white text-align right"   >Add Tokens</button>
+                    <span class="aa">136</span>
+                  </div>
+                  <div class="col align-middle">
+                    <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button>
                   </div>
                 </div>
-
+-->
 
         </mdb-card-body>
       </mdb-card>
 
  <mdb-card class="mt-4 rgba-green-light " *ngIf="widget">
-        <mdb-card-body>
+        <mdb-card-body class="py-0">
+          <table mdbTable borderless="true" small="true" class="my-0">
+            <tbody>
+              <tr>
+                <td class="align-middle"><i class="fas fa-bell"></i></td>
+                <td class="align-middle">Your have {{cartCount}} items in cart</td>
+                <td class="text-right">
+                  <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
+<!--
               <i class="fas fa-bell"></i> 	&nbsp;	&nbsp;Your have {{cartCount}} items in cart <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
+-->
 
         </mdb-card-body>
       </mdb-card>
