@@ -9,7 +9,6 @@ import { TicketComponent } from './ticket/ticket.component';
 import { DisabledManualURLGuard } from '../services/can-activate-route.guard';
 import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
-import {Page1Component} from './page1/page1.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
 
 
@@ -24,7 +23,6 @@ const routes: Routes = [
   {path: 'scan-request', component: ScanRequestComponent},
   {path: 'blocked', component: BlockedComponent},
   {path: 'checkout', component: CheckoutComponent, canActivate: [DisabledManualURLGuard]},
-  {path: 'page1', component: Page1Component},
   {path: 'dashboard', component: DashboardComponent}
 ];
 

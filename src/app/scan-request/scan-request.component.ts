@@ -154,16 +154,16 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    */
   appendAuthToken(val) {
     if (val.length) {
-      function mapLabel2Value(item) {
-        const retJson = {
-          value : item.tokenId,
-          label : item.label
-        };
-        return retJson;
-      }
-
-      this.tempAccessToken = val.map(mapLabel2Value);
+      this.tempAccessToken = val.map(this.mapLabel2Value);
     }
+  }
+
+  mapLabel2Value(item) {
+    const retJson = {
+      value : item.tokenId,
+      label : item.label
+    };
+    return retJson;
   }
 
   /**

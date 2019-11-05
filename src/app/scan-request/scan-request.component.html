@@ -74,10 +74,10 @@
                         <input type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
                         <label for="inputRepoURL">Source Code Repository</label>
                       </div>
-                      <div class="md-form md-outline">
+                      <div class="md-form">
                         <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
                                     formControlName="tokenId"
-                                    outline="true" label="Access Token"></mdb-select>
+                                    label="Access Token"></mdb-select>
                         <button mdbBtn color="link" class="p-0 blue-text"
                                 data-toggle="modal" data-target="#basicExample"
                                 (click)="tokenModal.show()" >
@@ -165,10 +165,10 @@
             <mdb-step name="Programming" label="Language" [stepForm]="myProgLangForm">
               <form [formGroup]="myProgLangForm" class="requestForm">
                 <mdb-card-text>Please specify the programming language used </mdb-card-text>
-                <div class="md-form md-outline">
+                <div class="md-form">
                   <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
                               formControlName="programLanguage" id="inputProgramLang"
-                              outline="true" label="Programming Language"></mdb-select>
+                              label="Programming Language"></mdb-select>
                 </div>
                 <div class="md-form md-outline">
                   <input type="text" id="inputBuildCmd" class="form-control" mdbInput formControlName="buildCommand">
