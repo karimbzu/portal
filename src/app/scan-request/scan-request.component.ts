@@ -43,6 +43,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
   @ViewChild('tokenModal', {static: false}) tokenModal: MDBModalRef;
 
+  handlerSubscribeProgLangForm;
+  handlerSubscribeListAuthToken;
+  handlerSubscribeProgressUpload;
+  handlerSubscribeOptServForm;
+
 
   /**
    * Remarks: We opt to create a form for each step so that
@@ -131,13 +136,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.freshFile = true;
     this.flagVerticalStepper = window.innerWidth < 1000;
     this.flagNeedValidation = true;
-    this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
-
-    this.myRequest.currentListAuthToken.subscribe(val => this.appendAuthToken(val));
-    this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
+    this.handlerSubscribeProgLangForm = this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
+    this.handlerSubscribeListAuthToken = this.myRequest.currentListAuthToken.subscribe(val => this.appendAuthToken(val));
+    this.handlerSubscribeProgressUpload = this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
 
     this.totalToken = 1;
-    this.myOptServForm.valueChanges.subscribe(val => this.calculateTotalToken(val));
+    this.handlerSubscribeOptServForm = this.myOptServForm.valueChanges.subscribe(val => this.calculateTotalToken(val));
 
     // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
     // Previously, we use AfterInit or AfterView ... but it comes with a cost.
@@ -146,7 +150,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
+    this.handlerSubscribeProgLangForm.unsubscribe();
+    this.handlerSubscribeListAuthToken.unsubscribe();
+    this.handlerSubscribeProgressUpload.unsubscribe();
+    this.handlerSubscribeOptServForm.unsubscribe();
   }
 
   /**

@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable, Input } from '@angular/core';
+import {Component, OnInit, Injectable, Input, OnDestroy} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { invalid } from '@angular/compiler/src/render3/view/util';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
@@ -15,9 +15,13 @@ import { Router, Event, NavigationStart, NavigationError, NavigationEnd } from '
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent implements OnInit, OnDestroy {
+  handlerSubscribeTotalItem;
+  handlerSubscribeTotalPrice;
+  handlerSubscribeCart;
+
   validatingForm: FormGroup;
-  check:false;
+  check: false;
   marked = false;
   count = 0;
   type = 'company';
@@ -25,37 +29,28 @@ export class CheckoutComponent implements OnInit {
   totalPrice;
   cartCount: number;
   totalToken: number;
-  btnCheckout = "";
+  btnCheckout = '';
   acctManagerName;
   acctManagerOrgName;
 
-  
+
   constructor(
     public router: Router,
-    private myHeader: HeaderService,
     private myCart: CartService,
-    private myTicket: TicketService) { 
-
-      this.router.events
-    .subscribe((event) => {
-  
-  
-    });
-    
-    this.myTicket.currentTotalItem.subscribe(val => this.totalItem = val);
-    this.myTicket.currentTotalPrice.subscribe(val => this.totalPrice = val);
-
+    private myTicket: TicketService) {
     }
 
 
   ngOnInit() {
+    this.handlerSubscribeTotalItem = this.myTicket.currentTotalItem.subscribe(val => this.totalItem = val);
+    this.handlerSubscribeTotalPrice = this.myTicket.currentTotalPrice.subscribe(val => this.totalPrice = val);
+
     this.validatingForm = new FormGroup({
      projectname: new FormControl(null, Validators.required),
      projectdesc: new FormControl(null, Validators.required)
     });
 
-    this.myHeader.setModePayment();
-    this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
+    this.handlerSubscribeCart = this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
 
     // Get the list of Account Managers
     // and assign to the variables
@@ -74,13 +69,16 @@ export class CheckoutComponent implements OnInit {
           this.acctManagerOrgName = myInfo[0].orgName;
         }
       })
-
-      
-      
       .catch(err => {
         console.error ('Unable to get the Account Manager list');
         console.error (err);
       });
+  }
+
+  ngOnDestroy() {
+    this.handlerSubscribeTotalItem.unsubscribe();
+    this.handlerSubscribeTotalPrice.unsubscribe();
+    this.handlerSubscribeCart.unsubscribe();
   }
 
   get projectname() {
@@ -93,17 +91,17 @@ export class CheckoutComponent implements OnInit {
 
    Accept(e:any) {
     if (e.checked === true) {
-      this.marked = true;   
-    } 
+      this.marked = true;
+    }
     else {
       this.marked=false;
     }
     console.log (e);
   }
- 
+
 
   btnPlaceOrder() {
-   
+
     this.myTicket.placeOrder(this.validatingForm.get('projectname').value, this.validatingForm.get('projectdesc').value)
       .then(res => {
         // Remarks: Redirect to the ticket page
@@ -129,7 +127,7 @@ export class CheckoutComponent implements OnInit {
         }
 
 
-      }); 
+      });
   }
 
 }
