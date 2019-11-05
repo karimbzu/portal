@@ -11,6 +11,7 @@ import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../services/auth.guard';
+import {ErrorComponent} from './error/error.component';
 
 
 const routes: Routes = [
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'scan-request', component: ScanRequestComponent, canActivate: [AuthGuard]},
   {path: 'blocked', component: BlockedComponent, canActivate: [AuthGuard]},
   {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard, DisabledManualURLGuard]},
-  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]}
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+  {path: '**', component: ErrorComponent}
 ];
 
 @NgModule({

@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <mdb-card class="my-3">
+      <mdb-card>
         <mdb-card-header class="centurionBlue h5 text-white">
           <mdb-icon fas icon="file-medical" class="pr-1"></mdb-icon>Scan Request
         </mdb-card-header>
@@ -163,7 +163,7 @@
               </form>
             </mdb-step>
             <mdb-step name="Programming" label="Language" [stepForm]="myProgLangForm">
-              <form [formGroup]="myProgLangForm" class="requestForm">
+              <form [formGroup]="myProgLangForm" class="requestForm" *ngIf="scanType == 'source_code'; else templateStep4">
                 <mdb-card-text>Please specify the programming language used </mdb-card-text>
                 <div class="md-form">
                   <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
@@ -175,6 +175,14 @@
                   <label for="inputBuildCmd">Build Command</label>
                 </div>
               </form>
+              <ng-template #templateStep4>
+                <form [formGroup]="myProgLangForm" class="requestForm">
+                  <mdb-card-text>
+                    This step is not applicable for scan type: <b>{{scanType}}</b>.
+                    Please proceed to next step.
+                  </mdb-card-text>
+                </form>
+              </ng-template>
             </mdb-step>
             <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
               <form [formGroup]="myOptServForm" class="requestForm">

@@ -84,6 +84,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     label: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 
+  scanType;
   flagLoadingAddToken = false;
   uploadId: number;
   freshFile = true;
@@ -200,6 +201,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       scanType: val
     });
 
+    this.scanType = val;          // To be used in Step 4
     this.flagShowRepo = false;
     this.flagShowUpload = false;
     this.flagShowWeb = false;
@@ -343,6 +345,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         // @ts-ignore
         this.myToast.success(res.info.originalName, 'Remove Old File');
         this.myScanItemForm.patchValue ({ uploadId: 0});
+
+        // Trigger to perform scanning (Step 3)
+        this.flagNeedValidation = true;
       })
       .catch(err => {
         this.myToast.error(err, 'Remove Old File');
@@ -399,12 +404,16 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       if (!repoURL.length) {
         console.error ('RepoURL field is EMPTY');
         this.myToast.error ('RepoURL field is EMPTY', 'Validate Item');
+        this.flagValidationFetchLoading = false;
+        this.flagValidationFetchError = true;
         return;
       }
 
       if (!tokenId) {
         console.error ('No Access Token is selected');
         this.myToast.error ('No Access Token is selected', 'Validate Item');
+        this.flagValidationFetchLoading = false;
+        this.flagValidationFetchError = true;
         return;
       }
 
@@ -426,6 +435,8 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       if (!uploadId) {
         console.error ('No file is uploaded');
         this.myToast.error ('No file is uploaded', 'Validate Item');
+        this.flagValidationFetchLoading = false;
+        this.flagValidationFetchError = true;
         return;
       }
 
