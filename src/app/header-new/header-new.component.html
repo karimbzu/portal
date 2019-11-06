@@ -1,12 +1,17 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg z-depth-0" [containerInside]="false">
   <mdb-navbar-brand>
     <div class="navbar-brand">
-      <img src="../../assets/images/centurionlogo.png" height="32" routerLink="/dashboard" />
+      <img src="../../assets/images/centurionlogo.png" class="home" height="32" routerLink="/dashboard" />
     </div>
   </mdb-navbar-brand>
 
   <links>
     <ul class="navbar-nav ml-auto">
+      <li class="nav-item hoverable" routerLink="/dashboard">
+        <span class="nav-link" mdbTooltip="Dashboard" placement="bottom">
+          <mdb-icon fas icon="home"></mdb-icon>
+        </span>
+      </li>
       <li class="nav-item hoverable" routerLink="/scan-request">
         <span class="nav-link" mdbTooltip="New Scan Request" placement="bottom">
           <mdb-icon fas icon="file-medical"></mdb-icon>
