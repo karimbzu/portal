@@ -56,24 +56,12 @@
     </div>
 
 
-    
 
 
     
-     <!-- </mdb-card-title>
-   </mdb-card-body>
-  </mdb-card> -->
 <!-- Individual -->
 <div *ngIf="type==='Individual'">
-  <!-- <mdb-card class="m-3">
-    <mdb-card-body>
-      <mdb-card-title> -->
-        <!-- <h5>
-
-          <div class="row">
-              <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Order Review</b></div>
-          </div></h5> -->
-
+ 
           <div class="col-sm-12 mt-2">
             <div class="row">
               <div class ="col-sm-1"></div>
@@ -93,21 +81,12 @@
                 <div class ="col-sm-7">{{totalPrice}}</div>
             </div>
           </div>
-     <!-- </mdb-card-title>
-   </mdb-card-body>
-  </mdb-card> -->
+   
   </div>
 
   <!-- company -->
   <div *ngIf="type==='company'">
-  <!-- <mdb-card class="m-3">
-    <mdb-card-body>
-      <mdb-card-title> -->
-        <!-- <h5>
-
-          <div class="row">
-              <div class ="col-sm-4"><span style="text-align:center; color:whitesmoke" class="badge badge-pill badge-warning">2</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Company Approval</b></div>
-          </div></h5> -->
+ 
           <div class="mt-4 row">
            
                 <div class="row">
@@ -121,32 +100,76 @@
         <div class="mt-3 row"></div>
 
         <form [formGroup]="validatingForm"> 
+
             <div class="row">
              
-              <div class ="col-sm-3">Company:
-                <!-- <div class ="col-sm-7"> -->
-                  <div class="md-form md-outline">
-                    <input type="text" id="companyname" value="TM" class="md-textarea form-control" formControlName="companyname" maxlength="4" disabled>
-                    <!-- <label for="projectname" class="">Project Name</label> -->
-                    <!-- <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error> -->
-                 </div>                
-             
+                <div class ="col-sm-5">
+                  <!-- <div class ="col-sm-7"> -->
+                    <div class="md-form md-outline">
+                      <input type="text" id="acctManagerOrgName" value="Company: TM" class="md-textarea form-control" formControlName="companyname" maxlength="4" disabled>
+                  
+                   </div>                
+                  
+                </div> 
+                <div class ="col-sm-7">
+                    <div class="md-form md-outline">
+                        <input mdbInput type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="20" required="required">
+                        <label for="projectname" class="">Project Name</label>
+                        <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
+                     </div> 
+                 <!-- <div class="form-group">
+                  <textarea formControlName="contactFormMessage" class="form-control rounded-0" mdbInput id="exampleFormControlTextarea2"
+                    rows="3" placeholder="Message"></textarea>
+                </div>   -->
+                </div>                                 
               </div>
-              <div class ="col-sm-7">Project Name
-                <div class="md-form md-outline">
-                  <input mdbInput type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="25" required="required">
-                  <label for="projectname" class="">Project Name</label>
-                  <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
-               </div>   
-              </div>                                 
-            </div>
+
+   
+            <div class="row">
+             
+                <div class ="col-sm-5">Division:
+                  <!-- <div class ="col-sm-7"> -->
+                    <div class="md-form md-outline">
+                      <input type="text" id="acctManagerOrgName" value="Division Research & Innovation Development" class="md-textarea form-control" formControlName="companyname" maxlength="4" disabled>
+                  
+                   </div>                
+                  
+                </div> 
+                <div class ="col-sm-7">  
+                 <div class="md-form md-outline">
+                      <input mdbInput type="text" id="projectdesc" class="md-textarea form-control" formControlName="projectdesc" maxlength="80" required="required">
+                      <label for="projectdesc" class="">Project Description</label>
+                      <mdb-error *ngIf="projectdesc.invalid && (projectdesc.dirty || projectdesc.touched)">Project Description is required</mdb-error>
+                 </div> 
+                 <!-- <div class="form-group">
+                  <textarea formControlName="contactFormMessage" class="form-control rounded-0" mdbInput id="exampleFormControlTextarea2"
+                    rows="3" placeholder="Message"></textarea>
+                </div>   -->
+                </div>                                 
+              </div>
+
+              <div class="row">
+             
+                <div class ="col-sm-5">Person in Charge (PIC):
+                  <!-- <div class ="col-sm-7"> -->
+                    <div class="md-form md-outline">
+                      <input type="text" id="companyname" value="Mohammad Harris Bin Mokhtar" id="acctManagerName" class="md-textarea form-control" formControlName="companyname" disabled>
+                      <!-- <label for="projectname" class="">Project Name</label> -->
+                      <!-- <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error> -->
+                   </div>                
+               
+                </div>
+              
+              </div>
         </form>
+
+  
 
      
 
 
         
-          <div class="row">
+          <!-- <div class="row">
 
 
             
@@ -160,19 +183,18 @@
                    </div>
 
             </div>
-        </div>
+        </div> -->
            
         <!-- <div class="mt-1 row"></div> -->
-        <div class="row">
+        <!-- <div class="row"> -->
         
            <!-- <div class ="col-3"> <input name="TM" value="TM" disabled mdbInput> </div> -->
-           <div class ="col-3">
+           <!-- <div class ="col-3">
            <div class="md-form md-outline">
               <input type="text" id="projectname" class="text form-control" formControlName="projectname">
-              <!-- ?<label or="projectname" class="">Project Name</label> -->
-              <!-- <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error> -->
+            
              </div>
-            </div>
+            </div> -->
            
           <!-- <div class ="col-sm-5">
               <div class="md-form md-outline">
@@ -181,17 +203,14 @@
             <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
               </div>
           </div> -->
-         </div>
+         <!-- </div> -->
          
-         
+               
            
-
-               
-               
             
           
 
-          <div class="col-sm-12 mt-2">
+          <!-- <div class="col-sm-12 mt-2">
             <form [formGroup]="validatingForm">
             <div class="row">
               <div class ="col-sm-1"></div>
@@ -218,7 +237,7 @@
                 <div class ="col-sm-7">
                     <div class="md-form md-outline">
                       <input mdbInput mdbValidate type="text" id="projectname" class="md-textarea form-control" formControlName="projectname" maxlength="30" required="required">
-                      <!-- <label for="projectname" class="">Project Name</label> -->
+                      <label for="projectname" class="">Project Name</label>
                       <mdb-error *ngIf="projectname.invalid && (projectname.dirty || projectname.touched)">Project Name is required</mdb-error>
                    </div>
                 </div>
@@ -237,10 +256,8 @@
                 </div>
             </div>
           </form>
-       </div>
-     <!-- </mdb-card-title>
-   </mdb-card-body>
-  </mdb-card> -->
+       </div> -->
+  
 
 
   
