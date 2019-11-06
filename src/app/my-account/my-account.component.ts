@@ -36,7 +36,6 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   }
 
   downloadFile(s: any, reportId: any) {
-
     if (!localStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
       return;
@@ -63,6 +62,27 @@ export class MyAccountComponent implements OnInit, OnDestroy {
  */
   }, error => {
      console.log(error);
+    });
+  }
+
+  downloadSelfFile(reportId: any) {
+    if (!localStorage.getItem('authToken')) {
+      console.error ('getListAccessToken', 'No authToken available for this user');
+      return;
+    }
+
+    // Fetch the data
+    this.http.get(environment.uploadUrl + 'ticketing/self/report/' + reportId, {
+      headers: new HttpHeaders()
+        .set('Authorization', environment.oipToken)
+        .set('x-auth-token',  localStorage.getItem('authToken')),
+      observe: 'response',
+      responseType: 'blob'
+    }).subscribe(data => {
+      const blob = new Blob([data.body], { type: 'application/pdf' });
+      FileSaver.saveAs(blob, 'report.pdf');
+    }, error => {
+      console.log(error);
     });
   }
 
