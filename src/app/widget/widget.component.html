@@ -55,7 +55,7 @@
 
           <mdb-card class="mt-4 amber accent-1">
               <mdb-card-header class="h5 text-black font-weight-bold">
-                  <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;History
+                  <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;Recent Request
               </mdb-card-header>
                 <mdb-card-body>
 
@@ -70,7 +70,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                  <tr *ngFor="let order of myListOrder.slice(0,5); let i = index" class="text-center">
+                                  <tr *ngFor="let order of myListOrder.slice(0,3); let i = index" class="text-center">
                                     <td>{{order.id}}</td>
                                     <td>{{order.project}}</td>
                                     <td><mdb-badge

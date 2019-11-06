@@ -45,7 +45,19 @@
                           </mdb-badge>
                         </td>
                         <td class="align-middle">{{order.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                        <td class="align-middle"><div *ngIf="order.status == 'done'"><button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button></div>
+                        <td class="align-middle">
+                          <!--
+                          <div *ngIf="order.status == 'done'">
+                            <button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button>
+                          </div>
+                          -->
+
+                          <div *ngIf="order.status == 'done'" (click)="downloadFile(order.originalName,order.reportId)">
+                            <mdb-icon far icon="file-archive" size="2x" class="text-warning downloadReport" mdbTooltip="Download ZIP report"></mdb-icon>
+                            <mdb-icon far icon="file-pdf" size="2x" *ngIf="order.self_filename" class="ml-2 text-danger downloadReport" mdbTooltip="Download PDF report"></mdb-icon>
+                          </div>
+
+
 
                         </td>
 
