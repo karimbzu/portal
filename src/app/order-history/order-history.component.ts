@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit,ViewChild, HostListener, AfterViewInit, ChangeDetectorRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {OrderService} from '../../services/order.service';
 import * as FileSaver from 'file-saver';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { MdbTablePaginationComponent, MdbTableDirective } from 'PATH-TO-MDB-ANGULAR-HERE';
+import {MdbTableDirective, MdbTablePaginationComponent} from 'ng-uikit-pro-standard';
 
 
 @Component({
@@ -11,10 +11,17 @@ import { MdbTablePaginationComponent, MdbTableDirective } from 'PATH-TO-MDB-ANGU
   templateUrl: './order-history.component.html',
   styleUrls: ['./order-history.component.scss']
 })
-export class OrderHistoryComponent implements OnInit {
+export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(MdbTablePaginationComponent, { static: true }) mdbTablePagination: MdbTablePaginationComponent;
+  @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
+  elements: any = [];
+  previous: any = [];
+  headElements = ['ID', 'First', 'Last', 'Handle'];
+
   myListOrder;
   handlerSubscribeOrder;
   constructor(
+    private cdRef: ChangeDetectorRef,
     private myOrder: OrderService,
     private http: HttpClient) { }
 
@@ -29,6 +36,7 @@ export class OrderHistoryComponent implements OnInit {
     this.elements = this.mdbTable.getDataSource();
     this.previous = this.mdbTable.getDataSource();
   }
+
   ngAfterViewInit() {
     this.mdbTablePagination.setMaxVisibleItemsNumberTo(5);
 
