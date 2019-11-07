@@ -1,0 +1,178 @@
+
+
+ <app-header-new></app-header-new>
+ <div class="container-fluid">
+ 
+   <div class="row">
+     <div class="col col-9">
+       <mdb-card >
+         <mdb-card-header class="centurionBlue h5 text-white">
+           <mdb-icon fas icon="history" class="pr-1"></mdb-icon>
+          
+           Order History
+         </mdb-card-header>
+         <mdb-card-body>
+           <mdb-card-text>
+ 
+                 <div class="row">
+                   <div class="col-12">
+ 
+                     <table mdbTable small="true" hover="true">
+ 
+                       <thead>
+                       <tr class="text-center">
+                         <th>Order ID</th>
+                         <th>Scan Type</th>
+                         <th>Project</th>
+                         <th>Status</th>
+                         <th>Date</th>
+                         <th>Report</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <tr *ngFor="let order of myListOrder; let i = index" class="text-center">
+                         <td class="align-middle" class="orderId" (click)="basicModal.show()">
+                           {{order.id}}
+                         </td>
+                         <td class="align-middle">{{order.scanType}}</td>
+                         <td class="align-middle">{{order.project}}</td>
+                         <td class="align-middle">
+                           <mdb-badge
+                             pill="true"
+                             [success]="order.status == 'done'"
+                             [warning]="order.status == 'scanning' || order.status == 'approved'"
+                             [danger]="order.status == 'follow up'">
+                             {{order.status}}
+                           </mdb-badge>
+                         </td>
+                         <td class="align-middle">{{order.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                         <td class="align-middle">
+                           <!--
+                           <div *ngIf="order.status == 'done'">
+                             <button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button>
+                           </div>
+                           -->
+ 
+                           <div *ngIf="order.status == 'done'">
+                             <mdb-icon far icon="file-archive" size="2x"
+                                       class="text-warning downloadReport" mdbTooltip="Download Raw Report"
+                                       (click)="downloadFile(order.originalName,order.reportId)"></mdb-icon>
+                             <mdb-icon far icon="file-pdf" size="2x" *ngIf="order.self_filename"
+                                       class="ml-2 text-danger downloadReport" mdbTooltip="Download Recommendation Report"
+                                       (click)="downloadSelfFile(order.reportId)"></mdb-icon>
+                           </div>
+ 
+ 
+ 
+                         </td>
+ 
+                         <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                              aria-hidden="true">
+                           <div class="modal-dialog modal-dialog-scrollable" role="document">
+                             <div class="modal-content">
+                               <div class="modal-header">
+                                 <label class="tajukModal"> Ticket Information</label>
+                                 <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                   <span aria-hidden="true">×</span>
+                                 </button>
+ 
+                               </div>
+                               <div class="modal-body">
+                                 <h4 class="modal-title text-center" id="myModalLabel">
+                                   Your Order Request ID: <span class="badge badge-warning">{{order.id}}</span>
+                                 </h4>
+                                 <table mdbTable>
+                                   <tbody>
+                                   <tr>
+                                     <th>Project Name</th> <td>:</td>
+                                     <td>  {{order.project}} </td>
+                                   </tr>
+                                   <tr>
+                                     <th>Project Description</th><td>:</td>
+                                     <td>{{order.description}}</td>
+                                   </tr>
+                                   <tr>
+                                     <th>Date</th><td>:</td>
+                                     <td>{{order.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                                   </tr>
+                                   <tr>
+                                     <th>Optional Services</th><td>:</td>
+                                     <td>
+                                       <span *ngIf="optService(order.optService).security_vulnerability">Security Vulnerability<br/></span>
+                                       <span *ngIf="optService(order.optService).web_app">Web Application<br/></span>
+                                       <span *ngIf="optService(order.optService).android">Android<br/></span>
+                                       <span *ngIf="optService(order.optService).continuous_scanning">Continuous Scanning</span>
+                                     </td>
+                                   </tr>
+                                   <tr>
+                                     <th>Price</th><td>:</td>
+                                     <td> {{order.price}} </td>
+                                   </tr>
+                                   <tr>
+                                     <th>Message </th><td>:</td>
+                                     <td> {{order.message}} </td>
+                                   </tr>
+                                   </tbody>
+                                 </table>
+                               </div>
+                               <div class="modal-footer">
+                                 <button type="button" mdbBtn color="primary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                               </div>
+                             </div>
+                           </div>
+                         </div>
+ 
+                       </tr>
+                       </tbody>
+                     </table>
+ 
+ 
+ 
+ 
+ 
+                   </div>
+ 
+ 
+                 </div>
+ 
+ 
+ 
+ 
+           </mdb-card-text>
+         </mdb-card-body>
+       </mdb-card>
+     </div>
+     <div class="col">
+         <app-widget [widget]="true"></app-widget>
+     </div>
+   </div>
+ </div>
+ <br />
+ 
+
+ <div class="container">
+    <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+      <thead>
+      <tr>
+        <th *ngFor="let head of myListOrder; let i = index" scope="col">aa
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let el of myListOrder; let i = index">
+        <th *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex"
+            scope="row">{{el.orderId}}</th>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.orderId}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.scanType}}</td>
+        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
+      </tr>
+      </tbody>
+      <tfoot class="grey lighten-5 w-100">
+      <tr>
+        <td colspan="4">
+          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="elements"></mdb-table-pagination>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
