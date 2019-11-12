@@ -16,7 +16,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
   previous: any = [];
-  headElements = ['ID', 'First', 'Last', 'Handle'];
+  headElements = ['Order ID', 'Scan Type', 'Project', 'Status','Date', 'Report'];
 
   myListOrder;
   handlerSubscribeOrder;
@@ -26,8 +26,6 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     private http: HttpClient) { }
 
   ngOnInit() {
-    this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
-    this.refreshList();
     for (let i = 1; i <= 15; i++) {
       this.elements.push({id: i.toString(), first: 'User ' + i, last: 'Name ' + i, handle: 'Handle ' + i});
     }
@@ -35,6 +33,10 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mdbTable.setDataSource(this.elements);
     this.elements = this.mdbTable.getDataSource();
     this.previous = this.mdbTable.getDataSource();
+
+    this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
+    this.refreshList();
+ 
   }
 
   ngAfterViewInit() {

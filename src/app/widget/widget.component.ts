@@ -10,6 +10,7 @@ import {OrderService} from '../../services/order.service';
 export class WidgetComponent implements OnInit {
 
   @Input() widget: boolean;
+  @Input() OH: boolean;
 
 
   cartCount: number;

@@ -53,13 +53,13 @@
             </mdb-card-body>
           </mdb-card>
 
-          <mdb-card class="mt-4 amber accent-1">
+          <mdb-card class="mt-4 amber accent-1" *ngIf="widget && !OH">
               <mdb-card-header class="h5 text-black font-weight-bold">
                   <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;Recent Request
               </mdb-card-header>
                 <mdb-card-body>
 
-                  <mdb-card-text class="text-black-50">
+                  <mdb-card-text class="text-black-50" >
                         <table mdbTable small="true" hover="true">
                                 <thead>
                                     <tr class="text-center">
@@ -82,26 +82,6 @@
                                     </mdb-badge></td>
                                     <td><i class="far fa-file"></i></td>
                                   </tr>
-                                  <!--
-                                    <tr>
-                                          <td>1 </td>
-                                          <td>One</td>
-                                          <td>  Pending</td>
-                                          <td>  <i class="far fa-file"></i></td>
-                                    </tr>
-                                    <tr>
-                                          <td>2</td>
-                                          <td>Two</td>
-                                          <td>In Progress</td>
-                                          <td>  <i class="far fa-file"></i></td>
-                                    </tr>
-                                    <tr>
-                                          <td>3</td>
-                                          <td>Three</td>
-                                          <td>Done</td>
-                                          <td>  <i class="far fa-file"></i></td>
-                                    </tr>
-                                    -->
                                 </tbody>
                             </table>
                          </mdb-card-text>
