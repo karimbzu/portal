@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { HeaderService } from '../../services/header.service';
 import {CartService} from '../../services/cart.service';
 import {Cart} from '../../models/cart';
@@ -10,13 +10,21 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   templateUrl: './my-cart.component.html',
   styleUrls: ['./my-cart.component.scss']
 })
-export class MyCartComponent implements OnInit {
+export class MyCartComponent implements OnInit, OnDestroy {
+  handlerSubscribeCart;
+
   validatingForm: FormGroup;
-  mark=false;
-  widget:true;
+  mark = false;
+  widget: true;
 
   listCart: Cart[];
-  isEmpty:boolean;
+  isEmpty: boolean;
+
+  scanTypeList = {
+    source_code : 'Source Code',
+    mobile_app : 'Binary Application',
+    web_app : 'Web Application'
+  };
 
   private units = [
     'bytes',
@@ -28,7 +36,7 @@ export class MyCartComponent implements OnInit {
   ];
 
   elements: any = [
-    {id: 1, first: 'My_Code.zip', last: "Security Vulnerability<br/>50MB", handle: '11/10/2019'},
+    {id: 1, first: 'My_Code.zip', last: 'Security Vulnerability<br/>50MB', handle: '11/10/2019'},
     {id: 2, first: 'Repo URL', last: 'Security Vulnerability', handle: '11/10/2019'},
     {id: 3, first: 'His_Code.zip', last: 'Security Vulnerability', handle: '11/10/2019'},
   ];
@@ -36,16 +44,20 @@ export class MyCartComponent implements OnInit {
   headElements = ['FILE', 'FILE INFO', 'SERVICE SELECTED', 'TOKEN'];
 
 
-  constructor(    public router: Router,
+  constructor(
+    public router: Router,
     private myHeader: HeaderService,
     private myCart: CartService) { }
 
   ngOnInit() {
-    // this.myHeader.setModePayment();
-    this.myCart.currentListCart.subscribe(val => this.listCart = val);
+    this.handlerSubscribeCart = this.myCart.currentListCart.subscribe(val => this.listCart = val);
     this.validatingForm = new FormGroup({
       required: new FormControl(null, Validators.required)
     });
+  }
+
+  ngOnDestroy() {
+    this.handlerSubscribeCart.unsubscribe();
   }
 
   btnDeleteCart(cartId) {
@@ -62,21 +74,20 @@ export class MyCartComponent implements OnInit {
     this.router.navigate(['checkout']);
   }
 
-  typetoString(s:any){
-    
-    if (s === 'repo')
-    return 'Repo';
-    if (s === 'file')
-    return 'File';
-
+  typetoString(s: any) {
+    if (s === 'repo') {
+      return 'Repo';
+    }
+    if (s === 'file') {
+      return 'File';
+    }
   }
 
   fileSizetransform(bytes: number, precision: number = 2  ) {
-   
-    if ( isNaN( parseFloat( String(bytes) )) || ! isFinite( bytes ) ) return '?';
+
+    if ( isNaN( parseFloat( String(bytes) )) || ! isFinite( bytes ) ) { return '?'; }
 
     let unit = 0;
-
     while ( bytes >= 1024 ) {
       bytes /= 1024;
       unit ++;
@@ -85,13 +96,12 @@ export class MyCartComponent implements OnInit {
     return bytes.toFixed( + precision ) + ' ' + this.units[ unit ];
   }
 
-  get input() {     
-      return this.validatingForm.get('required'); 
+  get input() {
+      return this.validatingForm.get('required');
   }
 
-  get az() {     
-   
-    return this.validatingForm.get('required').value; 
+  get az() {
+    return this.validatingForm.get('required').value;
  }
 
 }

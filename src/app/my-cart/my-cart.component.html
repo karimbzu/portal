@@ -1,25 +1,25 @@
 
- 
+
 <app-header-new></app-header-new>
 <div class="container-fluid">
- 
+
   <div class="row">
     <div class="col col-9">
         <mdb-card >
-          
-            <mdb-card-header class="centurionBlue h5 text-white">My Cart</mdb-card-header>
+
+            <mdb-card-header class="centurionBlue h5 text-white">
+              <mdb-icon fas icon="shopping-cart" class="pr-1"></mdb-icon>
+              My Cart
+            </mdb-card-header>
             <mdb-card-body>
               <mdb-card-text>
-          
-                <table mdbTable>
-          
-                  <table class="table table-striped">
+                  <table mdbTable class="table table-striped">
                     <thead >
                     <tr >
                       <th style="text-align:center">Type</th>
                       <th>File / Repo Info</th>
                       <th class="align-middle" style="text-align:center" >Scan Type</th>
-          
+
                       <th style="text-align:center">Optional Service</th>
                       <th  style="text-align:center">Price (Token)</th>
                       <th style="text-align:center" >Action</th>
@@ -27,7 +27,7 @@
                     </thead>
                     <tbody>
                     <tr mdbTableCol *ngFor="let cart of listCart; let i = index">
-                      <td>
+                      <td class="text-center align-middle">
                           <div *ngIf="cart.type === 'repo'">
                             <img src="../../assets/images/git-icon-19.jpg" height="40" width="40">
                           </div>
@@ -35,41 +35,33 @@
                               <img src="../../assets/images/folder.svg" height="40" width="40">
                           </div>
                       </td>
-                      <td>
+                      <td class="align-middle">
                        <div *ngIf="cart.fileName && cart.type === 'file'"> {{cart.fileName}} <br/> </div>
                        <div *ngIf="cart.fileSize && cart.type === 'file'"> {{fileSizetransform(cart.fileSize) }} <br/></div>
                        <div *ngIf="cart.repoURL && cart.type === 'repo'">  {{cart.repoURL}} <br/></div>
-          
                       </td>
-                      <td style="text-align:center">Source Code</td>
-          
-                      <td>
-                    <ul >
-                        <span *ngIf="cart.optService.security_vulnerability"> <li>	 Security Vulnerability</li> </span>
-                        <span *ngIf="cart.optService.web_app"> <li> 	Web Application</li>  </span>
-                        <span *ngIf="cart.optService.android"> <li>  	Android</li></span>
-                        <span *ngIf="cart.optService.continuous_scanning"> <li> 	 Continious Scanning</li> </span>
-                    </ul>
-          
+                      <td class="text-center align-middle">{{scanTypeList[cart.scanType]}}</td>
+                      <td class="text-center align-middle">
+                        <span *ngIf="cart.optService.security_vulnerability">Security Vulnerability<br/></span>
+                        <span *ngIf="cart.optService.web_app">Web Application<br/></span>
+                        <span *ngIf="cart.optService.android">Android<br/></span>
+                        <span *ngIf="cart.optService.continuous_scanning">Continuous Scanning</span>
                       </td>
-                      <td style="text-align:center" >{{cart.price}}</td>
-                      <td style="text-align:center" width="1%">
+                      <td class="text-center align-middle" >{{cart.price}}</td>
+                      <td class="text-center align-middle">
+                        <mdb-icon fas icon="trash-alt" size="2x" class="red-text" (click)="btnDeleteCart(cart.cartId)"></mdb-icon>
+<!--
                            <button type="button" class="btn btn-danger px-3" (click)="btnDeleteCart(cart.cartId)"><i class="fas fa-trash" aria-hidden="true"></i></button>
-          
+-->
                       </td>
                     </tr>
                     </tbody>
                   </table>
-          
-          
-          
-                </table>
-          
               </mdb-card-text>
-          
+
             </mdb-card-body>
           </mdb-card>
- 
+
           <button type="button" mdbBtn rounded="true" class="mt-4 centurionBlue text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
 <div class="container-fluid">
     &nbsp; 	&nbsp;

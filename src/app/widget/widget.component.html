@@ -1,69 +1,88 @@
-<mdb-card class="rgba-yellow-light"> 
-    <mdb-card-header class="h5 text-white">      
-        Current Total Balance
-    </mdb-card-header>   
-        <mdb-card-body>
-         
-                <div class="row"> 
-                  <div class="col">   <span class="aa">136</span>  </div>    
-                  <div class="col">  
-                    <div class="container-fluid">
-                          &nbsp; 	&nbsp;
-                    </div>
-                    <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white text-align right"   >Add Tokens</button>
-                  </div>  
-                </div> 
-           
-        
+<mdb-card class="">
+    <mdb-card-header class="h5 text-black font-weight-bold">
+      <mdb-icon fas icon="hand-holding-usd" class="pr-1"></mdb-icon>
+        Token Balance
+    </mdb-card-header>
+        <mdb-card-body class="py-0">
+          <table mdbTable borderless="true" small="true" class="mt-0">
+            <tbody>
+              <tr>
+                <td class="align-middle"><span class="h1 font-weight-bold">123</span></td>
+                <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button></td>
+              </tr>
+            </tbody>
+          </table>
         </mdb-card-body>
       </mdb-card>
 
- <mdb-card class="mt-4 rgba-green-light " *ngIf="widget">      
-        <mdb-card-body>
-       
-              <i class="fas fa-bell"></i> 	&nbsp;	&nbsp;Your have {{cartCount}} items in cart <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button> 
-         
+ <mdb-card class="mt-4 rgba-green-light " *ngIf="widget && cartCount">
+        <mdb-card-body class="py-0">
+          <table mdbTable borderless="true" small="true" class="my-0">
+            <tbody>
+              <tr>
+                <td class="align-middle"><i class="fas fa-bell"></i></td>
+                <td class="align-middle">You have {{cartCount}} items in cart</td>
+                <td class="text-right">
+                  <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
         </mdb-card-body>
       </mdb-card>
 
-      
 
-      <mdb-card class="mt-4 blue lighten-4" >  
-          <mdb-card-header class="h5 text-white"> 
-              <i class="fa fa-star" aria-hidden="true">  </i>  	&nbsp; 	&nbsp;Score Card   
-          </mdb-card-header>    
+
+      <mdb-card class="mt-4 light-blue lighten-3" *ngIf="false">
+          <mdb-card-header class="h5 text-black font-weight-bold">
+              <i class="fa fa-star" aria-hidden="true">  </i>  	&nbsp; 	&nbsp;Score Card
+          </mdb-card-header>
             <mdb-card-body>
 
-            
-                    <table>                      
+
+                    <table>
                             <tbody>
-                                <tr>                    
-                                  <td width="20%"><span class="aa">&#65;</span></td>                                
-                                  <td width="80%">Identify all third-party libraries used by the binary and analyze if they raise any security, license or operational risk.  </td>                                                     
+                                <tr>
+                                  <td width="20%"><span class="aa">&#65;</span></td>
+                                  <td width="80%">Identify all third-party libraries used by the binary and analyze if they raise any security, license or operational risk.  </td>
                                 </tr>
-                            </tbody>                            
+                            </tbody>
                     </table>
-         
+
             </mdb-card-body>
           </mdb-card>
 
-          <mdb-card class="mt-4 rgba-yellow-light">   
-              <mdb-card-header class="h5 text-white"> 
-                  <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;History   
-              </mdb-card-header>  
+          <mdb-card class="mt-4 amber accent-1">
+              <mdb-card-header class="h5 text-black font-weight-bold">
+                  <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;Recent Request
+              </mdb-card-header>
                 <mdb-card-body>
-            
+
                   <mdb-card-text class="text-black-50">
-                        <table mdbTable>                      
+                        <table mdbTable small="true" hover="true">
                                 <thead>
-                                    <tr>                    
-                                      <th style="text-align:center"> ID</th>
-                                      <th>Item</th>
+                                    <tr class="text-center">
+                                      <th style="text-align:center">ID</th>
+                                      <th>Project</th>
                                       <th>Status</th>
-                                      <th style="text-align:center"></th>                      
+                                      <th>Report</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                  <tr *ngFor="let order of myListOrder.slice(0,3); let i = index" class="text-center">
+                                    <td>{{order.id}}</td>
+                                    <td>{{order.project}}</td>
+                                    <td><mdb-badge
+                                      pill="true"
+                                      [success]="order.status == 'done'"
+                                      [warning]="order.status == 'scanning' || order.status == 'approved'"
+                                      [danger]="order.status == 'follow up'">
+                                      {{order.status}}
+                                    </mdb-badge></td>
+                                    <td><i class="far fa-file"></i></td>
+                                  </tr>
+                                  <!--
                                     <tr>
                                           <td>1 </td>
                                           <td>One</td>
@@ -82,8 +101,11 @@
                                           <td>Done</td>
                                           <td>  <i class="far fa-file"></i></td>
                                     </tr>
+                                    -->
                                 </tbody>
                             </table>
                          </mdb-card-text>
                 </mdb-card-body>
               </mdb-card>
+
+<br />

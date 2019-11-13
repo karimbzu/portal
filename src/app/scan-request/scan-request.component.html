@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
-      <mdb-card class="my-3">
+      <mdb-card>
         <mdb-card-header class="centurionBlue h5 text-white">
           <mdb-icon fas icon="file-medical" class="pr-1"></mdb-icon>Scan Request
         </mdb-card-header>
@@ -31,7 +31,7 @@
                       <input type="radio" class="custom-control-input" id="typeMobileApp" name="scanType"
                              value="mobile_app" formControlName="scanType">
                       <label for="typeMobileApp" class="custom-control-label">Binary Application</label>
-                      <mdb-badge pill="true" warning="true" class="float-right">COMING SOON</mdb-badge>
+                      <mdb-badge pill="true" warning="true" class="float-right">BETA</mdb-badge>
                     </mdb-card-header>
                     <mdb-card-body>
                       <mdb-card-text>
@@ -74,10 +74,10 @@
                         <input type="text" id="inputRepoURL" class="form-control" formControlName="repoURL" mdbInput>
                         <label for="inputRepoURL">Source Code Repository</label>
                       </div>
-                      <div class="md-form md-outline">
+                      <div class="md-form">
                         <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
                                     formControlName="tokenId"
-                                    outline="true" label="Access Token"></mdb-select>
+                                    label="Access Token"></mdb-select>
                         <button mdbBtn color="link" class="p-0 blue-text"
                                 data-toggle="modal" data-target="#basicExample"
                                 (click)="tokenModal.show()" >
@@ -163,18 +163,26 @@
               </form>
             </mdb-step>
             <mdb-step name="Programming" label="Language" [stepForm]="myProgLangForm">
-              <form [formGroup]="myProgLangForm" class="requestForm">
+              <form [formGroup]="myProgLangForm" class="requestForm" *ngIf="scanType == 'source_code'; else templateStep4">
                 <mdb-card-text>Please specify the programming language used </mdb-card-text>
-                <div class="md-form md-outline">
+                <div class="md-form">
                   <mdb-select [options]="optProgLangList" placeholder="Select Programming Language"
                               formControlName="programLanguage" id="inputProgramLang"
-                              outline="true" label="Programming Language"></mdb-select>
+                              label="Programming Language"></mdb-select>
                 </div>
                 <div class="md-form md-outline">
                   <input type="text" id="inputBuildCmd" class="form-control" mdbInput formControlName="buildCommand">
                   <label for="inputBuildCmd">Build Command</label>
                 </div>
               </form>
+              <ng-template #templateStep4>
+                <form [formGroup]="myProgLangForm" class="requestForm">
+                  <mdb-card-text>
+                    This step is not applicable for scan type: <b>{{scanType}}</b>.
+                    Please proceed to next step.
+                  </mdb-card-text>
+                </form>
+              </ng-template>
             </mdb-step>
             <mdb-step name="Optional" label="Services" [stepForm]="myOptServForm">
               <form [formGroup]="myOptServForm" class="requestForm">

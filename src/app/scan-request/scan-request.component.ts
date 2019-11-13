@@ -43,6 +43,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   @ViewChild('stepper', { static: true }) stepper: MdbStepperComponent;
   @ViewChild('tokenModal', {static: false}) tokenModal: MDBModalRef;
 
+  handlerSubscribeProgLangForm;
+  handlerSubscribeListAuthToken;
+  handlerSubscribeProgressUpload;
+  handlerSubscribeOptServForm;
+
 
   /**
    * Remarks: We opt to create a form for each step so that
@@ -79,6 +84,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     label: new FormControl('', [Validators.required, Validators.minLength(5)])
   });
 
+  scanType;
   flagLoadingAddToken = false;
   uploadId: number;
   freshFile = true;
@@ -131,13 +137,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     this.freshFile = true;
     this.flagVerticalStepper = window.innerWidth < 1000;
     this.flagNeedValidation = true;
-    this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
-
-    this.myRequest.currentListAuthToken.subscribe(val => this.appendAuthToken(val));
-    this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
+    this.handlerSubscribeProgLangForm = this.myProgLangForm.get('programLanguage').valueChanges.subscribe(val => this.updateProgLang(val));
+    this.handlerSubscribeListAuthToken = this.myRequest.currentListAuthToken.subscribe(val => this.appendAuthToken(val));
+    this.handlerSubscribeProgressUpload = this.myRequest.currentProgressUpload.subscribe(val => { this.progressUploadCount = val; });
 
     this.totalToken = 1;
-    this.myOptServForm.valueChanges.subscribe(val => this.calculateTotalToken(val));
+    this.handlerSubscribeOptServForm = this.myOptServForm.valueChanges.subscribe(val => this.calculateTotalToken(val));
 
     // Remarks: We use timeout to navigate to the 2nd step if this page came from dashboard.
     // Previously, we use AfterInit or AfterView ... but it comes with a cost.
@@ -146,7 +151,11 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     }, 100);
   }
 
-  ngOnDestroy(): void {
+  ngOnDestroy() {
+    this.handlerSubscribeProgLangForm.unsubscribe();
+    this.handlerSubscribeListAuthToken.unsubscribe();
+    this.handlerSubscribeProgressUpload.unsubscribe();
+    this.handlerSubscribeOptServForm.unsubscribe();
   }
 
   /**
@@ -154,16 +163,16 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    */
   appendAuthToken(val) {
     if (val.length) {
-      function mapLabel2Value(item) {
-        const retJson = {
-          value : item.tokenId,
-          label : item.label
-        };
-        return retJson;
-      }
-
-      this.tempAccessToken = val.map(mapLabel2Value);
+      this.tempAccessToken = val.map(this.mapLabel2Value);
     }
+  }
+
+  mapLabel2Value(item) {
+    const retJson = {
+      value : item.tokenId,
+      label : item.label
+    };
+    return retJson;
   }
 
   /**
@@ -192,6 +201,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       scanType: val
     });
 
+    this.scanType = val;          // To be used in Step 4
     this.flagShowRepo = false;
     this.flagShowUpload = false;
     this.flagShowWeb = false;
@@ -335,6 +345,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         // @ts-ignore
         this.myToast.success(res.info.originalName, 'Remove Old File');
         this.myScanItemForm.patchValue ({ uploadId: 0});
+
+        // Trigger to perform scanning (Step 3)
+        this.flagNeedValidation = true;
       })
       .catch(err => {
         this.myToast.error(err, 'Remove Old File');
@@ -391,12 +404,16 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       if (!repoURL.length) {
         console.error ('RepoURL field is EMPTY');
         this.myToast.error ('RepoURL field is EMPTY', 'Validate Item');
+        this.flagValidationFetchLoading = false;
+        this.flagValidationFetchError = true;
         return;
       }
 
       if (!tokenId) {
         console.error ('No Access Token is selected');
         this.myToast.error ('No Access Token is selected', 'Validate Item');
+        this.flagValidationFetchLoading = false;
+        this.flagValidationFetchError = true;
         return;
       }
 
@@ -418,6 +435,8 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       if (!uploadId) {
         console.error ('No file is uploaded');
         this.myToast.error ('No file is uploaded', 'Validate Item');
+        this.flagValidationFetchLoading = false;
+        this.flagValidationFetchError = true;
         return;
       }
 
@@ -531,6 +550,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
     this.myCart.addCart(requestData)
       .then(res => {
+        this.myCart.getListCart();
         console.log (res);
         this.router.navigate(['/my-cart']);
       })

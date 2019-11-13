@@ -6,37 +6,65 @@
   <div class="row">
     <div class="col col-9">
       <mdb-card >
-        <mdb-card-header class="centurionBlue h5 text-white">My Account</mdb-card-header>
+        <mdb-card-header class="centurionBlue h5 text-white">
+          <mdb-icon fas icon="tachometer-alt" class="pr-1"></mdb-icon>
+          My Account
+        </mdb-card-header>
         <mdb-card-body>
           <mdb-card-text>
-    
+
                 <div class="row">
                   <div class="col-12">
-    
-                    <table mdbTable>
-    
+
+                    <table mdbTable small="true" hover="true">
+
                       <thead>
-                      <tr>                  
-                        <th style="text-align:center">Order ID</th>
+                      <tr class="text-center">
+                        <th>Order ID</th>
                         <th>Scan Type</th>
                         <th>Project</th>
-                        <th style="text-align:center">Status</th>
+                        <th>Status</th>
                         <th>Date</th>
                         <th>Report</th>
                       </tr>
                       </thead>
                       <tbody>
-                      <tr *ngFor="let order of myListOrder; let i = index">
-                        <td class="align-middle" style="text-align:center;text-decoration: underline" ><button style="text-align:center;text-decoration: underline" type="button" mdbBtn type="button" flat="true" size="lg" mdbWavesEffect (click)="basicModal.show()" mdbWavesEffect>{{order.id}}</button>
+                      <tr *ngFor="let order of myListOrder; let i = index" class="text-center">
+                        <td class="align-middle" class="orderId" (click)="basicModal.show()">
+                          {{order.id}}
                         </td>
                         <td class="align-middle">{{order.scanType}}</td>
                         <td class="align-middle">{{order.project}}</td>
-                        <td class="align-middle"><span id={{removeSpace(order.status)}} class="badge badge-warning" >{{order.status}}</span></td>
-                        <td class="align-middle">{{order.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                        <td class="align-middle"><div *ngIf="order.status == 'done'"><button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button></div>
-    
+                        <td class="align-middle">
+                          <mdb-badge
+                            pill="true"
+                            [success]="order.status == 'done'"
+                            [warning]="order.status == 'scanning' || order.status == 'approved'"
+                            [danger]="order.status == 'follow up'">
+                            {{order.status}}
+                          </mdb-badge>
                         </td>
-    
+                        <td class="align-middle">{{order.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                        <td class="align-middle">
+                          <!--
+                          <div *ngIf="order.status == 'done'">
+                            <button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button>
+                          </div>
+                          -->
+
+                          <div *ngIf="order.status == 'done'">
+                            <mdb-icon far icon="file-archive" size="2x"
+                                      class="text-warning downloadReport" mdbTooltip="Download Raw Report"
+                                      (click)="downloadFile(order.originalName,order.reportId)"></mdb-icon>
+                            <mdb-icon far icon="file-pdf" size="2x" *ngIf="order.self_filename"
+                                      class="ml-2 text-danger downloadReport" mdbTooltip="Download Recommendation Report"
+                                      (click)="downloadSelfFile(order.reportId)"></mdb-icon>
+                          </div>
+
+
+
+                        </td>
+
                         <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                              aria-hidden="true">
                           <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -46,7 +74,7 @@
                                 <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
                                   <span aria-hidden="true">×</span>
                                 </button>
-    
+
                               </div>
                               <div class="modal-body">
                                 <h4 class="modal-title text-center" id="myModalLabel">
@@ -67,14 +95,12 @@
                                     <td>{{order.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                   </tr>
                                   <tr>
-                                    <th>Service</th><td>:</td>
+                                    <th>Optional Services</th><td>:</td>
                                     <td>
-                                      <ul >
-                                        <span *ngIf="optService(order.optService).security_vulnerability"><li> Security Vulnerability</li></span>
-                                        <span *ngIf="optService(order.optService).web_app">  <li>  Web Application</li></span>
-                                        <span *ngIf="optService(order.optService).android"> <li>  Android</li></span>
-                                        <span *ngIf="optService(order.optService).continuous_scanning"> <li>  Continious Scanning</li></span>
-                                      </ul >
+                                      <span *ngIf="optService(order.optService).security_vulnerability">Security Vulnerability<br/></span>
+                                      <span *ngIf="optService(order.optService).web_app">Web Application<br/></span>
+                                      <span *ngIf="optService(order.optService).android">Android<br/></span>
+                                      <span *ngIf="optService(order.optService).continuous_scanning">Continuous Scanning</span>
                                     </td>
                                   </tr>
                                   <tr>
@@ -94,34 +120,30 @@
                             </div>
                           </div>
                         </div>
-    
+
                       </tr>
                       </tbody>
                     </table>
-    
-    
-    
-    
-    
+
+
+
+
+
                   </div>
-    
-    
+
+
                 </div>
-    
-    
-    
-    
+
+
+
+
           </mdb-card-text>
         </mdb-card-body>
       </mdb-card>
     </div>
-    <div class="col">     
-        <app-widget [widget]="true"></app-widget>    
+    <div class="col">
+        <app-widget [widget]="true"></app-widget>
     </div>
   </div>
 </div>
-
-
-<div class="container-fluid">
-    &nbsp; 	&nbsp;
-</div>
+<br />

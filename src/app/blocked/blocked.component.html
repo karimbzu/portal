@@ -1,9 +1,18 @@
-<app-header></app-header>
-<mdb-card class="m-3">
-  <mdb-card-header class="red accent-4 h5 text-white">Blocked</mdb-card-header>
-  <mdb-card-body>
-    <mdb-card-text>Your access to page: <strong>{{blockedPage}}</strong> is blocked!</mdb-card-text>
-    <mdb-card-text>You are not supposed to refresh or manually access these pages. It should follow proper flow.</mdb-card-text>
-    <mdb-card-text>Click here to go back to page: <strong>{{prevPage}}</strong></mdb-card-text>
-  </mdb-card-body>
-</mdb-card>
+<app-header-new></app-header-new>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <mdb-card>
+        <mdb-card-header class="red accent-4 h5 text-white">
+          <mdb-icon fas icon="ban" class="pr-1"></mdb-icon>
+          Blocked
+        </mdb-card-header>
+        <mdb-card-body>
+          <mdb-card-text>Your access to page: <strong>{{blockedPage}}</strong> is blocked!</mdb-card-text>
+          <mdb-card-text>You are not supposed to refresh or manually access these pages. It should follow proper flow.</mdb-card-text>
+          <mdb-card-text>Click here to go back to page: <strong>{{prevPage}}</strong></mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+  </div>
+</div>
