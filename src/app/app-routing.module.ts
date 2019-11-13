@@ -31,6 +31,7 @@ const routes: Routes = [
   {path: 'widget', component: WidgetComponent, canActivate: [AuthGuard]},
   {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
   {path: '**', component: ErrorComponent}
+
 ];
 
 @NgModule({
