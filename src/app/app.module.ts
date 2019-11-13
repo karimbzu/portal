@@ -24,6 +24,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderNewComponent } from './header-new/header-new.component';
 import { WidgetComponent } from './widget/widget.component';
 import { ErrorComponent } from './error/error.component';
+import { OrderHistoryComponent } from './order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { ErrorComponent } from './error/error.component';
     DashboardComponent,
     HeaderNewComponent,
     WidgetComponent,
-    ErrorComponent
+    ErrorComponent,
+    OrderHistoryComponent
   ],
   imports: [
     BrowserModule,
