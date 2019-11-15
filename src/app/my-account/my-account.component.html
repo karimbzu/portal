@@ -1,149 +1,135 @@
-
-
- <app-header-new></app-header-new>
+<app-header-new></app-header-new>
 <div class="container-fluid">
 
   <div class="row">
-    <div class="col col-9">
+    <div class="col ">
       <mdb-card >
         <mdb-card-header class="centurionBlue h5 text-white">
           <mdb-icon fas icon="tachometer-alt" class="pr-1"></mdb-icon>
           My Account
         </mdb-card-header>
         <mdb-card-body>
-          <mdb-card-text>
-
-                <div class="row">
-                  <div class="col-12">
-
-                    <table mdbTable small="true" hover="true">
-
-                      <thead>
-                      <tr class="text-center">
-                        <th>Order ID</th>
-                        <th>Scan Type</th>
-                        <th>Project</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th>Report</th>
-                      </tr>
-                      </thead>
-                      <tbody>
-                      <tr *ngFor="let order of myListOrder; let i = index" class="text-center">
-                        <td class="align-middle" class="orderId" (click)="basicModal.show()">
-                          {{order.id}}
-                        </td>
-                        <td class="align-middle">{{order.scanType}}</td>
-                        <td class="align-middle">{{order.project}}</td>
-                        <td class="align-middle">
-                          <mdb-badge
-                            pill="true"
-                            [success]="order.status == 'done'"
-                            [warning]="order.status == 'scanning' || order.status == 'approved'"
-                            [danger]="order.status == 'follow up'">
-                            {{order.status}}
-                          </mdb-badge>
-                        </td>
-                        <td class="align-middle">{{order.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                        <td class="align-middle">
-                          <!--
-                          <div *ngIf="order.status == 'done'">
-                            <button class="btn btn-primary btn-xs" (click)="downloadFile(order.originalName,order.reportId)">Ready</button>
-                          </div>
-                          -->
-
-                          <div *ngIf="order.status == 'done'">
-                            <mdb-icon far icon="file-archive" size="2x"
-                                      class="text-warning downloadReport" mdbTooltip="Download Raw Report"
-                                      (click)="downloadFile(order.originalName,order.reportId)"></mdb-icon>
-                            <mdb-icon far icon="file-pdf" size="2x" *ngIf="order.self_filename"
-                                      class="ml-2 text-danger downloadReport" mdbTooltip="Download Recommendation Report"
-                                      (click)="downloadSelfFile(order.reportId)"></mdb-icon>
-                          </div>
-
-
-
-                        </td>
-
-                        <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                             aria-hidden="true">
-                          <div class="modal-dialog modal-dialog-scrollable" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <label class="tajukModal"> Ticket Information</label>
-                                <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-                                  <span aria-hidden="true">×</span>
-                                </button>
-
-                              </div>
-                              <div class="modal-body">
-                                <h4 class="modal-title text-center" id="myModalLabel">
-                                  Your Order Request ID: <span class="badge badge-warning">{{order.id}}</span>
-                                </h4>
-                                <table mdbTable>
-                                  <tbody>
+            <div class="card-deck mt-4 ml-4 mr-4">                
+                <mdb-card >
+                    <mdb-card-header class="h5 text-black font-weight-bold">
+                      <mdb-icon fas icon="hand-holding-usd" class="pr-1"></mdb-icon>
+                        Token Balance
+                    </mdb-card-header>
+                        <mdb-card-body class="py-0 align-middle">
+                          <table mdbTable borderless="true" small="true" class="mt-2">
+                            <tbody>
+                              <tr>
+                                <td class="align-middle"><span class="h1 font-weight-bold">123</span></td>
+                                <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" disabled>Add Tokens</button></td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </mdb-card-body>
+                      </mdb-card>
+              
+                      <mdb-card class="">
+                          <mdb-card-header class="h5 text-black font-weight-bold">
+                              <mdb-icon fas icon="qrcode"></mdb-icon>
+                              Scan
+                          </mdb-card-header>
+                              <mdb-card-body class="py-0">
+                                  <table mdbTable borderless="true" small="true" class="my-0 mt-2">
+                                      <tbody>
+                                        <tr>
+                                          <td class="align-middle"></td>
+                                          <td class="align-middle">Sucessfull Scan</td>
+                                          <td class="text-right">
+                                           <h1> 114 </h1>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                              </mdb-card-body>
+                            </mdb-card>
+              
+                <mdb-card class="">
+                    <mdb-card-header class="h5 text-black font-weight-bold">
+                        <mdb-icon fas icon="shopping-cart"></mdb-icon>
+                        Cart
+                    </mdb-card-header>
+                        <mdb-card-body class="py-0">
+                            <table mdbTable borderless="true" small="true" class="my-0 mt-2">
+                                <tbody>
                                   <tr>
-                                    <th>Project Name</th> <td>:</td>
-                                    <td>  {{order.project}} </td>
-                                  </tr>
-                                  <tr>
-                                    <th>Project Description</th><td>:</td>
-                                    <td>{{order.description}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Date</th><td>:</td>
-                                    <td>{{order.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                                  </tr>
-                                  <tr>
-                                    <th>Optional Services</th><td>:</td>
-                                    <td>
-                                      <span *ngIf="optService(order.optService).security_vulnerability">Security Vulnerability<br/></span>
-                                      <span *ngIf="optService(order.optService).web_app">Web Application<br/></span>
-                                      <span *ngIf="optService(order.optService).android">Android<br/></span>
-                                      <span *ngIf="optService(order.optService).continuous_scanning">Continuous Scanning</span>
+                                    <td class="align-middle"><i class="fas fa-bell"></i></td>
+                                    <td class="align-middle">You have {{cartCount}} items in cart</td>
+                                    <td class="text-right">
+                                      <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <th>Price</th><td>:</td>
-                                    <td> {{order.price}} </td>
-                                  </tr>
-                                  <tr>
-                                    <th>Message </th><td>:</td>
-                                    <td> {{order.message}} </td>
-                                  </tr>
-                                  </tbody>
+                                </tbody>
+                              </table>
+                        </mdb-card-body>
+                      </mdb-card>
+              </div>
+
+              <!--second row-->
+
+              <div class="card-deck mt-4 m-4 ml-4 mr-4">
+                  <mdb-card class="mt-4 light-blue lighten-3" >
+                      <mdb-card-header class="h5 text-black font-weight-bold">
+                          <i class="fa fa-star" aria-hidden="true">  </i>  	&nbsp; 	&nbsp;Score Card
+                      </mdb-card-header>
+                        <mdb-card-body>
+                                <table>
+                                        <tbody>
+                                            <tr>
+                                              <td width="20%"><span class="aa">&#65;</span></td>
+                                              <td width="80%">Identify all third-party libraries used by the binary and analyze if they raise any security, license or operational risk.  </td>
+                                            </tr>
+                                        </tbody>
                                 </table>
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" mdbBtn color="primary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      </tr>
-                      </tbody>
-                    </table>
-
-
-
-
-
-                  </div>
-
-
+            
+                        </mdb-card-body>
+                      </mdb-card>
+                
+                      <mdb-card class="mt-4 amber accent-1" >
+                          <mdb-card-header class="h5 text-black font-weight-bold">
+                              <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;Recent Request
+                          </mdb-card-header>
+                            <mdb-card-body>
+            
+                              <mdb-card-text class="text-black-50" >
+                                    <table mdbTable small="true" hover="true">
+                                            <thead>
+                                                <tr class="text-center">
+                                                  <th style="text-align:center">ID</th>
+                                                  <th>Project</th>
+                                                  <th>Status</th>
+                                                  <th>Report</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr *ngFor="let order of myListOrder.slice(0,3); let i = index" class="text-center">
+                                                <td>{{order.id}}</td>
+                                                <td>{{order.project}}</td>
+                                                <td><mdb-badge
+                                                  pill="true"
+                                                  [success]="order.status == 'done'"
+                                                  [warning]="order.status == 'scanning' || order.status == 'approved'"
+                                                  [danger]="order.status == 'follow up'">
+                                                  {{order.status}}
+                                                </mdb-badge></td>
+                                                <td><i class="far fa-file"></i></td>
+                                              </tr>
+                                            </tbody>
+                                        </table>
+                                     </mdb-card-text>
+                            </mdb-card-body>
+                          </mdb-card>
+                    <div class="col col-4" >
+              
+                    </div>
                 </div>
-
-
-
-
-          </mdb-card-text>
         </mdb-card-body>
       </mdb-card>
     </div>
-    <div class="col">
-        <app-widget [widget]="true"></app-widget>
-    </div>
+
   </div>
 </div>
 <br />
