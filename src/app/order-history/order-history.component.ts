@@ -3,8 +3,8 @@ import {OrderService} from '../../services/order.service';
 import * as FileSaver from 'file-saver';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import {MdbTableDirective, MdbTablePaginationComponent} from 'ng-uikit-pro-standard';
-
+import {MdbTableDirective, MdbTablePaginationComponent, MDBModalRef, MDBModalService} from 'ng-uikit-pro-standard';
+import { OrderInfo } from '../../models/order-info';
 
 @Component({
   selector: 'app-order-history',
@@ -16,14 +16,24 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(MdbTableDirective, { static: true }) mdbTable: MdbTableDirective;
   elements: any = [];
   previous: any = [];
+  modalData: any = [];
   headElements = ['Order ID', 'Scan Type', 'Project', 'Status','Date', 'Report'];
+  modalId: any;
+  
 
   myListOrder;
   handlerSubscribeOrder;
   constructor(
     private cdRef: ChangeDetectorRef,
     private myOrder: OrderService,
-    private http: HttpClient) { }
+    private http: HttpClient,) { }
+
+    openModal(el:any) {
+      this.modalData = el;
+    //  console.log("here i am 2"+JSON.stringify(this.modalData));      
+    }
+
+
 
   ngOnInit() {
     for (let i = 1; i <= 15; i++) {
@@ -112,11 +122,20 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  optService(s: any) {
+  optService() {
       let js: any;
-      js = JSON.parse(s);
+      js = this.modalData.optService;
+      // this.modalData
+        // js = js;
 
-      return js;
+        // {"security_vulnerability":true,
+        // "web_app":false,
+        // "android":false,
+        // "continuous_scanning":false
+        // } 
+        
+        
+      return  js;
   }
 
   myModal(s: any) {
