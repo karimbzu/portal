@@ -2,22 +2,22 @@
 
  <app-header-new></app-header-new>
  <div class="container-fluid">
- 
+
    <div class="row">
      <div class="col col-9">
        <mdb-card >
          <mdb-card-header class="centurionBlue h5 text-white">
            <mdb-icon fas icon="history" class="pr-1"></mdb-icon>
-          
+
            Order History
          </mdb-card-header>
          <mdb-card-body>
            <mdb-card-text>
- 
-               
+
+
   <div class="row">
       <div class="col-12">
-  
+
       <table mdbTable #tableEl="mdbTable" class="z-depth-1">
         <thead>
           <tr class="text-center">
@@ -27,14 +27,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let el of myListOrder; let i = index; " class="text-center"  >
-          <td class="align-middle" class="orderId"   (click)="basicModal.show() ;modalId=el.id; openModal(el)" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-              {{el.id}}  
+          <td class="align-middle" class="orderId" (click)="showTicketDialog(i); basicModal.show()"
+              *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+              {{el.id}}
           </td>
           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.scanType}}</td>
           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-  
-            
             <mdb-badge
               pill="true"
               [success]="el.status == 'done'"
@@ -45,8 +44,8 @@
           </td>
            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-            
-  
+
+
            <div *ngIf="el.status == 'done'">
               <mdb-icon far icon="file-archive" size="2x"
                         class="text-warning downloadReport" mdbTooltip="Download Raw Report"
@@ -56,7 +55,7 @@
                         (click)="downloadSelfFile(el.reportId)"></mdb-icon>
             </div>
            </td>
-          
+
         </tr>
         </tbody>
         <tfoot class="grey lighten-5 w-100">
@@ -68,11 +67,11 @@
         </tfoot>
       </table>
     </div>
-   
-   
+
+
   </div>
-     
- 
+
+
            </mdb-card-text>
          </mdb-card-body>
        </mdb-card>
@@ -83,9 +82,9 @@
    </div>
  </div>
  <br />
- 
 
-<!--  
+
+<!--
   <div class="row">
     <div class="col-12">
 
@@ -105,7 +104,7 @@
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
 
-          
+
           <mdb-badge
             pill="true"
             [success]="el.status == 'done'"
@@ -116,7 +115,7 @@
         </td>
          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          
+
 
          <div *ngIf="el.status == 'done'">
             <mdb-icon far icon="file-archive" size="2x"
@@ -193,12 +192,12 @@
       </tfoot>
     </table>
   </div>
- 
- 
+
+
 </div>
     -->
-  
-    
+
+
      <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
            aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable" role="document">
@@ -208,7 +207,7 @@
               <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
                 <span aria-hidden="true">×</span>
               </button>
-  
+
             </div>
             <div class="modal-body">
               <h4 class="modal-title text-center" id="myModalLabel">
@@ -231,11 +230,10 @@
                 <tr>
                   <th>Optional Services</th><td>:</td>
                   <td>
-                      <!-- <span *ngIf="optService().security_vulnerability">Security Vulnerability<br/></span>
-                      <span *ngIf="optService().web_app">Web Application<br/></span>
-                      <span *ngIf="optService().android">Android<br/></span>
-                      <span *ngIf="optService().continuous_scanning">Continuous Scanning</span> -->
-                 
+                      <span *ngIf="optServiceData.security_vulnerability">Security Vulnerability<br/></span>
+                      <span *ngIf="optServiceData.web_app">Web Application<br/></span>
+                      <span *ngIf="optServiceData.android">Android<br/></span>
+                      <span *ngIf="optServiceData.continuous_scanning">Continuous Scanning</span>
                   </td>
                 </tr>
                 <tr>

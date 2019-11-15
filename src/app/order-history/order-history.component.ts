@@ -17,9 +17,15 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
   elements: any = [];
   previous: any = [];
   modalData: any = [];
-  headElements = ['Order ID', 'Scan Type', 'Project', 'Status','Date', 'Report'];
+  optServiceData: any = {
+    security_vulnerability: false,
+    web_app: false,
+    android: false,
+    continuous_scanning: false
+  };
+  headElements = ['Ticket ID', 'Scan Type', 'Project', 'Status','Date', 'Report'];
   modalId: any;
-  
+
 
   myListOrder;
   handlerSubscribeOrder;
@@ -30,7 +36,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
 
     openModal(el:any) {
       this.modalData = el;
-    //  console.log("here i am 2"+JSON.stringify(this.modalData));      
+    //  console.log("here i am 2"+JSON.stringify(this.modalData));
     }
 
 
@@ -46,7 +52,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
     this.refreshList();
- 
+
   }
 
   ngAfterViewInit() {
@@ -122,7 +128,10 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
-  optService() {
+   optService() {
+    // return this.modalData.optService;
+    /*
+
       let js: any;
       js = this.modalData.optService;
       // this.modalData
@@ -132,14 +141,23 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
         // "web_app":false,
         // "android":false,
         // "continuous_scanning":false
-        // } 
-        
-        
+        // }
+
+
       return  js;
+     */
   }
 
   myModal(s: any) {
     return 'myModal' + s;
+  }
+
+  showTicketDialog(id) {
+    this.modalData = this.myListOrder[id];
+    this.optServiceData = JSON.parse(this.modalData.optService);
+    this.openModal(this.modalData);
+
+    // <!--(click)="basicModal.show() ;modalId=el.id; openModal(el)"-->
   }
 
 
