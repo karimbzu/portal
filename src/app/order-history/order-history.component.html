@@ -1,23 +1,21 @@
-
-
  <app-header-new></app-header-new>
  <div class="container-fluid">
- 
+
    <div class="row">
      <div class="col col-9">
        <mdb-card >
          <mdb-card-header class="centurionBlue h5 text-white">
            <mdb-icon fas icon="history" class="pr-1"></mdb-icon>
-          
+
            Order History
          </mdb-card-header>
          <mdb-card-body>
            <mdb-card-text>
- 
-               
+
+
   <div class="row">
       <div class="col-12">
-  
+
       <table mdbTable #tableEl="mdbTable" class="z-depth-1">
         <thead>
           <tr class="text-center">
@@ -26,15 +24,14 @@
            </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let el of myListOrder; let i = index" class="text-center">
-          <td class="align-middle" class="orderId" (click)="basicModal.show()" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <tr *ngFor="let el of myListOrder; let i = index; " class="text-center"  >
+          <td class="align-middle" class="orderId" (click)="showTicketDialog(i); basicModal.show()"
+              *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
               {{el.id}}
           </td>
           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.scanType}}</td>
           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-  
-            
             <mdb-badge
               pill="true"
               [success]="el.status == 'done'"
@@ -45,8 +42,8 @@
           </td>
            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-            
-  
+
+
            <div *ngIf="el.status == 'done'">
               <mdb-icon far icon="file-archive" size="2x"
                         class="text-warning downloadReport" mdbTooltip="Download Raw Report"
@@ -56,61 +53,7 @@
                         (click)="downloadSelfFile(el.reportId)"></mdb-icon>
             </div>
            </td>
-           <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-           aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <label class="tajukModal"> Ticket Information</label>
-              <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-                <span aria-hidden="true">×</span>
-              </button>
-  
-            </div>
-            <div class="modal-body">
-              <h4 class="modal-title text-center" id="myModalLabel">
-                Your Order Request ID: <span class="badge badge-warning">{{el.id}}</span>
-              </h4>
-              <table mdbTable>
-                <tbody>
-                <tr>
-                  <th>Project Name</th> <td>:</td>
-                  <td>  {{el.project}} </td>
-                </tr>
-                <tr>
-                  <th>Project Description</th><td>:</td>
-                  <td>{{el.description}}</td>
-                </tr>
-                <tr>
-                  <th>Date</th><td>:</td>
-                  <td>{{el.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                </tr>
-                <tr>
-                  <th>Optional Services</th><td>:</td>
-                  <td>
-                    <span *ngIf="optService(el.optService).security_vulnerability">Security Vulnerability<br/></span>
-                    <span *ngIf="optService(el.optService).web_app">Web Application<br/></span>
-                    <span *ngIf="optService(el.optService).android">Android<br/></span>
-                    <span *ngIf="optService(el.optService).continuous_scanning">Continuous Scanning</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th>Price</th><td>:</td>
-                  <td> {{el.price}} </td>
-                </tr>
-                <tr>
-                  <th>Message </th><td>:</td>
-                  <td> {{el.message}} </td>
-                </tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="modal-footer">
-              <button type="button" mdbBtn color="primary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
+
         </tr>
         </tbody>
         <tfoot class="grey lighten-5 w-100">
@@ -122,11 +65,11 @@
         </tfoot>
       </table>
     </div>
-   
-   
+
+
   </div>
-     
- 
+
+
            </mdb-card-text>
          </mdb-card-body>
        </mdb-card>
@@ -137,121 +80,63 @@
    </div>
  </div>
  <br />
- 
 
-<!--  
-  <div class="row">
-    <div class="col-12">
 
-    <table mdbTable #tableEl="mdbTable" class="z-depth-1">
-      <thead>
-        <tr class="text-center">
-          <th *ngFor="let head of headElements; let i = index" scope="col">{{head}}
-          </th>
-         </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let el of myListOrder; let i = index" class="text-center">
-        <td class="align-middle" class="orderId" (click)="basicModal.show()" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-            {{el.id}}
-        </td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.scanType}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
-        <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
 
-          
-          <mdb-badge
-            pill="true"
-            [success]="el.status == 'done'"
-            [warning]="el.status == 'scanning' || el.status == 'approved'"
-            [danger]="el.status == 'follow up'">
-            {{el.status}}
-          </mdb-badge>
-        </td>
-         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-         <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-          
+     <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+           aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable" role="document">
+          <div class="modal-content">
+            <!-- <div class="modal-header">
+                <label class="tajukModal text-warning"> Ticket Information</label>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                <span aria-hidden="true">×</span>
+              </button>
 
-         <div *ngIf="el.status == 'done'">
-            <mdb-icon far icon="file-archive" size="2x"
-                      class="text-warning downloadReport" mdbTooltip="Download Raw Report"
-                      (click)="downloadFile(el.originalName,el.reportId)"></mdb-icon>
-            <mdb-icon far icon="file-pdf" size="2x" *ngIf="el.self_filename"
-                      class="ml-2 text-danger downloadReport" mdbTooltip="Download Recommendation Report"
-                      (click)="downloadSelfFile(el.reportId)"></mdb-icon>
-          </div>
-         </td>
-         <div mdbModal #basicModal="mdbModal" class="modal fade bottom" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-         aria-hidden="true">
-      <div class="modal-dialog modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <label class="tajukModal"> Ticket Information</label>
-            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-              <span aria-hidden="true">×</span>
-            </button>
+            </div> -->
+            <div class="modal-body">
+                <h2 class="tajukModal text-center"> Ticket Information</h2>
+              <h4 class="modal-title text-center" id="myModalLabel">
+                Your Ticket Request ID: <span class="badge badge-warning">{{modalData.id}}</span>
+              </h4>
+              <table mdbTable>
+                <tbody>
+                <tr>
+                  <th>Project Name</th> <td>:</td>
+                  <td>  {{modalData.project}} </td>
+                </tr>
+                <tr>
+                  <th>Project Description</th><td>:</td>
+                  <td>{{modalData.description}}</td>
+                </tr>
+                <tr>
+                  <th>Date</th><td>:</td>
+                  <td>{{modalData.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                </tr>
+                <tr>
+                  <th>Optional Services</th><td>:</td>
+                  <td>
+                      <span *ngIf="optServiceData.security_vulnerability">Security Vulnerability<br/></span>
+                      <span *ngIf="optServiceData.web_app">Web Application<br/></span>
+                      <span *ngIf="optServiceData.android">Android<br/></span>
+                      <span *ngIf="optServiceData.continuous_scanning">Continuous Scanning</span>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Price</th><td>:</td>
+                  <td> {{modalData.price}} </td>
+                </tr>
+                <tr>
+                  <th>Message </th><td>:</td>
+                  <td> {{modalData.message}} </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+               <button type="button" mdbBtn rounded="true" class="mt-4 centurionBlue text-white mx-auto "  (click)="basicModal.hide()" mdbWavesEffect  >Close</button>
 
-          </div>
-          <div class="modal-body">
-            <h4 class="modal-title text-center" id="myModalLabel">
-              Your Order Request ID: <span class="badge badge-warning">{{el.id}}</span>
-            </h4>
-            <table mdbTable>
-              <tbody>
-              <tr>
-                <th>Project Name</th> <td>:</td>
-                <td>  {{el.project}} </td>
-              </tr>
-              <tr>
-                <th>Project Description</th><td>:</td>
-                <td>{{el.description}}</td>
-              </tr>
-              <tr>
-                <th>Date</th><td>:</td>
-                <td>{{el.logDateTime  | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-              </tr>
-              <tr>
-                <th>Optional Services</th><td>:</td>
-                <td>
-                  <span *ngIf="optService(el.optService).security_vulnerability">Security Vulnerability<br/></span>
-                  <span *ngIf="optService(el.optService).web_app">Web Application<br/></span>
-                  <span *ngIf="optService(el.optService).android">Android<br/></span>
-                  <span *ngIf="optService(el.optService).continuous_scanning">Continuous Scanning</span>
-                </td>
-              </tr>
-              <tr>
-                <th>Price</th><td>:</td>
-                <td> {{el.price}} </td>
-              </tr>
-              <tr>
-                <th>Message </th><td>:</td>
-                <td> {{el.message}} </td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="modal-footer">
-            <button type="button" mdbBtn color="primary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-      </tr>
-      </tbody>
-      <tfoot class="grey lighten-5 w-100">
-      <tr>
-        <td colspan="4">
-          <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="myListOrder"></mdb-table-pagination>
-        </td>
-      </tr>
-      </tfoot>
-    </table>
-  </div>
- 
- 
-</div>
-    -->
-
-
-  
- 
