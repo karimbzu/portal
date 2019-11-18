@@ -3,6 +3,9 @@ import {OrderService} from '../../services/order.service';
 import * as FileSaver from 'file-saver';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import {CartService} from '../../services/cart.service';
+
+
 
 @Component({
   selector: 'app-my-account',
@@ -12,11 +15,14 @@ import { environment } from '../../environments/environment';
 export class MyAccountComponent implements OnInit, OnDestroy {
   myListOrder;
   handlerSubscribeOrder;
+  cartCount: number;
   constructor(
+    private myCart: CartService,
     private myOrder: OrderService,
     private http: HttpClient) { }
 
   ngOnInit() {
+    this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
     this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
     this.refreshList();
   }
