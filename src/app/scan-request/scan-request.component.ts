@@ -371,7 +371,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
   handleStepChange() {
     // Set the submit button flag
-    this.flagSubmit = this.stepper.activeStepIndex >= 4;
+    this.flagSubmit = this.scanType === 'source_code' ? this.stepper.activeStepIndex >= 4 : this.stepper.activeStepIndex >= 2;
 
     if (this.stepper.activeStepIndex === 2 && this.flagNeedValidation) { this.handleStep3(); }
   }
