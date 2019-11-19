@@ -61,7 +61,8 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
     type: new FormControl('repo'),
     repoURL: new FormControl(''),
     tokenId: new FormControl(0),
-    uploadId: new FormControl(0)
+    uploadId: new FormControl(0),
+    dummy: new FormControl(0, [Validators.min(1)])
 //  }, {validators: validateStep2, updateOn: 'blur'});
   });
 
@@ -236,13 +237,16 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
 
     // Validate
     if (val === 'repo') {
-      this.myScanItemForm.setErrors(null);
+      // this.myScanItemForm.setErrors(null);
+      this.myScanItemForm.patchValue({dummy: 2});
     } else {
       const uploadId = this.myScanItemForm.get('uploadId');
       if (uploadId.value === 0) {
-        this.myScanItemForm.setErrors({uploadFile: true});
+        // this.myScanItemForm.setErrors({uploadFile: true});
+        this.myScanItemForm.patchValue({dummy: 0});
       } else {
-        this.myScanItemForm.setErrors(null);
+        // this.myScanItemForm.setErrors(null);
+        this.myScanItemForm.patchValue({dummy: 2});
       }
     }
 
@@ -325,7 +329,10 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         this.myToast.success(res.info.name, 'Upload File');
         // @ts-ignore
         this.uploadId = res.uploadId;
-        this.myScanItemForm.patchValue({uploadId: this.uploadId});
+        this.myScanItemForm.patchValue({
+          uploadId: this.uploadId,
+          dummy: 2                    // set the value to 2 to force the form to be ok
+        });
       })
       .catch(err => {
         console.error (err);
@@ -355,6 +362,9 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
       .finally(() => {
         this.file = null;
         this.freshFile = true;
+
+        // Reset the dummy value to invalidate the form
+        this.myScanItemForm.patchValue({dummy: 0});
       });
   }
 
