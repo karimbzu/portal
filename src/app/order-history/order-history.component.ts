@@ -23,7 +23,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     android: false,
     continuous_scanning: false
   };
-  headElements = ['Ticket ID', 'Scan Type', 'Project', 'Status','Date', 'Report'];
+  headElements = ['Ticket ID', 'Scan Type', 'Project', 'Status', 'Date', 'Report'];
   modalId: any;
 
 
@@ -32,14 +32,13 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(
     private cdRef: ChangeDetectorRef,
     private myOrder: OrderService,
-    private http: HttpClient,) { }
+    private http: HttpClient) {
+  }
 
-    openModal(el:any) {
-      this.modalData = el;
-    //  console.log("here i am 2"+JSON.stringify(this.modalData));
-    }
-
-
+  openModal(el: any) {
+    this.modalData = el;
+  //  console.log("here i am 2"+JSON.stringify(this.modalData));
+  }
 
   ngOnInit() {
     for (let i = 1; i <= 15; i++) {
@@ -52,7 +51,6 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
 
     this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
     this.refreshList();
-
   }
 
   ngAfterViewInit() {
@@ -93,15 +91,6 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
    }).subscribe(data => {
     const blob = new Blob([data.body], { type: 'application/zip' });
     FileSaver.saveAs(blob, s);
-
-    /*
-      var blob = new Blob([respData.body],   { type: 'application/zip' });
-      var url = window.URL.createObjectURL(blob);
-      var pwa = window.open(url);
-      if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
-          alert('Please disable your Pop-up blocker and try again.');
-      }
- */
   }, error => {
      console.log(error);
     });
