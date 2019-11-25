@@ -31,7 +31,7 @@ export class RequestService {
   });
   currentRequestData = this.requestData.asObservable();
 
-  private tokenValue =   localStorage.getItem('authToken');
+  private tokenValue =   sessionStorage.getItem('authToken');
   private uploader: BehaviorSubject<FileUploader> = new BehaviorSubject(new FileUploader({
     url: environment.uploadUrl + 'ticketing/upload',
     disableMultipart : false,
@@ -83,7 +83,7 @@ export class RequestService {
    * using GET /ticketing/access_token API
    */
   getListAccessToken() {
-    if (!localStorage.getItem('authToken')) {
+    if (!sessionStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
       return;
     }
@@ -92,7 +92,7 @@ export class RequestService {
     this.http.get(environment.baseUrl + 'ticketing/access_token', {
       headers: new HttpHeaders()
         .set('Authorization', environment.oipToken)
-        .set('x-auth-token', localStorage.getItem('authToken')),
+        .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
       this.listAuthToken.next(response.body.info);
@@ -108,7 +108,7 @@ export class RequestService {
    */
   addAccessToken(label, token) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('addAccessToken', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -123,7 +123,7 @@ export class RequestService {
       this.http.post(environment.baseUrl + 'ticketing/access_token', formData, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => {
         // Since it is successful, we need to refresh the list
@@ -142,7 +142,7 @@ export class RequestService {
    */
   uploadFile(file) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('uploadFile', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -177,7 +177,7 @@ export class RequestService {
    */
   deleteUploadedFile(uploadId) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('deleteUploadedFile', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -185,7 +185,7 @@ export class RequestService {
       this.http.delete(environment.baseUrl + 'ticketing/upload/' + uploadId, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => {
         resolve(response.body);
@@ -199,7 +199,7 @@ export class RequestService {
    */
   evaluateCheckRepo(repoURL, tokenId) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('deleteUploadedFile', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -212,7 +212,7 @@ export class RequestService {
       this.http.post(environment.baseUrl + 'ticketing/evaluate/check/repo', formData, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => resolve(response.body.path), err => reject(new Error(err.error.message)));
     });
@@ -224,7 +224,7 @@ export class RequestService {
    */
   evaluateCheckFile(uploadId) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('deleteUploadedFile', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -236,7 +236,7 @@ export class RequestService {
       this.http.post(environment.baseUrl + 'ticketing/evaluate/check/file', formData, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe(
         (response: any) => resolve(response.body.path),
@@ -251,7 +251,7 @@ export class RequestService {
    */
   evaluateCheckLanguage(path) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('deleteUploadedFile', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -263,7 +263,7 @@ export class RequestService {
       this.http.post(environment.baseUrl + 'ticketing/evaluate/check/language', formData, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => resolve(response.body), err => reject(new Error(err.error.message)));
     });
@@ -275,7 +275,7 @@ export class RequestService {
    */
   evaluateClean() {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('deleteUploadedFile', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -283,7 +283,7 @@ export class RequestService {
       this.http.delete(environment.baseUrl + 'ticketing/evaluate/clean', {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => resolve(response.body), err => reject(new Error(err.error.message)));
     });

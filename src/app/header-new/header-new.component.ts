@@ -25,6 +25,7 @@ export class HeaderNewComponent implements OnInit, OnDestroy {
   handleLogout() {
     // Clear out the userInfo and authToken
     localStorage.clear();
+    sessionStorage.clear();
 
     // Redirect
     this.router.navigate(['/login']);
