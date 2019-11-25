@@ -1,8 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild, HostListener, AfterViewInit, ChangeDetectorRef} from '@angular/core';
 import {OrderService} from '../../services/order.service';
-import * as FileSaver from 'file-saver';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from '../../environments/environment';
 import {MdbTableDirective, MdbTablePaginationComponent, MDBModalRef, MDBModalService} from 'ng-uikit-pro-standard';
 import { OrderInfo } from '../../models/order-info';
 
@@ -75,46 +73,12 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     }, 60000);
   }
 
-  downloadFile(s: any, reportId: any) {
-    if (!localStorage.getItem('authToken')) {
-      console.error ('getListAccessToken', 'No authToken available for this user');
-      return;
-    }
-
-  // Fetch the data
-    this.http.get(environment.baseUrl + 'ticketing/report/' + reportId, {
-    headers: new HttpHeaders()
-      .set('Authorization', environment.oipToken)
-      .set('x-auth-token',  localStorage.getItem('authToken')),
-    observe: 'response',
-    responseType: 'blob'
-   }).subscribe(data => {
-    const blob = new Blob([data.body], { type: 'application/zip' });
-    FileSaver.saveAs(blob, s);
-  }, error => {
-     console.log(error);
-    });
+  downloadFile(fileName, reportId) {
+    this.myOrder.getReport(reportId, fileName);
   }
 
-  downloadSelfFile(reportId: any) {
-    if (!localStorage.getItem('authToken')) {
-      console.error ('getListAccessToken', 'No authToken available for this user');
-      return;
-    }
-
-    // Fetch the data
-    this.http.get(environment.uploadUrl + 'ticketing/self/report/' + reportId, {
-      headers: new HttpHeaders()
-        .set('Authorization', environment.oipToken)
-        .set('x-auth-token',  localStorage.getItem('authToken')),
-      observe: 'response',
-      responseType: 'blob'
-    }).subscribe(data => {
-      const blob = new Blob([data.body], { type: 'application/pdf' });
-      FileSaver.saveAs(blob, 'report.pdf');
-    }, error => {
-      console.log(error);
-    });
+  downloadSelfFile(reportId) {
+    this.myOrder.getSelfReport(reportId);
   }
 
    optService() {

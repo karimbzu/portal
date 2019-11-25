@@ -28,7 +28,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Continously refresh the list every 60 seconds
+   * Continuously refresh the list every 60 seconds
    */
   refreshList() {
     setTimeout(() => {
