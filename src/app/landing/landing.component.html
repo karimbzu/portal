@@ -93,15 +93,57 @@
 
 <section mdbScrollSpyElement="landingHeader" id="pricing" class="view myPricing">
   <div class="container">
-    <h1>Pricing</h1>
-    <p>This is a test</p>
+    <table mdbTable borderless="true" style="height: 100vh">
+      <tr>
+        <td class="align-middle text-center">
+          <h1 class="mb-3">Frequently Asked Questions</h1>
+          <mdb-accordion [multiple]="false">
+            <mdb-accordion-item [collapsed]="false" [customClass]="'border-0 mb-2'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">Who can use this service?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">At the moment, Centurion is open for all TM developers. Please take this
+                  opportunity to scan your source codes and applications.</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item [customClass]="'border-0 mb-2'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">What are the code that can be scan?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">At the moment, we support the mainstream programming languages such as
+                  JavaScript, Java, PHP, Python, Swift, C/C++. If you are using different languages, please
+                  contact us so we can have it supported.</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item [customClass]="'border-0 mb-2'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">How much price of the scan?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">It's FREE until further notice. Seriously, its FREE!</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item [customClass]="'border-0'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">How long can i get the result?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">It depends on the complexity of your code. You should get the result within 1 - 7 days.</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+          </mdb-accordion>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
 
 <section mdbScrollSpyElement="landingHeader" id="contact" class="view myContact">
   <div class="container">
-    <h1>Contact Us</h1>
-    <p>This is a test</p>
+    <table mdbTable borderless="true" style="height: 100vh">
+      <tr>
+        <td class="align-middle text-center">
+          <h1>Contact Us</h1>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
 
