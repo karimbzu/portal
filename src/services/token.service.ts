@@ -14,7 +14,7 @@ import { environment } from '../environments/environment';
   
    
     constructor(public http: HttpClient) {
-     
+     this.getTokenBalance();
      }
 
      getTokenBalance() {
@@ -24,9 +24,9 @@ import { environment } from '../environments/environment';
         }
     
         // Fetch the data
-        this.http.get(environment.baseUrl + 'ticketing/cart', {
+        this.http.get(environment.baseUrl + 'ticketing/token/balance', {
           headers: new HttpHeaders()
-            // .set('Authorization', environment.oipToken)
+            .set('Authorization', environment.oipToken)
             .set('x-auth-token', localStorage.getItem('authToken')),
           observe: 'response'
         }).subscribe((response: any) => {
@@ -36,9 +36,10 @@ import { environment } from '../environments/environment';
             // this.tokenAmount.next (response.body.info.length);
     
             // Update the list
-            this.tokenAmount.next (response.body.info);
+            this.tokenAmount.next (response.body.info.amount);
           }
         });
       }
+
 }  
 
