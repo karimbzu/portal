@@ -1,3 +1,85 @@
+<header class="mh-100">
+  <mdb-navbar SideClass="navbar fixed-top navbar-light navbar-expand-lg scrolling-navbar" [containerInside]="true">
+    <mdb-navbar-brand>
+      <div class="navbar-brand">
+        <img src="../../assets/images/centurionlogo.png" class="home" height="32" routerLink="/dashboard" />
+      </div>
+    </mdb-navbar-brand>
+
+    <links>
+      <ul class="navbar-nav ml-auto" mdbScrollSpy="landingHeader">
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="solution">Home</span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="product">Product</span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="pricing">Pricing</span>
+        </li>
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="contact">Contact Us</span>
+        </li>
+      </ul>
+      <button mdbBtn rounded="true" class="centurionOrange text-white col-2" routerLink="/login">Login</button>
+    </links>
+  </mdb-navbar>
+  <section mdbScrollSpyElement="landingHeader" id="solution" class="mySolution">
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <div class="flex-fill align-middle default-color">Item 1</div>
+        <div class="flex-fill">Item 2</div>
+      </div>
+
+
+
+<!--
+      <div class="row">
+        <br />
+      </div>
+
+      <div class="row align-middle">
+        <div class="col-lg">
+          <h1 class="text-primary">Hack Proof Your Code</h1>
+          <p>Apps are crucial assets for a company. Centurion combines multiple security tools under a single user-friendly interface to handle all security needs of today's busy developers.</p>
+        </div>
+        <div class="col-lg">
+          <img src="../../assets/images/landing-bg-1.jpg" width="100%">
+        </div>
+      </div>
+-->
+    </div>
+  </section>
+</header>
+
+<!--<section class="myProduct"></section>-->
+<section mdbScrollSpyElement="landingHeader" id="product" class="myProduct">
+  <div class="container pt-5">
+    <div class="d-flex default-color mt-2">
+      <h1 class="text-center">Protection Designed For You</h1>
+    </div>
+
+  </div>
+</section>
+
+<!--<section class="myPricing"></section>-->
+<section mdbScrollSpyElement="landingHeader" id="pricing" class="myPricing">
+  <div class="container pt-5">
+    <h1>Pricing</h1>
+    <p>This is a test</p>
+  </div>
+</section>
+
+<!--<section class="myContact"></section>-->
+<section mdbScrollSpyElement="landingHeader" id="contact" class="myContact">
+  <div class="container pt-5">
+    <h1>Contact Us</h1>
+    <p>This is a test</p>
+  </div>
+</section>
+
+
+<!--
 <header class="h-100">
   <mdb-navbar
     SideClass="navbar fixed-top navbar-expand-lg centurionDarkBlue navbar-dark scrolling-navbar intro-fixed-nav"
@@ -60,3 +142,4 @@
     <p>Phone: 03 8888 3959</p>
   </div>
 </section>
+-->
