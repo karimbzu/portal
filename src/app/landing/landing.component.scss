@@ -1,5 +1,14 @@
-#solution, #product, #pricing, #contact {
+.myText {
+  font-size: 1.25rem;
+}
+
+#solution, #product {
   height: 100vh;
+}
+
+#pricing, #contact {
+  height: 100vh;
+  padding-top: 50px;
 }
 
 .myPricing, .mySolution {
@@ -7,7 +16,7 @@
 }
 
 .myProduct, .myContact {
-  background-color: honeydew;
+  background-color: #e1f5fe;
 }
 
 .navbar-nav .nav-link.active {
