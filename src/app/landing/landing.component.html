@@ -12,10 +12,10 @@
           <span class="nav-link" mdbScrollSpyLink="solution">Home</span>
         </li>
         <li class="nav-item">
-          <span class="nav-link" mdbScrollSpyLink="product">Product</span>
+          <span class="nav-link" mdbScrollSpyLink="product">Features</span>
         </li>
         <li class="nav-item">
-          <span class="nav-link" mdbScrollSpyLink="pricing">Pricing</span>
+          <span class="nav-link" mdbScrollSpyLink="pricing">FAQ</span>
         </li>
         <li class="nav-item">
           <span class="nav-link" mdbScrollSpyLink="contact">Contact Us</span>
@@ -26,7 +26,7 @@
   </mdb-navbar>
 </header>
 
-<section mdbScrollSpyElement="landingHeader" id="solution" class="view mySolution">
+<section mdbScrollSpyWindow="landingHeader" id="solution" class="view mySolution">
   <div class="container">
     <table mdbTable borderless="true" style="height: 100vh">
       <tr>
@@ -35,14 +35,16 @@
           <p>Apps are crucial assets for a company. Centurion combines multiple security tools under a single user-friendly interface to handle all security needs of today's busy developers.</p>
         </td>
         <td class="align-middle text-center">
-          <img src="../../assets/images/landing-bg-1.jpg" width="100%">
+          <mdb-card>
+            <mdb-card-img src="../../assets/images/landing-bg-1.jpg" ></mdb-card-img>
+          </mdb-card>
         </td>
       </tr>
     </table>
   </div>
 </section>
 
-<section mdbScrollSpyElement="landingHeader" id="product" class="view myProduct">
+<section mdbScrollSpyWindow="landingHeader" id="product" class="view myProduct">
   <div class="container">
     <table mdbTable borderless="true" style="height: 100vh">
       <tr>
@@ -84,14 +86,13 @@
               </mdb-card-body>
             </mdb-card>
           </div>
-
         </td>
       </tr>
     </table>
   </div>
 </section>
 
-<section mdbScrollSpyElement="landingHeader" id="pricing" class="view myPricing">
+<section mdbScrollSpyWindow="landingHeader" id="pricing" class="view myPricing">
   <div class="container">
     <table mdbTable borderless="true" style="height: 100vh">
       <tr>
@@ -135,80 +136,41 @@
   </div>
 </section>
 
-<section mdbScrollSpyElement="landingHeader" id="contact" class="view myContact">
+<section mdbScrollSpyWindow="landingHeader" id="contact" class="view myContact">
   <div class="container">
     <table mdbTable borderless="true" style="height: 100vh">
       <tr>
         <td class="align-middle text-center">
-          <h1>Contact Us</h1>
+          <mdb-card>
+            <mdb-card-body>
+              <mdb-card-title class="h1">Need Help? Contact Us</mdb-card-title>
+              <div class="d-flex my-3">
+                <div class="flex-fill">
+                  <mdb-icon far icon="envelope" size="3x"></mdb-icon>
+                  <p class="myText">centurion@tmrnd.com.my</p>
+                </div>
+                <div class="flex-fill">
+                  <mdb-icon fas icon="phone" size="3x"></mdb-icon>
+                  <p class="myText">+603 88839 5454</p>
+                </div>
+                <div class="flex-fill">
+                  <mdb-icon fas icon="map-marker-alt" size="3x"></mdb-icon>
+                  <p class="myText">
+                    Telekom Research & Development <br />
+                    TM Innovation Center, <br />
+                    Lingkaran Teknokrat Timur, <br />
+                    63000 Cyberjaya, Selangor
+                  </p>
+                </div>
+              </div>
+
+            </mdb-card-body>
+            <mdb-card-footer class="centurionDarkBlue">
+              <span class="text-white">Copyright &copy; 2019. All Rights Reserved By <a class="text-white-50" href="https://www.tmrnd.com.my">TM RND</a></span>
+            </mdb-card-footer>
+          </mdb-card>
         </td>
       </tr>
     </table>
   </div>
 </section>
-
-
-<!--
-<header class="h-100">
-  <mdb-navbar
-    SideClass="navbar fixed-top navbar-expand-lg centurionDarkBlue navbar-dark scrolling-navbar intro-fixed-nav"
-    [containerInside]="false"
-    #navbar>
-    <mdb-navbar-brand><img src="../../assets/images/centurionlogo3.png" height="48" /></mdb-navbar-brand>
-    <links>
-      <ul mdbScrollSpy="scrollSpyLanding" class="navbar-nav ml-auto">
-        <li class="nav-item active waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-home" class="nav-link text-black">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-about" class="nav-link text-black">About</a>
-        </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-reviews" class="nav-link text-black">Reviews</a>
-        </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-faq" class="nav-link">FAQ</a>
-        </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-contact" class="nav-link">Contact</a>
-        </li>
-      </ul>
-
-      <button mdbBtn type="button" color="success" rounded="true" routerLink="/login" mdbWavesEffect>Try Now!</button>
-    </links>
-  </mdb-navbar>
-  <section id="area-home" mdbScrollSpyElement="scrollSpyLanding">
-    <div class="container pt-5">
-      <h1>Home</h1>
-      <p>Welcome to Centurion Portal</p>
-    </div>
-  </section>
-</header>
-<section id="area-about" class="mx-auto p-3" mdbScrollSpyElement="scrollSpyLanding">
-  <div class="container">
-    <h1>About</h1>
-    <p>Everything you need to know about Centurion</p>
-  </div>
-</section>
-<section id="area-reviews" class="mx-auto p-3" mdbScrollSpyElement="scrollSpyLanding">
-  <div class="container">
-    <h1>Reviews</h1>
-    <p>What our customers say</p>
-  </div>
-</section>
-<section id="area-faq" mdbScrollSpyElement="scrollSpyLanding">
-  <div class="container">
-    <h1>FAQ</h1>
-    <p>Please check out these FAQ</p>
-  </div>
-</section>
-<section id="area-contact" mdbScrollSpyElement="scrollSpyLanding">
-  <div class="container">
-    <h1>Contact Us</h1>
-    <p>Email: harris@tmrnd.com.my</p>
-    <p>Phone: 03 8888 3959</p>
-  </div>
-</section>
--->
