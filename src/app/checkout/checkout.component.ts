@@ -5,6 +5,7 @@ import { CartService } from '../../services/cart.service';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 import {OrderService} from '../../services/order.service';
+import {TokenService} from '../../services/token.service';
 
 @Injectable()
 
@@ -17,6 +18,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   handlerSubscribeTotalItem;
   handlerSubscribeTotalPrice;
   handlerSubscribeCart;
+
 
   validatingForm: FormGroup;
   check: false;
@@ -36,6 +38,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     public router: Router,
     private myOrder: OrderService,
     private myCart: CartService,
+    private myToken: TokenService,
     private myTicket: TicketService) {
     }
 
@@ -100,6 +103,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
   btnPlaceOrder() {
 
+    // console.log(JSON.stringify(this.handlerSubscribeTotalPrice));
+    this.myToken.deductToken(this.totalPrice);
     this.myTicket.placeOrder(this.validatingForm.get('projectname').value, this.validatingForm.get('projectdesc').value)
       .then(res => {
         // Remarks: Redirect to the ticket page
