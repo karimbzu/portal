@@ -23,7 +23,7 @@ export class CartService {
    * Fetch the user cart list
    */
   getListCart() {
-    if (!localStorage.getItem('authToken')) {
+    if (!sessionStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
       return;
     }
@@ -32,7 +32,7 @@ export class CartService {
     this.http.get(environment.baseUrl + 'ticketing/cart', {
       headers: new HttpHeaders()
         .set('Authorization', environment.oipToken)
-        .set('x-auth-token', localStorage.getItem('authToken')),
+        .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
       console.log (response.body.info);
@@ -51,7 +51,7 @@ export class CartService {
    */
   addCart(requestData: Request) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('addAccessToken', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -69,7 +69,7 @@ export class CartService {
       this.http.post(environment.baseUrl + 'ticketing/cart', formData, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => {
         resolve(response.body);
@@ -82,7 +82,7 @@ export class CartService {
    */
   deleteCart(cartId) {
     return new Promise((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('addAccessToken', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -90,7 +90,7 @@ export class CartService {
       this.http.delete(environment.baseUrl + 'ticketing/cart/' + cartId, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => {
         // if successfully delete the cart, the list also need to be updated

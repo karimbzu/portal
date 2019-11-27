@@ -39,7 +39,7 @@ export class TicketService {
    */
   getAcctManagerList() {
     return new Promise ((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('getListAccessToken', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -48,7 +48,7 @@ export class TicketService {
       this.http.get(environment.baseUrl + 'auth/acct_manager', {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => {
         resolve (response.body);
@@ -61,7 +61,7 @@ export class TicketService {
    */
   placeOrder(myProject, myDescription) {
     return new Promise ((resolve, reject) => {
-      if (!localStorage.getItem('authToken')) {
+      if (!sessionStorage.getItem('authToken')) {
         console.error ('getListAccessToken', 'No authToken available for this user');
         reject(new Error('No authToken available for this user'));
       }
@@ -79,7 +79,7 @@ export class TicketService {
       this.http.post(environment.baseUrl + 'ticketing/ticket', formData, {
         headers: new HttpHeaders()
           .set('Authorization', environment.oipToken)
-          .set('x-auth-token', localStorage.getItem('authToken')),
+          .set('x-auth-token', sessionStorage.getItem('authToken')),
         observe: 'response'
       }).subscribe((response: any) => {
         // Regardless of the result, we need to update the cartList

@@ -1,62 +1,176 @@
-<header class="h-100">
-  <mdb-navbar
-    SideClass="navbar fixed-top navbar-expand-lg centurionDarkBlue navbar-dark scrolling-navbar intro-fixed-nav"
-    [containerInside]="false"
-    #navbar>
-    <mdb-navbar-brand><img src="../../assets/images/centurionlogo3.png" height="48" /></mdb-navbar-brand>
+<header class="mh-100">
+  <mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar" [containerInside]="true">
+    <mdb-navbar-brand>
+      <div class="navbar-brand">
+        <img src="../../assets/images/centurionlogo.png" class="home" height="32" routerLink="/dashboard" />
+      </div>
+    </mdb-navbar-brand>
+
     <links>
-      <ul mdbScrollSpy="scrollSpyLanding" class="navbar-nav ml-auto">
-        <li class="nav-item active waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-home" class="nav-link text-black">Home
-            <span class="sr-only">(current)</span>
-          </a>
+      <ul class="navbar-nav ml-auto" mdbScrollSpy="landingHeader">
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="solution">Home</span>
         </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-about" class="nav-link text-black">About</a>
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="product">Features</span>
         </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-reviews" class="nav-link text-black">Reviews</a>
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="pricing">FAQ</span>
         </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-faq" class="nav-link">FAQ</a>
-        </li>
-        <li class="nav-item waves-light" mdbWavesEffect>
-          <a mdbScrollSpyLink="area-contact" class="nav-link">Contact</a>
+        <li class="nav-item">
+          <span class="nav-link" mdbScrollSpyLink="contact">Contact Us</span>
         </li>
       </ul>
-
-      <button mdbBtn type="button" color="success" rounded="true" routerLink="/login" mdbWavesEffect>Try Now!</button>
+      <button mdbBtn rounded="true" class="centurionOrange text-white col-2" routerLink="/login">Login</button>
     </links>
   </mdb-navbar>
-  <section id="area-home" mdbScrollSpyElement="scrollSpyLanding">
-    <div class="container pt-5">
-      <h1>Home</h1>
-      <p>Welcome to Centurion Portal</p>
-    </div>
-  </section>
 </header>
-<section id="area-about" class="mx-auto p-3" mdbScrollSpyElement="scrollSpyLanding">
+
+<section mdbScrollSpyWindow="landingHeader" id="solution" class="view mySolution">
   <div class="container">
-    <h1>About</h1>
-    <p>Everything you need to know about Centurion</p>
+    <table mdbTable borderless="true" style="height: 100vh">
+      <tr>
+        <td class="align-middle text-center myText" width="50%">
+          <h1 class="text-primary font-weight-bolder">Hack Proof Your Code</h1>
+          <p>Apps are crucial assets for a company. Centurion combines multiple security tools under a single user-friendly interface to handle all security needs of today's busy developers.</p>
+        </td>
+        <td class="align-middle text-center">
+          <mdb-card>
+            <mdb-card-img src="../../assets/images/landing-bg-1.jpg" ></mdb-card-img>
+          </mdb-card>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
-<section id="area-reviews" class="mx-auto p-3" mdbScrollSpyElement="scrollSpyLanding">
+
+<section mdbScrollSpyWindow="landingHeader" id="product" class="view myProduct">
   <div class="container">
-    <h1>Reviews</h1>
-    <p>What our customers say</p>
+    <table mdbTable borderless="true" style="height: 100vh">
+      <tr>
+        <td class="align-middle text-center">
+          <h1>The Best Way to Scan Your Code</h1>
+          <p class="myText">Centurion is a great "self service security scan application" to provide your code checkup against
+            vulnerability and many other threats. Centurion is using advance checking mechanism couple with simple
+            user interface to make it a seamless experience for developer to scan their code whether it is for Mobile
+            (Android/iOS) or Web application.</p>
+
+          <div class="card-deck mt-5">
+            <mdb-card class="testimonial-card">
+              <div class="card-up centurionOrange"></div>
+              <div class="avatar mx-auto">
+                <mdb-card-img src="../../assets/images/icons8-color-hand-drawn-100.png" class="rounded-circle"></mdb-card-img>
+              </div>
+              <mdb-card-body>
+                <mdb-card-title class="h4">Source Code Analysis</mdb-card-title>
+              </mdb-card-body>
+            </mdb-card>
+
+            <mdb-card class="testimonial-card">
+              <div class="card-up centurionBlue"></div>
+              <div class="avatar mx-auto">
+                <mdb-card-img src="../../assets/images/icons8-touchscreen-100.png" class="rounded-circle"></mdb-card-img>
+              </div>
+              <mdb-card-body>
+                <mdb-card-title class="h4">Binary Application Analysis</mdb-card-title>
+              </mdb-card-body>
+            </mdb-card>
+
+            <mdb-card class="testimonial-card">
+              <div class="card-up centurionDarkBlue"></div>
+              <div class="avatar mx-auto">
+                <mdb-card-img src="../../assets/images/icons8-internet-100.png" class="rounded-circle"></mdb-card-img>
+              </div>
+              <mdb-card-body>
+                <mdb-card-title class="h4">Web Application Scanning</mdb-card-title>
+              </mdb-card-body>
+            </mdb-card>
+          </div>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
-<section id="area-faq" mdbScrollSpyElement="scrollSpyLanding">
+
+<section mdbScrollSpyWindow="landingHeader" id="pricing" class="view myPricing">
   <div class="container">
-    <h1>FAQ</h1>
-    <p>Please check out these FAQ</p>
+    <table mdbTable borderless="true" style="height: 100vh">
+      <tr>
+        <td class="align-middle text-center">
+          <h1 class="mb-3">Frequently Asked Questions</h1>
+          <mdb-accordion [multiple]="false">
+            <mdb-accordion-item [collapsed]="false" [customClass]="'border-0 mb-2'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">Who can use this service?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">At the moment, Centurion is open for all TM developers. Please take this
+                  opportunity to scan your source codes and applications.</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item [customClass]="'border-0 mb-2'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">What are the code that can be scan?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">At the moment, we support the mainstream programming languages such as
+                  JavaScript, Java, PHP, Python, Swift, C/C++. If you are using different languages, please
+                  contact us so we can have it supported.</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item [customClass]="'border-0 mb-2'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">How much price of the scan?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">It's FREE until further notice. Seriously, its FREE!</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+
+            <mdb-accordion-item [customClass]="'border-0'">
+              <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">How long can i get the result?</mdb-accordion-item-head>
+              <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
+                <p class="myText">It depends on the complexity of your code. You should get the result within 1 - 7 days.</p>
+              </mdb-accordion-item-body>
+            </mdb-accordion-item>
+          </mdb-accordion>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>
-<section id="area-contact" mdbScrollSpyElement="scrollSpyLanding">
+
+<section mdbScrollSpyWindow="landingHeader" id="contact" class="view myContact">
   <div class="container">
-    <h1>Contact Us</h1>
-    <p>Email: harris@tmrnd.com.my</p>
-    <p>Phone: 03 8888 3959</p>
+    <table mdbTable borderless="true" style="height: 100vh">
+      <tr>
+        <td class="align-middle text-center">
+          <mdb-card>
+            <mdb-card-body>
+              <mdb-card-title class="h1">Need Help? Contact Us</mdb-card-title>
+              <div class="d-flex my-3">
+                <div class="flex-fill">
+                  <mdb-icon far icon="envelope" size="3x"></mdb-icon>
+                  <p class="myText">centurion@tmrnd.com.my</p>
+                </div>
+                <div class="flex-fill">
+                  <mdb-icon fas icon="phone" size="3x"></mdb-icon>
+                  <p class="myText">+603 88839 5454</p>
+                </div>
+                <div class="flex-fill">
+                  <mdb-icon fas icon="map-marker-alt" size="3x"></mdb-icon>
+                  <p class="myText">
+                    Telekom Research & Development <br />
+                    TM Innovation Center, <br />
+                    Lingkaran Teknokrat Timur, <br />
+                    63000 Cyberjaya, Selangor
+                  </p>
+                </div>
+              </div>
+
+            </mdb-card-body>
+            <mdb-card-footer class="centurionDarkBlue">
+              <span class="text-white">Copyright &copy; 2019. All Rights Reserved By <a class="text-white-50" href="https://www.tmrnd.com.my">TM RND</a></span>
+            </mdb-card-footer>
+          </mdb-card>
+        </td>
+      </tr>
+    </table>
   </div>
 </section>

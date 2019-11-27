@@ -17,7 +17,7 @@ export class OrderService {
   }
 
   getListOrder() {
-    if (!localStorage.getItem('authToken')) {
+    if (!sessionStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
       return;
     }
@@ -26,7 +26,7 @@ export class OrderService {
     this.http.get(environment.baseUrl + 'ticketing/order_history', {
       headers: new HttpHeaders()
         .set('Authorization', environment.oipToken)
-        .set('x-auth-token', localStorage.getItem('authToken')),
+        .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
       // console.log (response.body.info);
@@ -41,7 +41,7 @@ export class OrderService {
    * Method to download report
    */
   getReport(reportId, fileName) {
-    if (!localStorage.getItem('authToken')) {
+    if (!sessionStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
       return;
     }
@@ -50,7 +50,7 @@ export class OrderService {
     this.http.get(environment.baseUrl + 'ticketing/report/' + reportId, {
       headers: new HttpHeaders()
         .set('Authorization', environment.oipToken)
-        .set('x-auth-token', localStorage.getItem('authToken')),
+        .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response',
       responseType: 'blob'
     }).subscribe((response: any) => {
@@ -66,7 +66,7 @@ export class OrderService {
    * Method to download report
    */
   getSelfReport(reportId) {
-    if (!localStorage.getItem('authToken')) {
+    if (!sessionStorage.getItem('authToken')) {
       console.error ('getListAccessToken', 'No authToken available for this user');
       return;
     }
@@ -75,7 +75,7 @@ export class OrderService {
     this.http.get(environment.baseUrl + 'ticketing/self/report/' + reportId, {
       headers: new HttpHeaders()
         .set('Authorization', environment.oipToken)
-        .set('x-auth-token', localStorage.getItem('authToken')),
+        .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response',
       responseType: 'blob'
     }).subscribe((response: any) => {

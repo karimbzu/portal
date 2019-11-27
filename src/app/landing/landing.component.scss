@@ -1,3 +1,24 @@
+.myText {
+  font-size: 1.25rem;
+}
+
+#solution, #product, #pricing, #contact {
+  height: 100vh;
+}
+
+.myPricing, .mySolution {
+  background-color: white;
+}
+
+.myProduct, .myContact {
+  background-color: #e1f5fe;
+}
+
+.navbar-nav .nav-link.active {
+  background-color: lightblue;
+}
+
+/*
 #area-home {
   background-image: url("../../assets/images/banner-1.png");
   background-repeat: no-repeat;
@@ -30,27 +51,29 @@
   }
 }
 
-#area-about {
+#area-about, #solution {
   background-color: beige;
   height: 100vh;
 }
 
-#area-reviews {
+#area-reviews, #product {
   background-color: honeydew;
   height: 100vh;
 }
 
-#area-faq {
+#area-faq, #pricing {
   background-color: beige;
-  height: 500px;
+  height: 100vh;
 }
 
-#area-contact {
+#area-contact, #contact {
   background-color: honeydew;
-  height: 500px;
+  height: 100vh;
 }
 
-
+.myBanner {
+  background-color: white;
+}
 
 .section {
   height: 100vh;
@@ -77,3 +100,4 @@
     }
   }
 }
+*/

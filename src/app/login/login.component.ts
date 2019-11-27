@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     // If already login, proceed to dashboard
-    if (localStorage.getItem('authToken')) {
+    if (sessionStorage.getItem('authToken')) {
       this.router.navigate(['/dashboard']);
     }
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     this.srvLogin.login(username, password)
       .then((response: any) => {
          localStorage.setItem('userInfo', JSON.stringify(response.body.info));
-         localStorage.setItem('authToken', response.headers.get('x-auth-token'));
+         sessionStorage.setItem('authToken', response.headers.get('x-auth-token'));
 
          this.loading = false;
          this.router.navigate(['/dashboard']);
