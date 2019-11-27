@@ -102,9 +102,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
 
   btnPlaceOrder() {
-
-    // console.log(JSON.stringify(this.handlerSubscribeTotalPrice));
-    this.myToken.deductToken(this.totalPrice);
     this.myTicket.placeOrder(this.validatingForm.get('projectname').value, this.validatingForm.get('projectdesc').value)
       .then(res => {
         // Remarks: Redirect to the ticket page
