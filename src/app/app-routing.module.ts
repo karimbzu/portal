@@ -26,13 +26,11 @@ const routes: Routes = [
   {path: 'ticket', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'scan-request', component: ScanRequestComponent, canActivate: [AuthGuard]},
   {path: 'blocked', component: BlockedComponent, canActivate: [AuthGuard]},
-  // {path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard, DisabledManualURLGuard]},
   {path: 'checkout', component: CheckoutComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'widget', component: WidgetComponent, canActivate: [AuthGuard]},
   {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
   {path: '**', component: ErrorComponent}
-
 ];
 
 @NgModule({
