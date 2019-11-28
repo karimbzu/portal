@@ -42,9 +42,9 @@
             </td>
             <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-              High : {{el.high}}
-              <br>Medium : {{el.medium}}
-              <br>Low : {{el.low}} 
+              <mdb-badge  class="px-1" danger="true">{{el.high}}</mdb-badge>
+              <mdb-badge  class="px-1" warning="true">{{el.medium}}</mdb-badge>
+              <mdb-badge  class="px-1" color="grey"> {{el.low}} </mdb-badge>            
             </td>
   
             <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
