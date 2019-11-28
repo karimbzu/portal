@@ -21,7 +21,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     android: false,
     continuous_scanning: false
   };
-  headElements = ['Ticket ID', 'Scan Type', 'Project', 'Status', 'Date', 'Report'];
+  headElements = ['Ticket ID', 'Scan Type', 'Project', 'Status', 'Date', 'Severity', 'Report'];
   modalId: any;
 
 
@@ -31,6 +31,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     private cdRef: ChangeDetectorRef,
     private myOrder: OrderService,
     private http: HttpClient) {
+     
   }
 
   openModal(el: any) {
@@ -48,7 +49,7 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
     this.previous = this.mdbTable.getDataSource();
 
     this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
-    this.refreshList();
+    this.refreshList();    
   }
 
   ngAfterViewInit() {

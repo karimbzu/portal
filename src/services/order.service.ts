@@ -14,6 +14,7 @@ export class OrderService {
 
   constructor(public http: HttpClient) {
     this.getListOrder();
+    console.log(this.getListOrder());
   }
 
   getListOrder() {

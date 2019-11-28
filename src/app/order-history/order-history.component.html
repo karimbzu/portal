@@ -24,24 +24,30 @@
            </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let el of myListOrder; let i = index; " class="text-center"  >
-          <td class="align-middle" class="orderId" (click)="showTicketDialog(i); basicModal.show()"
-              *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-              {{el.id}}
-          </td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.scanType}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
-          <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
-            <mdb-badge
-              pill="true"
-              [success]="el.status == 'done'"
-              [warning]="el.status == 'scanning' || el.status == 'approved'"
-              [danger]="el.status == 'follow up'">
-              {{el.status}}
-            </mdb-badge>
-          </td>
-           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
-           <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+          <tr class="align-middle" *ngFor="let el of myListOrder; let i = index; " class="text-center"  >
+            <td class="align-middle" class="orderId" (click)="showTicketDialog(i); basicModal.show()"
+                *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                {{el.id}}
+            </td>
+            <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.scanType}}</td>
+            <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.project}}</td>
+            <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+              <mdb-badge
+                pill="true"
+                [success]="el.status == 'done'"
+                [warning]="el.status == 'scanning' || el.status == 'approved'"
+                [danger]="el.status == 'follow up'">
+                {{el.status}}
+              </mdb-badge>
+            </td>
+            <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
+            <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+              High : {{el.high}}
+              <br>Medium : {{el.medium}}
+              <br>Low : {{el.low}} 
+            </td>
+  
+            <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
 
 
            <div *ngIf="el.status == 'done'">
