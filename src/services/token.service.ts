@@ -64,4 +64,25 @@ export class TokenService {
     });
   }
 
+  // requestToken() {
+  //   if (!sessionStorage.getItem('authToken')) {
+  //       console.error ('topupToken', 'No authToken available for this user');
+  //       return;
+  //   }
+
+  //   // Fetch the data
+  //   this.http.get(environment.baseUrl + 'ticketing/topup/request/' + topup, {
+  //     headers: new HttpHeaders()
+  //       .set('Authorization', environment.oipToken)
+  //       .set('x-auth-token', sessionStorage.getItem('authToken')),
+  //     observe: 'response'
+  //   }).subscribe((response: any) => {
+  //     console.log (response.body.info);
+  //     if (response.body.info !== undefined) {
+  //       // Update the list
+  //       this.tokenAmount.next (response.body.info.amount);
+  //     }
+  //   });
+  // }
+
 }
