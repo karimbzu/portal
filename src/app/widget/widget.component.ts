@@ -20,7 +20,6 @@ export class WidgetComponent implements OnInit, OnDestroy {
   handlerCartValue;
   handlerListOrder;
   handlerTokenAmount;
-  
 
   constructor(private myCart: CartService,
               private myToken: TokenService,
@@ -30,17 +29,16 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.handlerCartValue = this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
     this.handlerListOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
     this.handlerTokenAmount = this.myToken.currentTokenAmount.subscribe(val => this.tokenAmount = val);
-    
   }
-  
 
-
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.handlerCartValue.unsubscribe();
     this.handlerListOrder.unsubscribe();
     this.handlerTokenAmount.unsubscribe();
   }
 
+  handleAddToken() {
+    console.log ('Token Add request will be handled soon');
+  }
 
- 
 }
