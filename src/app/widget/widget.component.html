@@ -54,7 +54,7 @@
             </mdb-card-body>
           </mdb-card>
 
-          <mdb-card class="mt-4 myRecentRequest" *ngIf="widget && !OH" routerLink="/order-history">
+          <mdb-card class="mt-4 myRecentRequest" *ngIf="widget && !OH && myListOrder.length" routerLink="/order-history">
               <mdb-card-header class="h5 text-black font-weight-bold">
                   <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;Recent Request
               </mdb-card-header>

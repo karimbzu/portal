@@ -14,18 +14,20 @@
             <mdb-card-body>
               <mdb-card-text>
                   <table mdbTable class="table table-striped">
-                    <thead >
-                    <tr >
-                      <th style="text-align:center">Type</th>
-                      <th>File / Repo Info</th>
-                      <th class="align-middle" style="text-align:center" >Scan Type</th>
-
-                      <th style="text-align:center">Optional Service</th>
-                      <th  style="text-align:center">Price (Token)</th>
-                      <th style="text-align:center" >Action</th>
+                    <thead>
+                    <tr>
+                      <th class="font-weight-bolder text-center">Type</th>
+                      <th class="font-weight-bolder">File / Repo Info</th>
+                      <th class="font-weight-bolder text-center">Scan Type</th>
+                      <th class="font-weight-bolder text-center">Optional Service</th>
+                      <th class="font-weight-bolder text-center">Price (Token)</th>
+                      <th class="font-weight-bolder text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <tr *ngIf="!listCart.length">
+                      <td colspan="6" class="text-center">The list is empty</td>
+                    </tr>
                     <tr mdbTableCol *ngFor="let cart of listCart; let i = index">
                       <td class="text-center align-middle">
                           <div *ngIf="cart.type === 'repo'">

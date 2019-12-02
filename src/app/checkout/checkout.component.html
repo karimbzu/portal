@@ -34,13 +34,6 @@
 
 <div class ="col-8">
  <input type="radio" class="form-check-input" id="company" name="company" checked disabled mdbInput>
- <!--
- <label class="form-check-label disabled font-weight-bolder" for="company">Company <br>
-    <div  style="font-size:small">Payment made using company's e-wallet system
-              <span><br> *Subject to approval by Account Manager</span></div>
-
-  </label>
-  -->
   <label class="form-check-label font-weight-bolder" for="company">Company</label>
   <div class="row">
     <div class="small pl-5">Payment made using company's e-wallet system
@@ -198,7 +191,8 @@
               </mdb-card-text>
               <button type="button" mdbBtn rounded="true"
                       class="mt-4 centurionBlue text-white mx-auto d-block col-3"
-                      (click)="btnPlaceOrder()" [disabled]="!marked || (!(projectname.valid && (projectname.dirty || projectname.touched))) || (!(projectdesc.valid && (projectdesc.dirty || projectdesc.touched)))">PLACE ORDER</button>
+                      (click)="btnPlaceOrder()"
+                      [disabled]="!marked || (!(projectname.valid && (projectname.dirty || projectname.touched))) || (!(projectdesc.valid && (projectdesc.dirty || projectdesc.touched)))">PLACE ORDER</button>
             </mdb-card-body>
          </mdb-card>
       </div>

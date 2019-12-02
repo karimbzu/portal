@@ -38,9 +38,12 @@
             </td>
             <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.logDateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
             <td *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+              <div *ngIf="el.status === 'done'; else templateScanOngoing" class="mt-1">
               <mdb-badge mdbTooltip="High" class="px-2" danger="true">{{el.high}}</mdb-badge>
               <mdb-badge mdbTooltip="Medium" class="px-2" warning="true">{{el.medium}}</mdb-badge>
               <mdb-badge mdbTooltip="Low" class="px-2" color="grey"> {{el.low}} </mdb-badge>
+              </div>
+              <ng-template #templateScanOngoing>&nbsp;</ng-template>
             </td>
 
             <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
