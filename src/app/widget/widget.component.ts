@@ -41,6 +41,8 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.handlerTokenAmount.unsubscribe();
   }
 
-
+handleAddToken() {
+  console.log("User Request for token")
+}
  
 }

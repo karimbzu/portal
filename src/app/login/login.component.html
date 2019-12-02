@@ -1,9 +1,23 @@
-<div class="d-flex justify-content-center align-items-center vh-100 centurionBlue">
+<mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar" [containerInside]="true">
+    <mdb-navbar-brand>
+      <div class="navbar-brand">
+        <img src="../../assets/images/centurionlogo.png" class="home" height="32" routerLink="/dashboard" />
+      </div>
+    </mdb-navbar-brand>
+
+    <links>
+      <ul class="navbar-nav ml-auto" mdbScrollSpy="landingHeader">          
+      </ul>
+      
+    </links>
+  </mdb-navbar>
+
+<div class="d-flex justify-content-center align-items-center vh-100" style="background-color:#f5f5f5">
   <div class="col-md-4">
     <img src="../../assets/images/centurionlogo3.png" class="mb-5 mx-auto d-block" height="48" />
     <mdb-card cascade="true" narrower="true">
       <div class="view view-cascade gradient-card-header centurionDarkBlue">
-        <h2 class="card-header-title">Login</h2>
+       <img src="../../assets/images/centurionlogo3.png" class="mb-1 mx-auto d-block" height="48" />
       </div>
       <mdb-card-body>
         <form [formGroup]="validatingForm">
