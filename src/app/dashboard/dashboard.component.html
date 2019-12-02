@@ -6,55 +6,61 @@
   <div class="row">
     <div class="col col-9">
       <mdb-card>
-        <mdb-card-header class="centurionBlue h5 text-white">
+        <mdb-card-header class="centurionDarkBlue h5 text-white">
           <mdb-icon fas icon="calendar-check" class="pr-1"></mdb-icon>
           What do you want to scan today?
         </mdb-card-header>
         <mdb-card-body>
-          <div class="card-deck">
+          <p class="dark-blue font-weight-bolder py-3">Please choose one of the following scanning type</p>
 
-            <mdb-card class="mx-2 text-center">
+          <div class="card-deck mb-5">
+
+            <mdb-card class="mx-3 text-center">
               <mdb-card-header>
                 <mdb-card-title class="h5 font-weight-bolder">Source Code</mdb-card-title>
               </mdb-card-header>
-              <mdb-card-img src="../../assets/images/source-code.jpg"></mdb-card-img>
               <mdb-card-body class="pb-0">
                 <mdb-card-text>Analyze the source code for security and quality issues</mdb-card-text>
               </mdb-card-body>
-              <button mdbBtn rounded="true" class="justify-content-end centurionOrange text-white"
-                      (click)="handleButtonClick('source_code')">Select</button>
+              <mdb-card-footer class="p-0">
+                <button mdbBtn rounded="true" size="sm" class="centurionOrange text-white col-6"
+                        (click)="handleButtonClick('source_code')">Select</button>
+              </mdb-card-footer>
             </mdb-card>
 
-            <mdb-card class="mx-2 text-center">
+            <mdb-card class="mx-3 text-center">
               <mdb-card-header>
                 <mdb-card-title class="h5 font-weight-bolder">Binary Application</mdb-card-title>
                 <mdb-badge pill="true" warning="true" class="ml-1 align-top">BETA</mdb-badge>
               </mdb-card-header>
-              <mdb-card-img src="../../assets/images/mobile-app.jpg"></mdb-card-img>
               <mdb-card-body class="pb-0">
                 <mdb-card-text class="font-small">
                   Analyzing the Mobile Application, Firmware or executables to identify the security vulnerabilities and
                   licensing term of open source components in the application
                 </mdb-card-text>
               </mdb-card-body>
-              <button mdbBtn rounded="true" class="justify-content-end centurionOrange text-white"
-                      (click)="handleButtonClick('mobile_app')">Select</button>
+              <mdb-card-footer class="p-0">
+                <button mdbBtn rounded="true" size="sm" type="button" class="justify-content-end centurionOrange text-white col-6"
+                        (click)="handleButtonClick('mobile_app')">Select</button>
+              </mdb-card-footer>
+
             </mdb-card>
 
-            <mdb-card class="mx-2 text-center">
+            <mdb-card class="mx-3 text-center">
               <mdb-card-header>
                 <mdb-card-title class="h5 font-weight-bolder">Web Application</mdb-card-title>
                 <mdb-badge pill="true" info="true" class="ml-1 align-top">Q1 2020</mdb-badge>
               </mdb-card-header>
-              <mdb-card-img src="../../assets/images/web-app.jpg"></mdb-card-img>
               <mdb-card-body class="pb-0">
                 <mdb-card-text>
                   Perform dynamic analysis on the web portal. The testing is intrusive, so it is recommended not to
                   perform on a production system
                 </mdb-card-text>
               </mdb-card-body>
-              <button mdbBtn rounded="true" class="justify-content-end centurionOrange text-white"
-                      (click)="handleButtonClick('web_app')" disabled="true">Select</button>
+              <mdb-card-footer class="p-0">
+                <button mdbBtn rounded="true" size="sm" color="light" class="justify-content-end col-lg-6"
+                        (click)="handleButtonClick('web_app')" disabled="true">Coming Soon</button>
+              </mdb-card-footer>
             </mdb-card>
 
           </div>

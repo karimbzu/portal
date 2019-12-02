@@ -6,7 +6,10 @@
         <mdb-card-body class="py-0">
           <table mdbTable borderless="true" small="true" class="mt-0">
             <tbody>
-              <tr>
+            <tr>
+              <td colspan="2" class="text-black-50 pb-0">Credits available to perform scanning</td>
+            </tr>
+            <tr>
                 <td class="align-middle"><span class="h1 font-weight-bold">{{tokenAmount}}</span></td>
                 <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" (click)="handleAddToken()" [disabled]="tokenAmount>50">Request Token</button></td>
               </tr>
@@ -15,7 +18,7 @@
         </mdb-card-body>
       </mdb-card>
 
- <mdb-card class="mt-4 rgba-green-light " *ngIf="widget && cartCount">
+ <mdb-card class="mt-4" *ngIf="widget && cartCount">
         <mdb-card-body class="py-0">
           <table mdbTable borderless="true" small="true" class="my-0">
             <tbody>
@@ -23,7 +26,7 @@
                 <td class="align-middle"><i class="fas fa-bell"></i></td>
                 <td class="align-middle">You have {{cartCount}} items in cart</td>
                 <td class="text-right">
-                  <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/checkout" [disabled]="!cartCount" >Checkout</button>
+                  <button type="button " mdbBtn size="sm" rounded="true" class="centurionBlue text-white" routerLink="/my-cart" [disabled]="!cartCount" >Checkout</button>
                 </td>
               </tr>
             </tbody>
@@ -34,13 +37,11 @@
 
 
 
-      <mdb-card class="mt-4 light-blue lighten-3" *ngIf="false">
+      <mdb-card class="mt-4" *ngIf="false">
           <mdb-card-header class="h5 text-black font-weight-bold">
               <i class="fa fa-star" aria-hidden="true">  </i>  	&nbsp; 	&nbsp;Score Card
           </mdb-card-header>
             <mdb-card-body>
-
-
                     <table>
                             <tbody>
                                 <tr>
@@ -53,17 +54,19 @@
             </mdb-card-body>
           </mdb-card>
 
-          <mdb-card class="mt-4 amber accent-1 myRecentRequest" *ngIf="widget && !OH" routerLink="/order-history">
+          <mdb-card class="mt-4 myRecentRequest" *ngIf="widget && !OH" routerLink="/order-history">
               <mdb-card-header class="h5 text-black font-weight-bold">
                   <i class="fa fa-file" aria-hidden="true"> </i>  	&nbsp; 	&nbsp;Recent Request
               </mdb-card-header>
                 <mdb-card-body>
 
                   <mdb-card-text class="text-black-50" >
+                    <p class="text-black-50 pb-0">Your last 3 request</p>
+
                         <table mdbTable small="true" hover="true">
                                 <thead>
                                     <tr class="text-center">
-                                      <th style="text-align:center">ID</th>
+                                      <th>ID</th>
                                       <th>Project</th>
                                       <th>Status</th>
                                       <th>Report</th>
