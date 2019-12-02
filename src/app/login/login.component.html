@@ -1,25 +1,26 @@
 <mdb-navbar SideClass="navbar fixed-top navbar-light white navbar-expand-lg scrolling-navbar" [containerInside]="true">
     <mdb-navbar-brand>
       <div class="navbar-brand">
-        <img src="../../assets/images/centurionlogo.png" class="home" height="32" routerLink="/dashboard" />
+        <img src="../../assets/images/centurionlogo.png" class="home" height="32" routerLink="/landing" />
       </div>
     </mdb-navbar-brand>
 
     <links>
-      <ul class="navbar-nav ml-auto" mdbScrollSpy="landingHeader">          
+      <ul class="navbar-nav ml-auto" mdbScrollSpy="landingHeader">
       </ul>
-      
+
     </links>
   </mdb-navbar>
 
 <div class="d-flex justify-content-center align-items-center vh-100" style="background-color:#f5f5f5">
   <div class="col-md-4">
-    <img src="../../assets/images/centurionlogo3.png" class="mb-5 mx-auto d-block" height="48" />
+    <!--<img src="../../assets/images/centurionlogo3.png" class="mb-5 mx-auto d-block" height="48" />-->
     <mdb-card cascade="true" narrower="true">
       <div class="view view-cascade gradient-card-header centurionDarkBlue">
        <img src="../../assets/images/centurionlogo3.png" class="mb-1 mx-auto d-block" height="48" />
       </div>
-      <mdb-card-body>
+      <span class="text-center text-black-50 pt-5 mb-0">Login to your account</span>
+      <mdb-card-body class="pt-0">
         <form [formGroup]="validatingForm">
           <div class="md-form md-outline">
             <mdb-icon fas icon="user" class="prefix"></mdb-icon>
@@ -39,7 +40,13 @@
           </div>
         </form>
 
-        <button *ngIf="!loading" type="button" [disabled]="marked ||  !((username.valid && (username.dirty || username.touched)) && (password.valid && (password.dirty && password.touched))) " mdbBtn rounded="true" class="centurionOrange text-white col-6 mx-auto d-block" (click)="handleLogin()">Login
+        <button *ngIf="!loading" type="button"
+                [disabled]="marked ||  !((username.valid && (username.dirty || username.touched)) && (password.valid && (password.dirty && password.touched)))"
+                mdbBtn
+                rounded="true"
+                gradient="peach"
+                class="text-white col-6 mx-auto d-block"
+                (click)="handleLogin()">Login
         </button>
 
           <div class="d-flex justify-content-center">
@@ -54,7 +61,7 @@
 
       </mdb-card-body>
     </mdb-card>
-    <p class="text-white-50 text-center mt-5">Innovation by TM RND</p>
+    <p class="dark-blue text-center mt-5">Innovation by TM RND</p>
   </div>
 
 </div>
