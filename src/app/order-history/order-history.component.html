@@ -4,7 +4,7 @@
    <div class="row">
      <div class="col col-9">
        <mdb-card >
-         <mdb-card-header class="centurionBlue h5 text-white">
+         <mdb-card-header class="centurionDarkBlue h5 text-white">
            <mdb-icon fas icon="history" class="pr-1"></mdb-icon>
 
            Order History
@@ -12,11 +12,7 @@
          <mdb-card-body>
            <mdb-card-text>
 
-
-  <div class="row">
-      <div class="col-12">
-
-      <table mdbTable #tableEl="mdbTable" class="z-depth-1">
+      <table mdbTable #tableEl="mdbTable">
         <thead>
           <tr class="text-center">
             <th *ngFor="let head of headElements; let i = index" scope="col" class="font-weight-bolder">{{head}}
@@ -62,19 +58,14 @@
 
         </tr>
         </tbody>
-        <tfoot class="grey lighten-5 w-100">
+        <tfoot>
         <tr>
-          <td colspan="6">
+          <td colspan="7">
             <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="myListOrder"></mdb-table-pagination>
           </td>
         </tr>
         </tfoot>
       </table>
-    </div>
-
-
-  </div>
-
 
            </mdb-card-text>
          </mdb-card-body>

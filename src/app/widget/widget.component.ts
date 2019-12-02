@@ -38,7 +38,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
   }
 
   handleAddToken() {
-    console.log ('Token Add request will be handled soon');
+    console.log('User Request for token');
   }
 
 }
