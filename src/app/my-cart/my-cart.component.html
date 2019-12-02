@@ -7,7 +7,7 @@
     <div class="col col-9">
         <mdb-card >
 
-            <mdb-card-header class="centurionBlue h5 text-white">
+            <mdb-card-header class="centurionDarkBlue h5 text-white">
               <mdb-icon fas icon="shopping-cart" class="pr-1"></mdb-icon>
               My Cart
             </mdb-card-header>
@@ -58,11 +58,11 @@
                     </tbody>
                   </table>
               </mdb-card-text>
-
+              <button type="button" mdbBtn rounded="true"
+                      class="mt-4 centurionBlue text-white mx-auto d-block col-3"
+                      (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
             </mdb-card-body>
           </mdb-card>
-
-          <button type="button" mdbBtn rounded="true" class="mt-4 centurionBlue text-white mx-auto d-block col-3"  (click)="btnCheckout()" [disabled]="!listCart.length" >Checkout</button>
 <!--
       <div class="container-fluid">
     &nbsp; 	&nbsp;

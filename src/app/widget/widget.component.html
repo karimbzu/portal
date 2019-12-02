@@ -66,10 +66,9 @@
                         <table mdbTable small="true" hover="true">
                                 <thead>
                                     <tr class="text-center">
-                                      <th>ID</th>
-                                      <th>Project</th>
-                                      <th>Status</th>
-                                      <th>Report</th>
+                                      <th class="font-weight-bolder">ID</th>
+                                      <th class="font-weight-bolder">Project</th>
+                                      <th class="font-weight-bolder">Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -83,7 +82,6 @@
                                       [danger]="order.status == 'follow up'">
                                       {{order.status}}
                                     </mdb-badge></td>
-                                    <td><i class="far fa-file"></i></td>
                                   </tr>
                                 </tbody>
                             </table>
