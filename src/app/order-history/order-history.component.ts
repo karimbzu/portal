@@ -40,15 +40,15 @@ export class OrderHistoryComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    for (let i = 1; i <= 15; i++) {
-      this.elements.push({id: i.toString(), first: 'User ' + i, last: 'Name ' + i, handle: 'Handle ' + i});
-    }
-
-    this.mdbTable.setDataSource(this.elements);
+    // for (let i = 1; i <= 15; i++) {
+    //   this.elements.push({id: i.toString(), first: 'User ' + i, last: 'Name ' + i, handle: 'Handle ' + i});
+    // }
+    this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
+    this.mdbTable.setDataSource(this.handlerSubscribeOrder);
     this.elements = this.mdbTable.getDataSource();
     this.previous = this.mdbTable.getDataSource();
-
-    this.handlerSubscribeOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
+    // console.log('total'+ this.mdbTable.getDataSource.length);
+   
     this.refreshList();    
   }
 
