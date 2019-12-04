@@ -25,6 +25,8 @@ import { HeaderNewComponent } from './header-new/header-new.component';
 import { WidgetComponent } from './widget/widget.component';
 import { ErrorComponent } from './error/error.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { RequestBinaryComponent } from './request-binary/request-binary.component';
+import { RequestWebComponent } from './request-web/request-web.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     HeaderNewComponent,
     WidgetComponent,
     ErrorComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    RequestBinaryComponent,
+    RequestWebComponent
   ],
   imports: [
     BrowserModule,
