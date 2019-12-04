@@ -1,9 +1,17 @@
+.rowInsight {
+  min-height: 100px;
+}
+
+.rowInsight > div > h6 {
+  margin-bottom: 0px;
+}
+
 .myText {
   font-size: 1.25rem;
 }
 
 .text-primary {
-  color: #1a2644;  
+  color: #1a2644;
 }
 
 #solution, #product, #pricing, #contact {
