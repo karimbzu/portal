@@ -27,119 +27,48 @@
     </links>
   </mdb-navbar>
 </header>
-<!-- <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar"> -->
-  <!-- <div class="container"> -->
-
-    <!-- Brand -->
-    <!-- <a class="navbar-brand" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">
-      <strong>MDB</strong>
-    </a> -->
-
-    <!-- Collapse -->
-    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button> -->
-
-    <!-- Links -->
-    <!-- <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
-
-      <!-- Left -->
-      <!-- <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home
-            <span class="sr-only">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/material-design-for-bootstrap/" target="_blank">About MDB</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/getting-started/" target="_blank">Free download</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank">Free tutorials</a>
-        </li>
-      </ul> -->
-
-      <!-- Right -->
-      <!-- <ul class="navbar-nav nav-flex-icons">
-        <li class="nav-item">
-          <a href="https://www.facebook.com/mdbootstrap" class="nav-link" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://twitter.com/MDBootstrap" class="nav-link" target="_blank">
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://github.com/mdbootstrap/bootstrap-material-design" class="nav-link border border-light rounded"
-            target="_blank">
-            <i class="fab fa-github mr-2"></i>MDB GitHub
-          </a>
-        </li>
-      </ul>
-
-    </div> -->
-
-  <!-- </div> -->
-<!-- </nav> -->
-<!-- Navbar -->
 
 <!--Carousel Wrapper-->
 <br/>
 <br/>
-
 <!--/.Carousel Wrapper-->
 
 <!--Main layout-->
 <main>
+
+  <!-- experiment with Parallax -->
+  <div class="d-flex justify-content-center align-items-center view intro jarallax" id="myParallaxBg">
+    <div class="col-md-8 text-white text-center align-middle">
+      <h1 class="font-weight-bold display-3"><strong>Hack Proof Your Code</strong></h1>
+      <br>
+      <p>Apps are crucial assets for a company. Centurion combines multiple security tools under a single user-friendly interface to handle all security needs of today's busy developers.</p>
+      <p>Read details below to learn more about Centurion.</p>
+    </div>
+  </div>
+  <!-- end of Parallax -->
+
   <div class="container">
 
     <!--Section: Main info-->
     <section class="mt-5 wow fadeIn">
 
       <!--Grid row-->
-      <div class="row">
+      <div class="row" *ngIf="false">
 
         <!--Grid column-->
         <div class="col-md-6 mb-4 text-center" >
-
-          <img style="height:300px;" src="../../assets/images/landing-bg-2.png" class="img-fluid z-depth-1-half"
-            alt="">
-
+          <img style="height:300px;" src="../../assets/images/landing-bg-2.png" class="img-fluid z-depth-1-half" alt="">
         </div>
         <!--Grid column-->
 
         <!--Grid column-->
         <div class="col-md-6 mb-4">
-
           <!-- Main heading -->
           <h1 class="font-weight-bolder" style="color:darkblue"><strong> Hack Proof Your Code </strong></h1>
           <br>
           <p>Apps are crucial assets for a company. Centurion combines multiple security tools under a single user-friendly interface to handle all security needs of today's busy developers.</p>
           <p> Read details below to learn more about Centurion.</p>
           <!-- Main heading -->
-
-          <!-- <hr> -->
-
-          <!-- <p>
-            <strong>400+</strong> material UI elements,
-            <strong>600+</strong> material icons,
-            <strong>74</strong> CSS animations, SASS files, templates, tutorials and many more.
-            <strong>Free for personal and commercial use.</strong>
-          </p> -->
-
-          <!-- CTA -->
-          <!-- <a target="_blank" href="https://mdbootstrap.com/getting-started/" class="btn btn-indigo btn-md">Download
-            <i class="fas fa-download ml-1"></i>
-          </a>
-          <a target="_blank" href="https://mdbootstrap.com/components/" class="btn btn-indigo btn-md">Live demo
-            <i class="fas fa-image ml-1"></i>
-          </a> -->
-
         </div>
         <!--Grid column-->
 
@@ -149,12 +78,10 @@
     </section>
     <!--Section: Main info-->
 
-    <hr class="my-5">
+    <!--<hr class="my-5">-->
 
     <!--Section: Main features & Quick Start-->
     <section>
-
-
       <h1 class="font-weight-bolder text-center" style="color:darkblue"><strong> Best Way To Scan Your Code</strong></h1>
       <br/>
 
@@ -427,49 +354,6 @@
     </section>
     <!--Section: More-->
 
-    <!-- <section mdbScrollSpyWindow="landingHeader" id="pricing" class="view myPricing">
-      <div class="container">
-        <table mdbTable borderless="true" style="height: 10vh">
-          <tr>
-            <td class="align-middle text-center">
-              <h1 class="mb-3">Frequently Asked Questions</h1>
-              <mdb-accordion [multiple]="false">
-                <mdb-accordion-item [collapsed]="false" [customClass]="'border-0 mb-2'">
-                  <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">Who can use this service?</mdb-accordion-item-head>
-                  <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
-                    <p class="myText">At the moment, Centurion is open for all TM developers. Please take this
-                      opportunity to scan your source codes and applications.</p>
-                  </mdb-accordion-item-body>
-                </mdb-accordion-item>
-
-                <mdb-accordion-item [customClass]="'border-0 mb-2'">
-                  <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">What are the code that can be scan?</mdb-accordion-item-head>
-                  <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
-                    <p class="myText">At the moment, we support the mainstream programming languages such as
-                      JavaScript, Java, PHP, Python, Swift, C/C++. If you are using different languages, please
-                      contact us so we can have it supported.</p>
-                  </mdb-accordion-item-body>
-                </mdb-accordion-item>
-
-                <mdb-accordion-item [customClass]="'border-0 mb-2'">
-                  <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">How much price of the scan?</mdb-accordion-item-head>
-                  <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
-                    <p class="myText">It's FREE until further notice. Seriously, its FREE!</p>
-                  </mdb-accordion-item-body>
-                </mdb-accordion-item>
-
-                <mdb-accordion-item [customClass]="'border-0'">
-                  <mdb-accordion-item-head [customClass]="'border-0 blue text-white z-depth-1'">How long can i get the result?</mdb-accordion-item-head>
-                  <mdb-accordion-item-body [customClass]="'rgba-blue-light'">
-                    <p class="myText">It depends on the complexity of your code. You should get the result within 1 - 7 days.</p>
-                  </mdb-accordion-item-body>
-                </mdb-accordion-item>
-              </mdb-accordion>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </section> -->
   <br/>
   <br/>
     <h1 class="text-center">Frequently Asked Questions</h1>
@@ -656,66 +540,3 @@
 
 </footer>
 <!-- Footer -->
-
-<!-- <footer class="page-footer text-center font-small mt-4 wow fadeIn"> -->
-
-  <!--Call to action-->
-  <!-- <div class="pt-4">
-    <a class="btn btn-outline-white" href="https://mdbootstrap.com/getting-started/" target="_blank" role="button">Download
-      MDB
-      <i class="fas fa-download ml-2"></i>
-    </a>
-    <a class="btn btn-outline-white" href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank" role="button">Start
-      free tutorial
-      <i class="fas fa-graduation-cap ml-2"></i>
-    </a>
-  </div> -->
-  <!--/.Call to action-->
-
-  <!-- <hr class="my-4"> -->
-
-  <!-- Social icons -->
-  <!-- <div class="pb-4">
-    <a href="https://www.facebook.com/mdbootstrap" target="_blank">
-      <i class="fab fa-facebook-f mr-3"></i>
-    </a>
-
-    <a href="https://twitter.com/MDBootstrap" target="_blank">
-      <i class="fab fa-twitter mr-3"></i>
-    </a>
-
-    <a href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
-      <i class="fab fa-youtube mr-3"></i>
-    </a>
-
-    <a href="https://plus.google.com/u/0/b/107863090883699620484" target="_blank">
-      <i class="fab fa-google-plus-g mr-3"></i>
-    </a>
-
-    <a href="https://dribbble.com/mdbootstrap" target="_blank">
-      <i class="fab fa-dribbble mr-3"></i>
-    </a>
-
-    <a href="https://pinterest.com/mdbootstrap" target="_blank">
-      <i class="fab fa-pinterest mr-3"></i>
-    </a>
-
-    <a href="https://github.com/mdbootstrap/bootstrap-material-design" target="_blank">
-      <i class="fab fa-github mr-3"></i>
-    </a>
-
-    <a href="http://codepen.io/mdbootstrap/" target="_blank">
-      <i class="fab fa-codepen mr-3"></i>
-    </a>
-  </div> -->
-  <!-- Social icons -->
-
-  <!--Copyright-->
-  <!-- <div class="footer-copyright py-3">
-    © 2018 Copyright:
-    <a href="https://mdbootstrap.com/bootstrap-tutorial/" target="_blank"> MDBootstrap.com </a>
-  </div> -->
-  <!--/.Copyright-->
-
-<!-- </footer> -->
-<!--/.Footer-->
