@@ -35,7 +35,6 @@ export class CartService {
         .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
-      console.log (response.body.info);
       if (response.body.info !== undefined) {
         // Update the number of carts in list
         this.cartCount.next (response.body.info.length);
