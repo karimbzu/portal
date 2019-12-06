@@ -427,7 +427,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         return;
       }
 
-      if (!tokenId) {
+      if (tokenId === -1) {
         console.error ('No Access Token is selected');
         this.myToast.error ('No Access Token is selected', 'Validate Item');
         this.flagValidationFetchLoading = false;

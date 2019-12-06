@@ -39,8 +39,9 @@
           </div>
         </form>
 
+        <!-- [disabled]="marked ||  !((username.valid && (username.dirty || username.touched)) && (password.valid && (password.dirty && password.touched)))" -->
         <button *ngIf="!loading" type="button"
-                [disabled]="marked ||  !((username.valid && (username.dirty || username.touched)) && (password.valid && (password.dirty && password.touched)))"
+                [disabled]="!(username.valid) || !(password.valid)"
                 mdbBtn
                 rounded="true"
                 gradient="peach"
