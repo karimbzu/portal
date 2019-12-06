@@ -75,7 +75,9 @@
                         <label for="inputRepoURL">Source Code Repository</label>
                       </div>
                       <div class="md-form">
-                        <mdb-select [options]="tempAccessToken" placeholder="Select an Access Token"
+                        <mdb-select [options]="tempAccessToken"
+                                    class="colorful-select dropdown-warning"
+                                    placeholder="Select an Access Token"
                                     formControlName="tokenId"
                                     label="Access Token"></mdb-select>
                         <button mdbBtn color="link" class="p-0 blue-text"

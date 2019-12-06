@@ -60,7 +60,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
   myScanItemForm = new FormGroup({
     type: new FormControl('repo'),
     repoURL: new FormControl(''),
-    tokenId: new FormControl(0),
+    tokenId: new FormControl(-1),
     uploadId: new FormControl(0),
     dummy: new FormControl(0, [Validators.min(1)])
 //  }, {validators: validateStep2, updateOn: 'blur'});
@@ -164,7 +164,15 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    */
   appendAuthToken(val) {
     if (val.length) {
-      this.tempAccessToken = val.map(this.mapLabel2Value);
+      this.tempAccessToken = [{value: 0, label: 'No Access Token'}, {value: '', label: '---------------------', group: true}];
+
+      // We manually add it to the list
+      const tempVal = val.map(this.mapLabel2Value);
+      tempVal.forEach(myArray => {
+        this.tempAccessToken.push(myArray);
+      });
+
+//      this.tempAccessToken = val.map(this.mapLabel2Value);
     }
   }
 
