@@ -15,7 +15,7 @@ export class TokenService {
 
     constructor(public http: HttpClient) {
       this.getTokenBalance();
-      this.postRequestToken();
+      
     }
 
   /**
@@ -32,6 +32,7 @@ export class TokenService {
           headers: new HttpHeaders()
             .set('Authorization', environment.oipToken)
             .set('x-auth-token', sessionStorage.getItem('authToken')),
+            
           observe: 'response'
         }).subscribe((response: any) => {
           console.log (response.body.info);
@@ -69,23 +70,24 @@ export class TokenService {
    /**
    * Method to request for token topup from Account Manager 
    */
-  postRequestToken() {
-    if (!sessionStorage.getItem('authToken')) {
-        console.error ('authToken', 'No authToken available for this user');
-        return;
-    }
+  postRequestToken(name,email,orgName,acctManagerList) {
+    // if (!sessionStorage.getItem('authToken')) {
+    //     console.error ('authToken', 'No authToken available for this user');
+    //     return;
+    // }
 
     // Post the data
-    this.http.post(environment.notifyUrl + 'notify/token/request', {
-      headers: new HttpHeaders()
-        .set('Authorization', environment.oipToken)
-        .set('x-auth-token', sessionStorage.getItem('authToken')),
+    const body =  {name:name, email:email, orgName:orgName, acctManagerList: acctManagerList};
+    this.http.post(environment.notifyUrl + 'notify/token/request', body, {
+      // headers: new HttpHeaders()
+      //   .set('Content-Type', 'application/x-www-form-urlencoded'),
+        // .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
       console.log (response.body.info);
       if (response.body.info !== undefined) {
         // Update the list
-        this.tokenAmount.next (response.body.info.amount);
+        // this.tokenAmount.next (response.body.info.amount);
       }
     });
   }

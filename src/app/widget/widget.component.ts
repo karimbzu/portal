@@ -12,7 +12,10 @@ export class WidgetComponent implements OnInit, OnDestroy {
 
   @Input() widget: boolean;
   @Input() OH: boolean;
-
+  name = 'myName';
+  email = 'myEmail';
+  orgName = 'myOrgName';
+  acctManagerList : any;
 
   cartCount: number;
   myListOrder;
@@ -23,10 +26,17 @@ export class WidgetComponent implements OnInit, OnDestroy {
   handlerAddToken;
 
   constructor(private myCart: CartService,
-              private myToken: TokenService,              
+              private myToken: TokenService,                       
               private myOrder: OrderService) {}
 
   ngOnInit() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    if (userInfo) {
+      this.name = userInfo.name;
+      this.email = userInfo.email;
+      this.orgName = userInfo.orgName;
+      this.acctManagerList = ['ros@tmrnd.com.my','liza@tmrnd.com.my'];
+    }
     this.handlerCartValue = this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
     this.handlerListOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
     
@@ -40,6 +50,8 @@ export class WidgetComponent implements OnInit, OnDestroy {
   }
 
   handleAddToken() {
+   
+    this.myToken.postRequestToken(this.name,this.email,this.orgName,this.acctManagerList);
     console.log('User Request for token');    
 
   }
