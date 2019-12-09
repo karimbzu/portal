@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input} from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { OrderService } from '../../services/order.service';
 import { TokenService } from '../../services/token.service';
+import {TicketService} from '../../services/ticket.service';
 
 @Component({
   selector: 'app-widget',
@@ -15,7 +16,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
   name = 'myName';
   email = 'myEmail';
   orgName = 'myOrgName';
-  acctManagerList : any;
+  acctManagerList: any;
 
   cartCount: number;
   myListOrder;
@@ -26,8 +27,9 @@ export class WidgetComponent implements OnInit, OnDestroy {
   handlerAddToken;
 
   constructor(private myCart: CartService,
-              private myToken: TokenService,                       
-              private myOrder: OrderService) {}
+              private myToken: TokenService,
+              private myOrder: OrderService,
+              private myTicket: TicketService) {}
 
   ngOnInit() {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -35,11 +37,24 @@ export class WidgetComponent implements OnInit, OnDestroy {
       this.name = userInfo.name;
       this.email = userInfo.email;
       this.orgName = userInfo.orgName;
-      this.acctManagerList = ['ros@tmrnd.com.my','liza@tmrnd.com.my'];
+      this.acctManagerList = ['ros@tmrnd.com.my', 'liza@tmrnd.com.my'];
     }
+
+    // Getting the account manager
+    this.myTicket.getAcctManagerList()
+      .then((res: any) => {
+        const myInfo = res.info;
+
+        // For now, lets just show the list
+        console.log (myInfo);
+      })
+      .catch(err => {
+        console.error ('Error getting the Account Manager list');
+        console.error (err);
+      });
+
     this.handlerCartValue = this.myCart.currentCartValue.subscribe(val => this.cartCount = val);
     this.handlerListOrder = this.myOrder.currentListOrder.subscribe(val => this.myListOrder = val);
-    
     this.handlerTokenAmount = this.myToken.currentTokenAmount.subscribe(val => this.tokenAmount = val);
   }
 
@@ -50,10 +65,8 @@ export class WidgetComponent implements OnInit, OnDestroy {
   }
 
   handleAddToken() {
-   
-    this.myToken.postRequestToken(this.name,this.email,this.orgName,this.acctManagerList);
-    console.log('User Request for token');    
-
+    this.myToken.emailRequestToken(this.name, this.email, this.orgName, this.acctManagerList);
+    console.log('User Request for token');
   }
 
 }
