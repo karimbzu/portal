@@ -64,6 +64,7 @@ export class CheckoutComponent implements OnInit, OnDestroy {
 
         if (!myInfo.length) {
           console.log ('Account Manager List is EMPTY');
+          
           this.acctManagerName = 'Mohammad Harris bin Mokhtar (DEFAULT)';
           this.acctManagerOrgName = myDetails.orgName;
         } else {
