@@ -45,8 +45,14 @@ export class WidgetComponent implements OnInit, OnDestroy {
       .then((res: any) => {
         const myInfo = res.info;
 
-        // For now, lets just show the list
-        console.log (myInfo);
+        // Set the account manager, if it exist
+        // otherwise, we shall use the default list
+        if (myInfo.length) {
+          this.acctManagerList = [];
+          myInfo.forEach(myManager => {
+            this.acctManagerList.push(myManager.email);
+          });
+        }
       })
       .catch(err => {
         console.error ('Error getting the Account Manager list');
