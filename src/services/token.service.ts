@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject} from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../environments/environment';
+import { getJSDocThisTag } from 'typescript';
 
 
 @Injectable({
@@ -14,6 +15,7 @@ export class TokenService {
 
     constructor(public http: HttpClient) {
       this.getTokenBalance();
+      this.postRequestToken();
     }
 
   /**
@@ -64,25 +66,28 @@ export class TokenService {
     });
   }
 
-  // requestToken() {
-  //   if (!sessionStorage.getItem('authToken')) {
-  //       console.error ('topupToken', 'No authToken available for this user');
-  //       return;
-  //   }
+   /**
+   * Method to request for token topup from Account Manager 
+   */
+  postRequestToken() {
+    if (!sessionStorage.getItem('authToken')) {
+        console.error ('authToken', 'No authToken available for this user');
+        return;
+    }
 
-  //   // Fetch the data
-  //   this.http.get(environment.baseUrl + 'ticketing/topup/request/' + topup, {
-  //     headers: new HttpHeaders()
-  //       .set('Authorization', environment.oipToken)
-  //       .set('x-auth-token', sessionStorage.getItem('authToken')),
-  //     observe: 'response'
-  //   }).subscribe((response: any) => {
-  //     console.log (response.body.info);
-  //     if (response.body.info !== undefined) {
-  //       // Update the list
-  //       this.tokenAmount.next (response.body.info.amount);
-  //     }
-  //   });
-  // }
+    // Post the data
+    this.http.post(environment.notifyUrl + 'notify/token/request', {
+      headers: new HttpHeaders()
+        .set('Authorization', environment.oipToken)
+        .set('x-auth-token', sessionStorage.getItem('authToken')),
+      observe: 'response'
+    }).subscribe((response: any) => {
+      console.log (response.body.info);
+      if (response.body.info !== undefined) {
+        // Update the list
+        this.tokenAmount.next (response.body.info.amount);
+      }
+    });
+  }
 
 }
