@@ -3,6 +3,7 @@ import { CartService } from '../../services/cart.service';
 import { OrderService } from '../../services/order.service';
 import { TokenService } from '../../services/token.service';
 import {TicketService} from '../../services/ticket.service';
+import {ToastService} from 'ng-uikit-pro-standard';
 
 @Component({
   selector: 'app-widget',
@@ -26,7 +27,8 @@ export class WidgetComponent implements OnInit, OnDestroy {
   handlerTokenAmount;
   handlerAddToken;
 
-  constructor(private myCart: CartService,
+  constructor(private myToast: ToastService,
+              private myCart: CartService,
               private myToken: TokenService,
               private myOrder: OrderService,
               private myTicket: TicketService) {}
@@ -72,6 +74,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
 
   handleAddToken() {
     this.myToken.emailRequestToken(this.name, this.email, this.orgName, this.acctManagerList);
+    this.myToast.success('Your request has been sent to Account Manager');
     console.log('User Request for token');
   }
 

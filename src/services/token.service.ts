@@ -84,7 +84,7 @@ export class TokenService {
         // .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
-      console.log (response.body);
+      // console.log (response.body);
       // Remarks: We need to better review the actual
       // response from the request to better deal with it
     });
