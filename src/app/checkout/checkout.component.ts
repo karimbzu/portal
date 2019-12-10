@@ -57,14 +57,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
     // Get the list of Account Managers
     // and assign to the variables
     this.myTicket.getAcctManagerList()
-      .then(res => {
-        // @ts-ignore
+      .then((res: any) => {
         const myInfo = res.info;
         const myDetails = JSON.parse(localStorage.getItem('userInfo'));
 
         if (!myInfo.length) {
           console.log ('Account Manager List is EMPTY');
-          
           this.acctManagerName = 'Mohammad Harris bin Mokhtar (DEFAULT)';
           this.acctManagerOrgName = myDetails.orgName;
         } else {
