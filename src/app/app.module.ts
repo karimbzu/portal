@@ -25,6 +25,8 @@ import { HeaderNewComponent } from './header-new/header-new.component';
 import { WidgetComponent } from './widget/widget.component';
 import { ErrorComponent } from './error/error.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
+import { AccountManagerComponent } from './account-manager/account-manager.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
     HeaderNewComponent,
     WidgetComponent,
     ErrorComponent,
-    OrderHistoryComponent
+    OrderHistoryComponent,
+    AccountManagerComponent
   ],
   imports: [
     BrowserModule,
