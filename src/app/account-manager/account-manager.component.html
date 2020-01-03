@@ -1,0 +1,109 @@
+<app-header-new></app-header-new>
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col col-9">
+      <mdb-card >
+        <mdb-card-header class="centurionDarkBlue h5 text-white">
+          <mdb-icon fas icon="receipt" class="pr-1"></mdb-icon>
+       
+
+          Account Manager
+        </mdb-card-header>
+        <mdb-card-body>
+          <mdb-card-text>
+             
+                <mdb-card >
+            
+                            <mdb-card-body class="py-0 align-middle">
+                                    <mdb-accordion>
+                                            <mdb-accordion-item [collapsed]="false">
+                                              <mdb-accordion-item-head><mdb-icon fas icon="users" class="pr-1 "></mdb-icon> Token Usage</mdb-accordion-item-head>
+                                              <mdb-accordion-item-body>                                                
+
+                                              <table mdbTable #tableEl="mdbTable">
+                                                <thead>
+                                                  <tr class="text-center">
+                                                    <th *ngFor="let head of headElements; let i = index" scope="col" class="font-weight-bolder">{{head}}
+                                                    </th>
+                                                   </tr>
+                                                </thead>
+                                                <tbody>
+                                                  <tr class="align-middle" *ngFor="let el of myListTokenUsage; let i = index; " class="text-center"  >
+                                                    <td class="align-middle" class="orderId" (click)="showTicketDialog(i); basicModal.show()"
+                                                        *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                        {{el.user}}
+                                                    </td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.token}}</td>
+                                                  
+                                        
+                                                </tr>
+                                                </tbody>
+                                                <tfoot>
+                                                <tr>
+                                                  <td colspan="7">
+                                                    <mdb-table-pagination [tableEl]="tableEl" [searchDataSource]="myListTokenUsage"></mdb-table-pagination>
+                                                  </td>
+                                                </tr>
+                                                </tfoot>
+                                              </table>
+                                              </mdb-accordion-item-body>
+                                            </mdb-accordion-item>
+                                          
+                                          
+
+                                          </mdb-accordion>
+                            </mdb-card-body>
+                          </mdb-card>
+       
+     
+
+          </mdb-card-text>
+        </mdb-card-body>
+      </mdb-card>
+    </div>
+    <div class="col">
+
+      <mdb-card class="">
+          <mdb-card-header class="h5 text-black font-weight-bold">
+              <i class="fas fa-money-check-alt mr-2"></i> 
+              TOPUP
+          </mdb-card-header>
+              <mdb-card-body class="py-0">
+                  <table mdbTable borderless="true" small="true" class="my-0 mt-2">
+                      <tbody>
+                        <tr>
+                          <td class="align-middle"></td>
+                          <td class="align-middle"> Your current token balance :</td>
+                          <td class="text-right">
+                           <h1> {{tokenAmount}} </h1>                           
+                          </td>
+                        </tr>
+                        <tr>
+                          <td colspan="3" class="text-center">                            
+                              <button type="button " mdbBtn  rounded="true" class="centurionBlue text-white" (click)="topupToken(); myModal.show()">Topup Token</button>
+                          </td>
+
+                        </tr>
+                      </tbody>
+                    </table>
+              </mdb-card-body>
+            </mdb-card>
+    </div>
+  </div>
+</div>
+<br />
+
+<div mdbModal #myModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+  
+      <div class="modal-body text-center">
+        Successfully topup 100 token <br> Your current token balance : {{tokenAmount}} <hr>
+        <button type="button " mdbBtn  rounded="true" class="centurionBlue text-white" (click)="myModal.hide()" mdbWavesEffect>Close</button>
+      
+      </div>
+
+    </div>
+  </div>

@@ -14,6 +14,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../services/auth.guard';
 import {ErrorComponent} from './error/error.component';
 import {WidgetComponent} from './widget/widget.component';
+import { AccountManagerComponent } from './account-manager/account-manager.component';
 
 
 const routes: Routes = [
@@ -29,7 +30,9 @@ const routes: Routes = [
   {path: 'checkout', component: CheckoutComponent},
   {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
   {path: 'widget', component: WidgetComponent, canActivate: [AuthGuard]},
+  {path: 'account-manager', component: AccountManagerComponent, canActivate: [AuthGuard]},
   {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
+ 
   {path: '**', component: ErrorComponent}
 ];
 

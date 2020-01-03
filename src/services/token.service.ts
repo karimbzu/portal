@@ -49,17 +49,19 @@ export class TokenService {
         return;
     }
 
+    const body = {topup};
     // Fetch the data
-    this.http.get(environment.baseUrl + 'ticketing/token/topup/' + topup, {
+    this.http.post(environment.baseUrl + 'ticketing/token/topup', body, {
       headers: new HttpHeaders()
         .set('Authorization', environment.oipToken)
         .set('x-auth-token', sessionStorage.getItem('authToken')),
       observe: 'response'
     }).subscribe((response: any) => {
-      console.log (response.body.info);
-      if (response.body.info !== undefined) {
+      // console.log (response.body.info);
+      if (response.body !== undefined) {
         // Update the list
-        this.tokenAmount.next (response.body.info.amount);
+         this.tokenAmount.next (response.body.amount);
+        //  console.log("after topuppp"+JSON.stringify(response.body.amount));
       }
     });
   }
