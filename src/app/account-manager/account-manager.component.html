@@ -24,18 +24,20 @@
                                               <table mdbTable #tableEl="mdbTable">
                                                 <thead>
                                                   <tr class="text-center">
-                                                    <th *ngFor="let head of headElements; let i = index" scope="col" class="font-weight-bolder">{{head}}
+                                                    <th *ngFor="let head of headElementsToken; let i = index" scope="col" class="font-weight-bolder">{{head}}
                                                     </th>
                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                   <tr class="align-middle" *ngFor="let el of myListTokenUsage; let i = index; " class="text-center"  >
-                                                    <td class="align-middle" class="orderId" (click)="showTicketDialog(i); basicModal.show()"
+                                                    <td class="align-middle" class="orderId" 
                                                         *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                                                         {{el.user}}
                                                     </td>
                                                     <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
-                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.token}}</td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.amount}}</td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.action}}</td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.dateTime}}</td>
                                                   
                                         
                                                 </tr>
