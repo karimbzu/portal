@@ -67,7 +67,7 @@
     </div>
     <div class="col">
 
-      <mdb-card class="">
+      <!-- <mdb-card class="">
           <mdb-card-header class="h5 text-black font-weight-bold">
               <i class="fas fa-money-check-alt mr-2"></i> 
               TOPUP
@@ -91,7 +91,27 @@
                       </tbody>
                     </table>
               </mdb-card-body>
-            </mdb-card>
+            </mdb-card> -->
+
+            <mdb-card class="">
+                <mdb-card-header class="h5 text-black font-weight-bold">
+                  <mdb-icon fas icon="hand-holding-usd" class="pr-1"></mdb-icon>
+                    Token Balance
+                </mdb-card-header>
+                    <mdb-card-body class="py-0">
+                      <table mdbTable borderless="true" small="true" class="mt-0">
+                        <tbody>
+                        <tr>
+                          <td colspan="2" class="text-black-50 pb-0">Credits available to perform scanning</td>
+                        </tr>
+                        <tr>
+                            <td class="align-middle"><span class="h1 font-weight-bold">{{tokenAmount}}</span></td>
+                            <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionOrange text-white" text-white (click)="topupToken(); myModal.show()" >Topup Token</button></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </mdb-card-body>
+                  </mdb-card>
     </div>
   </div>
 </div>
