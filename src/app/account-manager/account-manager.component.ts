@@ -36,7 +36,7 @@ export class AccountManagerComponent implements OnInit, OnDestroy, AfterViewInit
   handlerTokenAmount;
   handlerTopupToken;
 
-  headElementsToken = ['ID', 'Name',  'Usage'];
+  headElementsToken = ['ID', 'Name',  'Token', 'Action', 'Date'];
 
   constructor(
     private cdRef: ChangeDetectorRef,
