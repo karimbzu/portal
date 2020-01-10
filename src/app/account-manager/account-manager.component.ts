@@ -28,7 +28,7 @@ export class AccountManagerComponent implements OnInit, OnDestroy, AfterViewInit
     android: false,
     continuous_scanning: false
   };
-  headElements = ['User Id','Name', 'Token Usage'];
+  headElements = ['ID', 'Name',  'Token', 'Action', 'Date'];
   
   myListTokenUsage;
   handlerSubscribeTokenUsage; 
@@ -36,7 +36,7 @@ export class AccountManagerComponent implements OnInit, OnDestroy, AfterViewInit
   handlerTokenAmount;
   handlerTopupToken;
 
-  headElementsToken = ['ID', 'Name',  'Token', 'Action', 'Date'];
+  // headElementsToken = ['ID', 'Name',  'Token', 'Action', 'Date'];
 
   constructor(
     private cdRef: ChangeDetectorRef,

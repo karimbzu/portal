@@ -14,7 +14,7 @@ export class TokenUsageService {
 
   constructor(public http: HttpClient) {
     this.getUserToken();
-    console.log(this.getUserToken());
+    // console.log(this.getUserToken());
   }
 
   getUserToken() {
