@@ -26,6 +26,7 @@ import { WidgetComponent } from './widget/widget.component';
 import { ErrorComponent } from './error/error.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { AccountManagerComponent } from './account-manager/account-manager.component';
+import { Test1Component } from './test1/test1.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { AccountManagerComponent } from './account-manager/account-manager.compo
     WidgetComponent,
     ErrorComponent,
     OrderHistoryComponent,
-    AccountManagerComponent
+    AccountManagerComponent,
+    Test1Component
   ],
   imports: [
     BrowserModule,
