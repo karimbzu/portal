@@ -13,10 +13,6 @@
         <mdb-card-body>
           <mdb-card-text>
              
-                <mdb-card >
-            
-                            <mdb-card-body class="py-0 align-middle">
-                                                                          
 
                                               <table mdbTable #tableEl="mdbTable">
                                                  <thead>
@@ -32,8 +28,20 @@
                                                         {{el.user}}
                                                     </td>
                                                     <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.name}}</td>
-                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.amount}}</td>
-                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.action}}</td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                      <span class="text-danger" *ngIf="el.action == 'deduct'">{{el.amount}}</span>
+                                                      <span class="text-success" *ngIf="el.action == 'topup'">{{el.amount}}</span>
+                                                    
+                                                    </td>
+                                                    <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
+                                                      <mdb-badge
+                                                      pill="true"
+                                                      [warning]="el.action == 'deduct'"
+                                                      [success]="el.action == 'topup' ">
+                                                      {{el.action}}
+                                                    </mdb-badge>                                                                                                    
+                                                    
+                                                    </td>
                                                     <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">{{el.dateTime | date:'yyyy-MM-dd HH:mm:ss'}}</td>
                                                   
                                         
@@ -46,13 +54,7 @@
                                                   </td>
                                                 </tr>
                                                 </tfoot>
-                                              </table>
-                                 
-                            </mdb-card-body>
-                          </mdb-card>
-       
-     
-
+                                              </table>                                 
           </mdb-card-text>
         </mdb-card-body>
       </mdb-card>
