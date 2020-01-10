@@ -472,7 +472,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         .catch(err => {
           this.flagValidationFetchError = true;
           console.error (err);
-          this.myToast.error (err.message);
+          this.myToast.error (err.message, 'Evaluate Uploaded File');
         })
         .finally(() => {
           this.flagValidationFetchLoading = false;
