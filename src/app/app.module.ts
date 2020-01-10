@@ -26,8 +26,6 @@ import { WidgetComponent } from './widget/widget.component';
 import { ErrorComponent } from './error/error.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { AccountManagerComponent } from './account-manager/account-manager.component';
-import { Test1Component } from './test1/test1.component';
-
 
 @NgModule({
   declarations: [
@@ -47,8 +45,7 @@ import { Test1Component } from './test1/test1.component';
     WidgetComponent,
     ErrorComponent,
     OrderHistoryComponent,
-    AccountManagerComponent,
-    Test1Component
+    AccountManagerComponent
   ],
   imports: [
     BrowserModule,

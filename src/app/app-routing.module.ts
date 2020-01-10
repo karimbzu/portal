@@ -15,8 +15,6 @@ import { AuthGuard } from '../services/auth.guard';
 import { ErrorComponent } from './error/error.component';
 import { WidgetComponent } from './widget/widget.component';
 import { AccountManagerComponent } from './account-manager/account-manager.component';
-import { Test1Component } from './test1/test1.component';
-
 
 const routes: Routes = [
   {path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -33,7 +31,6 @@ const routes: Routes = [
   {path: 'widget', component: WidgetComponent, canActivate: [AuthGuard]},
   {path: 'account-manager', component: AccountManagerComponent, canActivate: [AuthGuard]},
   {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
-  {path: 'test1', component: Test1Component},
   {path: '**', component: ErrorComponent}
 ];
 
