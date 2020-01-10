@@ -36,7 +36,7 @@
                                                     <td class="align-middle" *ngIf="i+1 >= mdbTablePagination.firstItemIndex && i < mdbTablePagination.lastItemIndex">
                                                       <mdb-badge
                                                       pill="true"
-                                                      [warning]="el.action == 'deduct'"
+                                                      [danger]="el.action == 'deduct'"
                                                       [success]="el.action == 'topup' ">
                                                       {{el.action}}
                                                     </mdb-badge>                                                                                                    
