@@ -55,7 +55,7 @@ import { Test1Component } from './test1/test1.component';
     AppRoutingModule,
     HttpClientModule,
     MDBBootstrapModulesPro.forRoot(),
-    ToastModule.forRoot(),
+    ToastModule.forRoot({opacity: 1}),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MdbFileUploadModule

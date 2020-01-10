@@ -7,9 +7,6 @@ import {ToastService} from 'ng-uikit-pro-standard';
   styleUrls: ['./test1.component.scss']
 })
 export class Test1Component implements OnInit {
-  toastOption = {
-    opacity: 1
-  };
 
   constructor(private myToast: ToastService) { }
 
@@ -17,7 +14,7 @@ export class Test1Component implements OnInit {
   }
 
   sendMessage1() {
-    this.myToast.success('This is Message 1', 'Success', this.toastOption);
+    this.myToast.success('This is Message 1', 'Success');
   }
 
   sendMessage2() {
