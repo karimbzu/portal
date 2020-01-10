@@ -55,7 +55,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    * on respective form
    */
   myScanTypeForm = new FormGroup({
-    scanType: new FormControl('source_code')
+    scanType: new FormControl('mobile_app')
   });
   myScanItemForm = new FormGroup({
     type: new FormControl('repo'),
