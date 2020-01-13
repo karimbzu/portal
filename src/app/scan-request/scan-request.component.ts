@@ -55,7 +55,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
    * on respective form
    */
   myScanTypeForm = new FormGroup({
-    scanType: new FormControl('source_code')
+    scanType: new FormControl('mobile_app')
   });
   myScanItemForm = new FormGroup({
     type: new FormControl('repo'),
@@ -343,7 +343,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         });
       })
       .catch(err => {
+        this.myToast.error(err.statusText, 'Upload File');
         console.error (err);
+
+        // Remarks: Due to the error when uploading the file,
+        // we need to fallback to the original state of the upload
+        this.flagUpload = false;
       })
       .finally(() => {
         this.freshFile = false;
@@ -472,7 +477,7 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         .catch(err => {
           this.flagValidationFetchError = true;
           console.error (err);
-          this.myToast.error (err.message);
+          this.myToast.error (err.message, 'Evaluate Uploaded File');
         })
         .finally(() => {
           this.flagValidationFetchLoading = false;

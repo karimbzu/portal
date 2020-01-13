@@ -240,7 +240,11 @@ export class RequestService {
         observe: 'response'
       }).subscribe(
         (response: any) => resolve(response.body.path),
-        err => reject(new Error(err.error.message))
+        err => {
+          console.error ('We have error processing the evaluate file');
+          console.error (err);
+          reject(new Error(err.error.message || err.statusText));
+        }
       );
     });
   }

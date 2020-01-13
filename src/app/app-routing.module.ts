@@ -12,10 +12,9 @@ import { BlockedComponent } from './blocked/blocked.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AuthGuard } from '../services/auth.guard';
-import {ErrorComponent} from './error/error.component';
-import {WidgetComponent} from './widget/widget.component';
+import { ErrorComponent } from './error/error.component';
+import { WidgetComponent } from './widget/widget.component';
 import { AccountManagerComponent } from './account-manager/account-manager.component';
-
 
 const routes: Routes = [
   {path: '', redirectTo: 'landing', pathMatch: 'full'},
@@ -32,7 +31,6 @@ const routes: Routes = [
   {path: 'widget', component: WidgetComponent, canActivate: [AuthGuard]},
   {path: 'account-manager', component: AccountManagerComponent, canActivate: [AuthGuard]},
   {path: 'order-history', component: OrderHistoryComponent, canActivate: [AuthGuard]},
- 
   {path: '**', component: ErrorComponent}
 ];
 

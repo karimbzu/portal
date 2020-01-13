@@ -27,7 +27,6 @@ import { ErrorComponent } from './error/error.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { AccountManagerComponent } from './account-manager/account-manager.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +52,7 @@ import { AccountManagerComponent } from './account-manager/account-manager.compo
     AppRoutingModule,
     HttpClientModule,
     MDBBootstrapModulesPro.forRoot(),
-    ToastModule.forRoot(),
+    ToastModule.forRoot({opacity: 1}),
     BrowserAnimationsModule,
     ReactiveFormsModule,
     MdbFileUploadModule
