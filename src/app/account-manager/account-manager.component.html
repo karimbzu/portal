@@ -16,15 +16,12 @@
                 <mdb-card >
             
                             <mdb-card-body class="py-0 align-middle">
-                                    <mdb-accordion>
-                                            <mdb-accordion-item [collapsed]="false">
-                                              <mdb-accordion-item-head><mdb-icon fas icon="users" class="pr-1 "></mdb-icon> Token Usage</mdb-accordion-item-head>
-                                              <mdb-accordion-item-body>                                                
+                                                                          
 
                                               <table mdbTable #tableEl="mdbTable">
-                                                <thead>
-                                                  <tr class="text-center">
-                                                    <th *ngFor="let head of headElementsToken; let i = index" scope="col" class="font-weight-bolder">{{head}}
+                                                 <thead>
+                                                <tr class="text-center">
+                                                    <th *ngFor="let head of headElements; let i = index" scope="col" class="font-weight-bolder">{{head}}
                                                     </th>
                                                    </tr>
                                                 </thead>
@@ -50,12 +47,7 @@
                                                 </tr>
                                                 </tfoot>
                                               </table>
-                                              </mdb-accordion-item-body>
-                                            </mdb-accordion-item>
-                                          
-                                          
-
-                                          </mdb-accordion>
+                                 
                             </mdb-card-body>
                           </mdb-card>
        
@@ -66,34 +58,7 @@
       </mdb-card>
     </div>
     <div class="col">
-
-      <!-- <mdb-card class="">
-          <mdb-card-header class="h5 text-black font-weight-bold">
-              <i class="fas fa-money-check-alt mr-2"></i> 
-              TOPUP
-          </mdb-card-header>
-              <mdb-card-body class="py-0">
-                  <table mdbTable borderless="true" small="true" class="my-0 mt-2">
-                      <tbody>
-                        <tr>
-                          <td class="align-middle"></td>
-                          <td class="align-middle"> Your current token balance :</td>
-                          <td class="text-right">
-                           <h1> {{tokenAmount}} </h1>                           
-                          </td>
-                        </tr>
-                        <tr>
-                          <td colspan="3" class="text-center">                            
-                              <button type="button " mdbBtn  rounded="true" class="centurionBlue text-white" (click)="topupToken(); myModal.show()">Topup Token</button>
-                          </td>
-
-                        </tr>
-                      </tbody>
-                    </table>
-              </mdb-card-body>
-            </mdb-card> -->
-
-            <mdb-card class="">
+             <mdb-card class="">
                 <mdb-card-header class="h5 text-black font-weight-bold">
                   <mdb-icon fas icon="hand-holding-usd" class="pr-1"></mdb-icon>
                     Token Balance
@@ -104,7 +69,7 @@
                         <tr>
                           <td colspan="2" class="text-black-50 pb-0">Credits available to perform scanning</td>
                         </tr>
-                        <tr>
+                        <tr>                        
                             <td class="align-middle"><span class="h1 font-weight-bold">{{tokenAmount}}</span></td>
                             <td class="align-middle text-right"><button type="button " mdbBtn size="sm" rounded="true" class="centurionOrange text-white" text-white (click)="topupToken(); myModal.show()" >Topup Token</button></td>
                           </tr>
