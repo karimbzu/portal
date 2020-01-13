@@ -343,7 +343,12 @@ export class ScanRequestComponent implements OnInit, OnDestroy {
         });
       })
       .catch(err => {
+        this.myToast.error(err.statusText, 'Upload File');
         console.error (err);
+
+        // Remarks: Due to the error when uploading the file,
+        // we need to fallback to the original state of the upload
+        this.flagUpload = false;
       })
       .finally(() => {
         this.freshFile = false;
