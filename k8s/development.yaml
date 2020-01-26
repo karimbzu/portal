@@ -1,16 +1,11 @@
 apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
-  annotations:
-    openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: '2020-01-20T02:57:14Z'
   generation: 2
   labels:
     app: portal
   name: portal
   namespace: pipelines-demo
-  resourceVersion: '42291118'
-  selfLink: /apis/apps.openshift.io/v1/namespaces/aktest/deploymentconfigs/portal
 spec:
   replicas: 1
   selector:
@@ -28,9 +23,6 @@ spec:
     type: Rolling
   template:
     metadata:
-      annotations:
-        openshift.io/generated-by: OpenShiftWebConsole
-      creationTimestamp: null
       labels:
         app: portal
         deploymentconfig: portal
@@ -65,27 +57,3 @@ spec:
         lastTriggeredImage: >-
           image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
       type: ImageChange
-status:
-  availableReplicas: 1
-  conditions:
-    - lastTransitionTime: '2020-01-20T03:01:27Z'
-      lastUpdateTime: '2020-01-20T03:01:27Z'
-      message: Deployment config has minimum availability.
-      status: 'True'
-      type: Available
-    - lastTransitionTime: '2020-01-20T02:59:44Z'
-      lastUpdateTime: '2020-01-20T03:01:33Z'
-      message: replication controller "portal-1" successfully rolled out
-      reason: NewReplicationControllerAvailable
-      status: 'True'
-      type: Progressing
-  details:
-    causes:
-      - type: ConfigChange
-    message: config change
-  latestVersion: 1
-  observedGeneration: 2
-  readyReplicas: 1
-  replicas: 1
-  unavailableReplicas: 0
-  updatedReplicas: 1
