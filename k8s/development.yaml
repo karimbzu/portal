@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: portal
+  name: portal
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: portal
+  template:
+    metadata:
+      labels:
+        app: portal
+    spec:
+      containers:
+        - image: image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
+          imagePullPolicy: Always
+          name: ui
+          ports:
+            - containerPort: 8080
+              protocol: TCP
