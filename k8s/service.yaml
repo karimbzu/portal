@@ -2,7 +2,6 @@ kind: Service
 metadata:
   annotations:
     openshift.io/generated-by: OpenShiftWebConsole
-  creationTimestamp: "2020-01-26T13:26:12Z"
   labels:
     app: portal
   name: portal
