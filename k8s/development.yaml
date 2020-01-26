@@ -17,7 +17,7 @@ spec:
       containers:
         - image: image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
           imagePullPolicy: Always
-          name: ui
+          name: portal
           ports:
             - containerPort: 8080
               protocol: TCP
