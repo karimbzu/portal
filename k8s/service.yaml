@@ -1,7 +1,6 @@
 kind: Service
 metadata:
   annotations:
-    openshift.io/generated-by: OpenShiftWebConsole
   labels:
     app: portal
   name: portal
