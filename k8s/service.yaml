@@ -11,7 +11,7 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    deploymentconfig: portal
+    app: portal
   sessionAffinity: None
   type: ClusterIP
 status:
