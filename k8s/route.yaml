@@ -1,18 +1,12 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  annotations:
-    openshift.io/host.generated: "true"
-  creationTimestamp: "2020-01-26T13:27:07Z"
   labels:
     app: portal
   name: portal
-  namespace: pipelines-demo
-  resourceVersion: "136471979"
 spec:
   port:
     targetPort: 80-tcp
-  subdomain: ""
   tls:
     insecureEdgeTerminationPolicy: None
     termination: edge
@@ -21,13 +15,3 @@ spec:
     name: portal
     weight: 100
   wildcardPolicy: None
-status:
-  ingress:
-  - conditions:
-    - lastTransitionTime: "2020-01-26T13:27:07Z"
-      status: "True"
-      type: Admitted
-    host: portal-pipelines-demo.apps.ocp.tmrnd.net
-    routerCanonicalHostname: apps.ocp.tmrnd.net
-    routerName: default
-    wildcardPolicy: None
