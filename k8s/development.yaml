@@ -1,59 +1,23 @@
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  generation: 2
   labels:
     app: portal
   name: portal
-  namespace: pipelines-demo
 spec:
   replicas: 1
   selector:
-    app: portal
-    deploymentconfig: portal
-  strategy:
-    activeDeadlineSeconds: 21600
-    resources: {}
-    rollingParams:
-      intervalSeconds: 1
-      maxSurge: 25%
-      maxUnavailable: 25%
-      timeoutSeconds: 600
-      updatePeriodSeconds: 1
-    type: Rolling
+    matchLabels:
+      app: portal
   template:
     metadata:
       labels:
         app: portal
-        deploymentconfig: portal
     spec:
       containers:
-        - image: >-
-            image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
+        - image: image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
           imagePullPolicy: Always
           name: portal
           ports:
             - containerPort: 80
               protocol: TCP
-          resources: {}
-          terminationMessagePath: /dev/termination-log
-          terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-  test: false
-  triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - portal
-        from:
-          kind: ImageStreamTag
-          name: 'portal:latest'
-          namespace: pipelines-demo
-        lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
-      type: ImageChange
