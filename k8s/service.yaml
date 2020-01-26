@@ -1,15 +1,22 @@
-apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+  creationTimestamp: "2020-01-26T13:26:12Z"
   labels:
     app: portal
   name: portal
+  namespace: pipelines-demo
+  resourceVersion: "136470880"
 spec:
-  type: NodePort
   ports:
-    - name: 8080-tcp
-      port: 8080
-      targetPort: 8080
-      protocol: TCP
+  - name: 80-tcp
+    port: 80
+    protocol: TCP
+    targetPort: 80
   selector:
-    app: portal
+    deploymentconfig: portal
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
