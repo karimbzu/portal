@@ -9,7 +9,7 @@ RUN apt-get update \
 WORKDIR /usr/src/app
 COPY package*.json ./
 COPY mdb-file-upload-8.3.1.tgz ./
-RUN npm install
+RUN npm install && npm audit fix
 COPY . .
 RUN npm run build
 ### STAGE 2: Run ###
