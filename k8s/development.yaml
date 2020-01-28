@@ -21,3 +21,16 @@ spec:
           ports:
             - containerPort: 80
               protocol: TCP
+  triggers:
+     - type: ConfigChange
+     - imageChangeParams:
+         automatic: true
+         containerNames:
+           - portal
+         from:
+           kind: ImageStreamTag
+           name: 'portal:latest'
+           namespace: pipelines-demo
+         lastTriggeredImage: >-
+           image-registry.openshift-image-registry.svc:5000/pipelines-demo/portal:latest
+       type: ImageChange
