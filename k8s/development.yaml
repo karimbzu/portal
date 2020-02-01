@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portal
   name: portal
-  namespace: pipelines-demo
+  namespace: centurion
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - image: >-
-            default-route-openshift-image-registry.apps.ocp.tmrnd.net/tekton-pipelines/portal:latest
+            default-route-openshift-image-registry.apps.ocp.tmrnd.net/centurion/portal:latest
           imagePullPolicy: Always
           name: portal
           ports:
@@ -53,7 +53,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'portal:latest'
-          namespace: pipelines-demo
+          namespace: centurion
         lastTriggeredImage: >-
-          default-route-openshift-image-registry.apps.ocp.tmrnd.net/tekton-pipelines/portal:latest
+          default-route-openshift-image-registry.apps.ocp.tmrnd.net/centurion/portal:latest
       type: ImageChange
