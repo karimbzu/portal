@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - image: >-
-            http://index.docker.io/drkarim/portal:d0cc735b4727866664ff6a482b9557c5ae0cbdc3
+            docker.io/drkarim/portal:d0cc735b4727866664ff6a482b9557c5ae0cbdc3
           imagePullPolicy: Always
           name: portal
           ports:
@@ -55,5 +55,5 @@ spec:
           name: 'portal:latest'
           namespace: tekton-pipelines
         lastTriggeredImage: >-
-          http://index.docker.io/drkarim/portal:d0cc735b4727866664ff6a482b9557c5ae0cbdc3
+          docker.io/drkarim/portal:d0cc735b4727866664ff6a482b9557c5ae0cbdc3
       type: ImageChange
