@@ -1,4 +1,4 @@
-# Portal pipeline
+# Portal tekton
 
 Procedures
 1. npm install
