@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portal
   name: portal
-  namespace: pipelines-demo
+  namespace: tekton-pipelines
 spec:
   replicas: 1
   selector:
@@ -53,7 +53,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'portal:latest'
-          namespace: pipelines-demo
-        lastTriggeredImage: >-
+          namespace: tekton-pipelines
+          lastTriggeredImage: >-
           quay.io/drkarim/portal:latest
       type: ImageChange
