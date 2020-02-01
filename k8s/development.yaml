@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portal
   name: portal
-  namespace: centurion
+  namespace: pipelines-demo
 spec:
   replicas: 1
   selector:
@@ -53,7 +53,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'portal:latest'
-          namespace: centurion
+          namespace: pipelines-demo
         lastTriggeredImage: >-
           default-route-openshift-image-registry.apps.ocp.tmrnd.net/tekton-pipelines/portal:latest
       type: ImageChange
