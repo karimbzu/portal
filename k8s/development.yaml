@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portal
   name: portal
-  namespace: tekton-pipelines
+  namespace: pipelines-demo
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - image: >-
-            docker.io/drkarim/portal:d0cc735b4727866664ff6a482b9557c5ae0cbdc3
+            quay.io/drkarim/portal:latest
           imagePullPolicy: Always
           name: portal
           ports:
@@ -53,7 +53,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'portal:latest'
-          namespace: tekton-pipelines
+          namespace: pipelines-demo
         lastTriggeredImage: >-
-          docker.io/drkarim/portal:d0cc735b4727866664ff6a482b9557c5ae0cbdc3
+          quay.io/drkarim/portal:latest
       type: ImageChange
