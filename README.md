@@ -1,4 +1,4 @@
-# Portal cent
+# Portal
 
 Procedures
 1. npm install
