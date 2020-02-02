@@ -1,4 +1,4 @@
-# Portal 
+# Portal
 
 Procedures
 1. npm install
