@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - image: >-
-            quay.io/drkarim/portal:latest
+            image-registry.openshift-image-registry.svc:5000/tekton-pipelines/portal:latest
           imagePullPolicy: Always
           name: portal
           ports:
@@ -55,5 +55,5 @@ spec:
           name: 'portal:latest'
           namespace: tekton-pipelines
           lastTriggeredImage: >-
-          quay.io/drkarim/portal:latest
+            image-registry.openshift-image-registry.svc:5000/tekton-pipelines/portal:latest
       type: ImageChange
