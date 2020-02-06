@@ -5,7 +5,7 @@ metadata:
   labels:
     app: portal
   name: portal
-  namespace: centurion-pipeline
+  namespace: centurion
 spec:
   replicas: 1
   selector:
@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - image: >-
-            image-registry.openshift-image-registry.svc:5000/centurion-pipeline/portal:latest
+            image-registry.openshift-image-registry.svc:5000/centurion/portal:latest
           imagePullPolicy: Always
           name: portal
           ports:
@@ -53,7 +53,7 @@ spec:
         from:
           kind: ImageStreamTag
           name: 'portal:latest'
-          namespace: centurion-pipeline
+          namespace: centurion
           lastTriggeredImage: >-
-            image-registry.openshift-image-registry.svc:5000/centurion-pipeline/portal:latest
+            image-registry.openshift-image-registry.svc:5000/centurion/portal:latest
       type: ImageChange
